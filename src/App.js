@@ -14,20 +14,36 @@ function App() {
 	return (
 		<Box sx={{ padding: 0, margin: 0, height: "100vh" }}>
 			<Routes>
-				<Route
-					path="/"
-					element={
-						<>
-							<Sidebar />
-							<Home />
-						</>
-					}
-				/>
+				<Route path="/" element={<Home />} />
 				<Route
 					path="/profile"
 					element={
 						<MainContent>
 							<Profile />
+						</MainContent>
+					}
+				/>
+				<Route
+					path="/students"
+					element={
+						<MainContent>
+							<Students />
+						</MainContent>
+					}
+				/>
+				<Route
+					path="/courses"
+					element={
+						<MainContent>
+							<Courses />
+						</MainContent>
+					}
+				/>
+				<Route
+					path="/lifestyle"
+					element={
+						<MainContent>
+							<Lifestyle />
 						</MainContent>
 					}
 				/>
