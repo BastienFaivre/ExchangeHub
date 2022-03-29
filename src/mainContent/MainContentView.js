@@ -1,14 +1,15 @@
 import Sidebar from "../sidebar/sidebarPresenter"
+import Navigation from "../navigation/navigationPresenter"
 
 import Grid from "@mui/material/Grid"
 
 export default function MainContent({ children }) {
 	return (
-		<Grid container sx={{ height: "100%" }} direction="column">
-			<Grid item xs={2}>
-				<div>Navbar</div>
+		<Grid container sx={{ height: 1 }} direction="column">
+			<Grid item xs="auto">
+				<Navigation />
 			</Grid>
-			<Grid container xs={10}>
+			<Grid item container xs={true}>
 				<Grid item xs={2}>
 					<Sidebar />
 				</Grid>

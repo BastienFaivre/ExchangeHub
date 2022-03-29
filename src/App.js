@@ -17,10 +17,9 @@ function App() {
 				<Route
 					path="/"
 					element={
-						<>
-							<Sidebar />
+						<MainContent>
 							<Home />
-						</>
+						</MainContent>
 					}
 				/>
 				<Route
@@ -28,6 +27,30 @@ function App() {
 					element={
 						<MainContent>
 							<Profile />
+						</MainContent>
+					}
+				/>
+				<Route
+					path="/students"
+					element={
+						<MainContent>
+							<Students />
+						</MainContent>
+					}
+				/>
+				<Route
+					path="/courses"
+					element={
+						<MainContent>
+							<Courses />
+						</MainContent>
+					}
+				/>
+				<Route
+					path="/lifestyle"
+					element={
+						<MainContent>
+							<Lifestyle />
 						</MainContent>
 					}
 				/>
