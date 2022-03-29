@@ -1,27 +1,28 @@
 import { createTheme } from "@mui/material/styles"
-import { blue, red } from "@mui/material/colors"
+import { grey } from "@mui/material/colors"
 
-const theme = createTheme((theme) => ({
+const theme = createTheme({
+	palette: {
+		primary: {
+			main: "#BB4451",
+		},
+		secondary: {
+			main: "#44BBAE",
+		},
+	},
 	components: {
 		MuiTab: {
 			variants: [
 				{
 					props: { variant: "sidebar" },
 					style: {
-						textTransform: "none",
-						border: `2px dashed ${blue[500]}`,
-					},
-				},
-				{
-					props: { variant: "dashed", color: "secondary" },
-					style: {
-						border: `4px dashed ${red[500]}`,
+						color: grey[100],
 					},
 				},
 			],
 		},
 	},
-}))
+})
 
 // Example custom theme
 // const theme = createTheme({

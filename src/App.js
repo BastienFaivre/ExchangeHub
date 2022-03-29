@@ -14,7 +14,14 @@ function App() {
 	return (
 		<Box sx={{ padding: 0, margin: 0, height: "100vh" }}>
 			<Routes>
-				<Route path="/" element={<Home />} />
+				<Route
+					path="/"
+					element={
+						<MainContent>
+							<Home />
+						</MainContent>
+					}
+				/>
 				<Route
 					path="/profile"
 					element={

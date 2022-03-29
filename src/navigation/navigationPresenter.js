@@ -1,3 +1,5 @@
+import NavigationView from "./navigationView"
+
 export default function NavigationPresenter() {
-	return <div>NAVIGATION</div>
+	return <NavigationView />
 }

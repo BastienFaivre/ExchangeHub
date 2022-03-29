@@ -1,11 +1,8 @@
 import Tabs from "@mui/material/Tabs"
 import Tab from "@mui/material/Tab"
 import Box from "@mui/material/Box"
-import { useState } from "react"
 
-import { Link, useLocation } from "react-router-dom"
-
-// TODO tab values are indices from 0... we need to map the index to the current link. Look on https://mui.com/guides/routing/
+import { Link } from "react-router-dom"
 
 export default function SidebarView({ currentTab }) {
 	return (
@@ -13,7 +10,7 @@ export default function SidebarView({ currentTab }) {
 			sx={{
 				maxWidth: 300,
 				bgcolor: "primary.main",
-				height: "100%",
+				height: 1,
 			}}>
 			<Tabs
 				value={currentTab}
@@ -21,29 +18,33 @@ export default function SidebarView({ currentTab }) {
 				textColor="secondary"
 				indicatorColor="secondary"
 				aria-label="links to other pages">
-				<Tab
-					variant="sidebar"
+				{/* <Tab
 					label="Home"
 					value="/"
 					to="/"
+					variant="sidebar"
+					active
 					component={Link}
-				/>
+				/> */}
 				<Tab
 					label="Courses"
 					value="/courses"
 					to="/courses"
+					variant="sidebar"
 					component={Link}
 				/>
 				<Tab
 					label="Lifestyle"
 					value="/lifestyle"
 					to="/lifestyle"
+					variant="sidebar"
 					component={Link}
 				/>
 				<Tab
 					label="Students"
 					value="/students"
 					to="/students"
+					variant="sidebar"
 					component={Link}
 				/>
 			</Tabs>
