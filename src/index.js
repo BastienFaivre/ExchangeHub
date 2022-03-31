@@ -15,6 +15,46 @@ import theme from "./MUI/theme"
 // Sets all default styling
 import CssBaseline from "@mui/material/CssBaseline"
 
+// FIREBASE
+import firebaseConfig from "./config/firebaseConfig"
+import { initializeApp } from "firebase/app"
+
+// import { saveNewTodo, fetchTodos } from "./redux/reducers/todos"
+
+initializeApp(firebaseConfig)
+
+// DEMONSTRATION AND TESTING OF REDUX
+
+// the firebaseConfig file will not be pushed and it needs to be in the following format
+
+// export default {
+// 	apiKey: "***",
+// 	authDomain: "exchange-hub-dh2642.firebaseapp.com",
+// 	projectId: "exchange-hub-dh2642",
+// 	storageBucket: "exchange-hub-dh2642.appspot.com",
+// 	messagingSenderId: "***",
+// 	appId: "***",
+// 	databaseURL:
+// 		"https://exchange-hub-dh2642-default-rtdb.europe-west1.firebasedatabase.app/",
+// }
+
+// const unsubscribe = store.subscribe(() =>
+// 	console.log("State after dispatch: ", store.getState())
+// )
+
+// store.dispatch(saveNewTodo("Welcome again"))
+// Will update the todos in the reducer everytime there is a change
+// store.dispatch(fetchTodos)
+
+// store.dispatch({ type: "INCREMENT" })
+// store.dispatch({ type: "INCREMENT" })
+// store.dispatch({ type: "INCREMENT" })
+// store.dispatch({ type: "DECREMENT" })
+// store.dispatch({ type: "DECREMENT" })
+// store.dispatch({ type: "ADD_TODO", payload: { id: 1, content: "First todo" } })
+// store.dispatch({ type: "ADD_TODO", payload: { id: 2, content: "Second todo" } })
+// store.dispatch({ type: "TOGGLE_TODO", payload: { id: 1 } })
+
 ReactDOM.render(
 	<BrowserRouter>
 		<Provider store={store}>

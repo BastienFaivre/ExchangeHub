@@ -1,8 +1,10 @@
 import { combineReducers } from "redux"
-import todos from "./todos"
+import { todoReducer } from "./todos"
+import counterReducer from "./counter"
 // Import all reducers
 
 export default combineReducers({
-	todos,
+	todos: todoReducer,
+	counter: counterReducer,
 	// all other reducers
 })
