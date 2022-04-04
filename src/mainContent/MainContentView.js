@@ -10,7 +10,7 @@ export default function MainContent({ children }) {
 				<Navigation />
 			</Grid>
 			<Grid item container xs={true}>
-				<Grid item xs={2}>
+				<Grid item xs={2} sx={{ minHeight:"100vh" }}>
 					<Sidebar />
 				</Grid>
 				<Grid item xs={10}>

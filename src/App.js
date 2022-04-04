@@ -13,7 +13,7 @@ import SearchForm from "./mainContent/courses/searchPresenter"
 
 function App() {
 	return (
-		<Box sx={{ padding: 0, margin: 0, height: "100vh" }}>
+		<Box sx={{ padding: 0, margin: 0, minHeight: "100vh" }}>
 			<Routes>
 				<Route
 					path="/"
