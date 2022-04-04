@@ -9,6 +9,7 @@ import Sidebar from "./sidebar/sidebarPresenter"
 import MainContent from "./mainContent/MainContentView"
 
 import { Box } from "@mui/material"
+import SearchForm from "./mainContent/courses/searchPresenter"
 
 function App() {
 	return (
@@ -42,7 +43,7 @@ function App() {
 					path="/courses"
 					element={
 						<MainContent>
-							<Courses />
+							<SearchForm />
 						</MainContent>
 					}
 				/>
