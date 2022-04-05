@@ -1,5 +1,4 @@
 import AppBar from "@mui/material/AppBar"
-import Box from "@mui/material/Box"
 import Toolbar from "@mui/material/Toolbar"
 import Typography from "@mui/material/Typography"
 import IconButton from "@mui/material/IconButton"
@@ -10,8 +9,14 @@ import { Link, useLocation } from "react-router-dom"
 export default function NavigationView() {
 	const { pathname } = useLocation()
 	return (
-		<Box sx={{ flexGrow: 1 }}>
-			<AppBar position="static" sx={{ bgcolor: "primary.dark", mb: 0 }}>
+		<>
+			<AppBar
+				position="fixed"
+				sx={{
+					bgcolor: "primary.dark",
+					mb: 0,
+					zIndex: (theme) => theme.zIndex.drawer + 1,
+				}}>
 				<Toolbar>
 					<IconButton
 						size="large"
@@ -38,6 +43,6 @@ export default function NavigationView() {
 					</IconButton>
 				</Toolbar>
 			</AppBar>
-		</Box>
+		</>
 	)
 }
