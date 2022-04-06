@@ -13,7 +13,7 @@ export default function NavigationView() {
 			<AppBar
 				position="fixed"
 				sx={{
-					bgcolor: "primary.dark",
+					bgcolor: "primary.main",
 					mb: 0,
 					zIndex: (theme) => theme.zIndex.drawer + 1,
 				}}>

@@ -4,7 +4,7 @@ import { grey } from "@mui/material/colors"
 const theme = createTheme({
 	palette: {
 		primary: {
-			main: "#BB4451",
+			main: "#B51F1F",
 		},
 		secondary: {
 			main: "#44BBAE",
@@ -16,7 +16,7 @@ const theme = createTheme({
 				{
 					props: { variant: "sidebar" },
 					style: {
-						color: grey[100],
+						color: "#B51F1F",
 					},
 				},
 			],
