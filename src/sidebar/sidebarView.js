@@ -30,7 +30,7 @@ export default function SidebarView({ currentTab }) {
 				/> */}
 			<Tab
 				label="Courses"
-				value="/courses"
+				value={"/courses" || "/courses/:id"}
 				to="/courses"
 				variant="sidebar"
 				component={Link}

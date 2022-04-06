@@ -5,16 +5,15 @@ import SidebarView from "./sidebarView"
 import { matchPath, useLocation } from "react-router-dom"
 
 function useRouteMatch(patterns) {
-	const { pathname } = useLocation()
-
+	const location = useLocation()
 	for (let i = 0; i < patterns.length; i += 1) {
 		const pattern = patterns[i]
-		const possibleMatch = matchPath(pattern, pathname)
+		const possibleMatch = matchPath(pattern, location.pathname)
 		if (possibleMatch !== null) {
+			console.log(possibleMatch)
 			return possibleMatch
 		}
 	}
-
 	return null
 }
 
