@@ -8,6 +8,7 @@ import Navigation from "./navigation/navigationPresenter"
 import Sidebar from "./sidebar/sidebarPresenter"
 import MainContent from "./mainContent/MainContentView"
 import SearchPresenter from "./mainContent/courses/searchPresenter"
+import CoursesPresenter from "./mainContent/courses/coursePresenter"
 
 function App() {
 	return (
@@ -48,7 +49,7 @@ function App() {
 				path="/lifestyle"
 				element={
 					<MainContent>
-						<Lifestyle />
+						<CoursesPresenter />
 					</MainContent>
 				}
 			/>

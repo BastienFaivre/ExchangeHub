@@ -17,8 +17,8 @@ export default function SidebarView({ currentTab }) {
 		<Tabs
 			value={currentTab}
 			orientation="vertical"
-			textColor="secondary"
-			indicatorColor="secondary"
+			textColor="primary"
+			indicatorColor="primary"
 			aria-label="links to other pages">
 			{/* <Tab
 					label="Home"

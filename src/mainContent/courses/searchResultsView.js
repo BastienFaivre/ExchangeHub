@@ -2,7 +2,9 @@ import Card from "@mui/material/Card"
 import CardActions from "@mui/material/CardActions"
 import CardContent from "@mui/material/CardContent"
 import Button from "@mui/material/Button"
+import Grid from "@mui/material/Grid"
 import Stack from "@mui/material/Stack"
+import Container from '@mui/material/Container';
 import React from "react"
 
 export default function SearchResultsView({ searchResults, courseClicked }) {
@@ -12,23 +14,25 @@ export default function SearchResultsView({ searchResults, courseClicked }) {
 		}
 
 		return (
-			<Card variant="outlined" key={res.course.courseCode}>
-				<CardContent>
-					<div>
-						{res.course.courseCode} {res.course.title}{" "}
-						{res.course.credits} credits
-					</div>
-				</CardContent>
-				<CardActions>
-					<Button onClick={courseClickedACB}>More Information</Button>
-				</CardActions>
-			</Card>
+			<Grid item xs={12} md={12} lg={6} key={res.course.courseCode}>
+				<Card variant="outlined" sx={{ backgroundColor: "grey.100" }}>
+					<CardContent>
+						<Grid container>
+							<Grid item xs={8}>{res.course.courseCode} {res.course.title}</Grid>
+							<Grid item xs={4} sx={{ textAlign: "end" }}>{res.course.credits} hp</Grid>
+						</Grid>
+					</CardContent>
+					<CardActions>
+						<Button onClick={courseClickedACB}>More Information</Button>
+					</CardActions>
+				</Card>
+			</Grid>
 		)
 	}
 
 	return (
-		<Stack direction="column" spacing={2} padding="20px 0">
+		<Grid container spacing={2} padding="20px 0">
 			{searchResults.map(resultCB)}
-		</Stack>
+		</Grid>
 	)
 }

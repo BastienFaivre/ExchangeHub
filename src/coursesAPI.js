@@ -2,7 +2,7 @@ const BASE_URL = "https://www.kth.se/api/kopps/v2/"
 const ENGLISH = "&l=en"
 
 function treatHTTPResponseACB(res) {
-	console.log(res)
+	//console.log(res)
 	if (!res.ok) throw new Error("API problem: " + Response.status + "\n")
 	return res.json()
 }
