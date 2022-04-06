@@ -21,7 +21,6 @@ export default function MainContent({ children }) {
 					[`& .MuiDrawer-paper`]: {
 						width: 240,
 						boxSizing: "border-box",
-						bgcolor: "primary.main",
 					},
 				}}>
 				<Toolbar />

@@ -7,7 +7,8 @@ import Home from "./home/homePresenter"
 import Navigation from "./navigation/navigationPresenter"
 import Sidebar from "./sidebar/sidebarPresenter"
 import MainContent from "./mainContent/MainContentView"
-import SearchForm from "./mainContent/courses/searchPresenter"
+import SearchPresenter from "./mainContent/courses/searchPresenter"
+import CoursePresenter from "./mainContent/courses/coursePresenter"
 
 function App() {
 	return (
@@ -36,14 +37,24 @@ function App() {
 					</MainContent>
 				}
 			/>
-			<Route
-				path="/courses"
-				element={
-					<MainContent>
-						<SearchForm />
-					</MainContent>
-				}
-			/>
+			<Route path="/courses">
+				<Route
+					index
+					element={
+						<MainContent>
+							<SearchPresenter />
+						</MainContent>
+					}
+				/>
+				<Route
+					path=":id"
+					element={
+						<MainContent>
+							<CoursePresenter />
+						</MainContent>
+					}
+				/>
+			</Route>
 			<Route
 				path="/lifestyle"
 				element={

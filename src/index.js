@@ -18,10 +18,22 @@ import CssBaseline from "@mui/material/CssBaseline"
 // FIREBASE
 import firebaseConfig from "./config/firebaseConfig"
 import { initializeApp } from "firebase/app"
+import {
+	getAuth,
+	createUserWithEmailAndPassword,
+	signInWithEmailAndPassword,
+} from "firebase/auth"
+import { saveFilterSearchCourses } from "./redux/reducers/coursesReducer"
 
 // import { saveNewTodo, fetchTodos } from "./redux/reducers/todos"
 
-initializeApp(firebaseConfig)
+const app = initializeApp(firebaseConfig)
+const auth = getAuth(app)
+
+// createUserWithEmailAndPassword(auth, "philip.hamelink@gmail.com", "password")
+// signInWithEmailAndPassword(auth, "philip.hamelink@gmail.com", "password")
+
+// console.log(auth)
 
 // DEMONSTRATION AND TESTING OF REDUX
 
@@ -37,12 +49,16 @@ initializeApp(firebaseConfig)
 // 	databaseURL:
 // 		"https://exchange-hub-dh2642-default-rtdb.europe-west1.firebasedatabase.app/",
 // }
+const unsubscribe = store.subscribe(() =>
+	console.log("State after dispatch: ", store.getState())
+)
 
-// const unsubscribe = store.subscribe(() =>
-// 	console.log("State after dispatch: ", store.getState())
-// )
+store.dispatch(
+	saveFilterSearchCourses({
+		text_pattern: "queuing",
+	})
+)
 
-// store.dispatch(saveNewTodo("Welcome again"))
 // Will update the todos in the reducer everytime there is a change
 // store.dispatch(fetchTodos)
 
