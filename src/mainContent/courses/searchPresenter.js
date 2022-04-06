@@ -30,8 +30,6 @@ export default function SearchPresenter(props) {
 			<SearchFormView search={doSearchACB} />
 			{data.length > 0 && <SearchResultsView
 				searchResults={data}
-				error={error}
-				loading={loading}
 				courseClicked={courseClickedACB}
 			/>}
 			{loading && (

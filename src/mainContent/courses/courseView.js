@@ -1,8 +1,11 @@
-import { Grid, Stack } from "@mui/material";
+import { Grid, Stack, Typography } from "@mui/material"
 import CardContent from "@mui/material/CardContent"
 import Card from "@mui/material/Card"
 import Button from "@mui/material/Button"
-import Rating from '@mui/material/Rating';
+import Rating from '@mui/material/Rating'
+import RateReviewIcon from '@mui/icons-material/RateReview'
+import CommentsDisabledIcon from '@mui/icons-material/CommentsDisabled'
+import { Link } from "react-router-dom"
 
 export default function CourseView({ courseData, comments }) {
 
@@ -53,7 +56,9 @@ export default function CourseView({ courseData, comments }) {
             <Grid container item xs={12} md={12} lg={6} sx={{ height: 1 }}>
                 <Grid container item sx={{ paddingBottom: "10px", textAlign: "center" }}>
                     <Grid item xs={12}>
-                        <h2>About the Course</h2>
+                        <Typography variant="h5" sx={{ fontWeight: "bold", paddingBottom: "10px" }}>
+                            About the Course
+                        </Typography>
                     </Grid>
                 </Grid>
                 <Grid container item xs={12}>
@@ -68,7 +73,7 @@ export default function CourseView({ courseData, comments }) {
                                         {courseData.title.en}
                                     </Grid>
                                     <Grid item xs={2} sx={{ textAlign: "end" }}>
-                                        {courseData.credits} {courseData.creditUnitAbbr}
+                                        {courseData.credits} Credits
                                     </Grid>
                                 </Grid>
                                 <Grid container item sx={{ paddingBottom: "10px" }}>
@@ -95,11 +100,24 @@ export default function CourseView({ courseData, comments }) {
                 </Grid>
             </Grid>
             <Grid container item xs={12} md={12} lg={6}>
-                <Grid item xs={12} sx={{ paddingBottom: "10px", textAlign: "center" }}>
-                    <h2>Students Comments ({comments.length})</h2>
+                <Grid item xs={6} sx={{ paddingBottom: "10px", textAlign: "center" }}>
+                    <Typography variant="h5" sx={{ fontWeight: "bold", paddingBottom: "10px" }}>
+                        Students Comments ({comments.length})
+                    </Typography>
                 </Grid>
-                <Stack direction="column" spacing={2} width={"100%"}>
+                <Grid item xs={6} sx={{ textAlign: "center" }}>
+                    <Button to={`/profile`} component={Link}><RateReviewIcon />&nbsp;&nbsp;Write a Comment</Button>
+                </Grid>
+                <Stack direction="column" spacing={2} width={"100%"} height={"100%"}>
                     {comments.map(commentCB)}
+                    {comments.length === 0 &&
+                        <Grid item xs={12} sx={{ textAlign: "center" }}>
+                            <Typography variant="h5" sx={{ padding: "10px" }}>
+                                This course has not been reviewed yet.
+                            </Typography>
+                            <CommentsDisabledIcon fontSize="large" />
+                        </Grid>
+                    }
                 </Stack>
             </Grid>
         </Grid>
