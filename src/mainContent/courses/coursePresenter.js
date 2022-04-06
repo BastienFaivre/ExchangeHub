@@ -1,6 +1,10 @@
 import CourseView from "./courseView";
+import { useParams } from "react-router-dom"
 
-export default function CoursesPresenter() {
+export default function CoursePresenter() {
+
+	const params = useParams()
+	console.log(params)
 
 	const courseData = {
 		"code": "DH2642",
@@ -148,4 +152,5 @@ export default function CoursesPresenter() {
 	return (
 		<CourseView courseData={courseData} comments={comments} />
 	);
+
 }
