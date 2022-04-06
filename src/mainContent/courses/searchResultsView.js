@@ -3,10 +3,7 @@ import CardActions from "@mui/material/CardActions"
 import CardContent from "@mui/material/CardContent"
 import Button from "@mui/material/Button"
 import Grid from "@mui/material/Grid"
-import Stack from "@mui/material/Stack"
-import Box from "@mui/material/Box"
 import React from "react"
-import { CircularProgress } from "@mui/material"
 import { Link } from "react-router-dom"
 
 export default function SearchResultsView({
@@ -25,8 +22,8 @@ export default function SearchResultsView({
 				<Card variant="outlined" sx={{ backgroundColor: "grey.100" }}>
 					<CardContent>
 						<Grid container>
-							<Grid item xs={8}>{res.courseCode} {res.title}</Grid>
-							<Grid item xs={4} sx={{ textAlign: "end" }}>{res.credits} hp</Grid>
+							<Grid item xs={10}>{res.courseCode} {res.title}</Grid>
+							<Grid item xs={2} sx={{ textAlign: "end" }}>{res.credits} hp</Grid>
 						</Grid>
 					</CardContent>
 					<CardActions>
@@ -39,13 +36,7 @@ export default function SearchResultsView({
 
 	return (
 		<Grid container spacing={2} padding="20px 0">
-			{searchResults.length > 0 && searchResults.map(resultCB)}
-			{loading && (
-				<Box sx={{ width: "fit-content", mx: "auto" }}>
-					<CircularProgress color="primary" m="auto" />
-				</Box>
-			)}
-			{error && <p>Error</p>}
+			{searchResults.map(resultCB)}
 		</Grid>
 	)
 }

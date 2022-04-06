@@ -59,7 +59,7 @@ function App() {
 				path="/lifestyle"
 				element={
 					<MainContent>
-						<CoursePresenter />
+						<Lifestyle />
 					</MainContent>
 				}
 			/>
