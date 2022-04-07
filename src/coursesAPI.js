@@ -1,3 +1,4 @@
+const PROXY = "http://159.69.42.15:1234/"
 const BASE_URL = "https://www.kth.se/api/kopps/v2/"
 const ENGLISH = "&l=en"
 
@@ -10,13 +11,9 @@ function transformResultACB(data) {
 	return data.searchHits.map((r) => r.course)
 }
 
-function transformDetailsACB(data) {
-	return data
-}
-
 export function searchCourses(apiParam) {
 	return fetch(
-		"http://159.69.42.15:1234/" +
+			PROXY +
 			BASE_URL +
 			"courses/search?" +
 			new URLSearchParams(apiParam) +
@@ -29,5 +26,4 @@ export function searchCourses(apiParam) {
 export function getCourseDetails(courseCode) {
 	return fetch(BASE_URL + "course/" + courseCode)
 		.then(treatHTTPResponseACB)
-		.then(transformDetailsACB)
 }

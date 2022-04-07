@@ -20,7 +20,8 @@ export default function CoursePresenter() {
 		}
 	}, [])
 
-	const comments = [
+	// This is hard coded comments for debug purpose !
+	let comments = [
 		{
 			title: "Very good course!",
 			rating: 4.5,
@@ -34,18 +35,22 @@ export default function CoursePresenter() {
 			uuid: 1,
 		},
 		{
-			title: "Horrible!",
-			rating: 1,
-			difficulty: "Advanced",
+			title: "Interesting course!",
+			rating: 4,
+			difficulty: "Intermediate",
 			equivalence: "Programmation web",
 			description:
-				"This was the most difficult I had during my exchange, I spent so much time on all the assignments. I really do not recommend this course.",
+				"I coded with React for the first time, the lectures are really interesting. The labs help us to understand the content presented in the lecture. I recommend this course for people who want to learn more about interaction web programming.",
 			forname: "Philip",
 			lastname: "Hamelink",
 			contact: "philip.hamelink@epfl.ch",
 			uuid: 2,
 		},
 	]
+
+	if (courseCode !== "DH2642") {
+		comments = []
+	}
 
 	return (
 		<Box>
