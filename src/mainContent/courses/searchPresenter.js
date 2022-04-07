@@ -10,17 +10,26 @@ import {
 	saveFilterSearchCourses,
 } from "../../redux/reducers/coursesReducer"
 
+import { useState } from "react"
+
 export default function SearchPresenter(props) {
+
+	const [searchInput, setSearchInput] = useState("")
+
 	const { loading, error, data } = useSelector(
 		(state) => state.courses.results
 	)
 
 	const dispatch = useDispatch()
 
-	function doSearchACB(searchText) {
-		if (searchText && searchText.length > 0) {
-			dispatch(saveFilterSearchCourses({ text_pattern: searchText }))
+	function doSearchACB() {
+		if (searchInput && searchInput.length > 0) {
+			dispatch(saveFilterSearchCourses({ text_pattern: searchInput }))
 		}
+	}
+
+	function inputChangedACB(input) {
+		setSearchInput(input)
 	}
 
 	function courseClickedACB(courseCode) {
@@ -29,7 +38,7 @@ export default function SearchPresenter(props) {
 
 	return (
 		<Box>
-			<SearchFormView search={doSearchACB} />
+			<SearchFormView search={doSearchACB} searchInput={searchInput} setSearchInput={inputChangedACB} />
 			{data.length > 0 && (
 				<SearchResultsView
 					searchResults={data}

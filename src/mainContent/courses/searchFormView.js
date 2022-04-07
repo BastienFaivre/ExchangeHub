@@ -8,10 +8,8 @@ import Paper from "@mui/material/Paper"
 import InputBase from "@mui/material/InputBase"
 import IconButton from "@mui/material/IconButton"
 import SearchIcon from "@mui/icons-material/Search"
-import { useState } from "react"
 
-export default function SearchFormView({ search }) {
-	const [searchInput, setSearchInput] = useState("")
+export default function SearchFormView({ search, searchInput, setSearchInput }) {
 
 	function handleInputChangeACB(event) {
 		setSearchInput(event.target.value)
@@ -19,7 +17,7 @@ export default function SearchFormView({ search }) {
 
 	function doSearchACB(e) {
 		e.preventDefault()
-		search(searchInput)
+		search()
 	}
 
 	return (
@@ -46,21 +44,5 @@ export default function SearchFormView({ search }) {
 				<SearchIcon />
 			</IconButton>
 		</Paper>
-		// <Stack direction="row" spacing={2} padding="20px">
-		//     <TextField id="outlined-basic" label="Course" variant="outlined" onChange={inputChangedACB} />
-		//     <Button
-		//     {/* <FormControl sx={{ m: 1, minWidth: 200 }}>
-		//         <InputLabel id="demo-simple-select-helper-label">Department</InputLabel>
-		//         <Select
-		//         value={""}
-		//         label="Department"
-		//         >
-		//         <MenuItem value="">
-		//             <em>None</em>
-		//         </MenuItem>
-		//         <MenuItem value={"EECS"}>EECS</MenuItem>
-		//         </Select>
-		//     </FormControl> */}
-		// </Stack>
 	)
 }
