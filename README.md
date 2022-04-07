@@ -6,9 +6,9 @@ This is a project for the course [DH2642](https://www.kth.se/student/kurser/kurs
 
 ## Description
 
-ExchangeHub is a website for EPFL student planning to do an exchange at KTH. This platform helps future KTH exchange students to prepare their exchange in terms of course and lifestyle based on previous exchange students that left comments and reviewed.
+ExchangeHub is a website for EPFL students planning to do an exchange at KTH. This platform helps future KTH exchange students to prepare their exchange in terms of course and lifestyle based on previous exchange students that left comments and reviewed.
 
-Under **courses** tab, the users can search for KTH courses based on their search criterias. They can learn more about a specific course by clicking on it. In the detailed view, the users have access to more information about the course and also to students reviews and ratings about it.
+Under **courses** tab, the users can search for KTH courses based on their search criterias. They can learn more about a specific course by clicking on it. In the detailed tab of a course, the users have access to more information about the course and also to students reviews and ratings about it.
 
 Under **lifestyle** tab, the users can found information about the life in Sweden and Stochholm. Study tips can also be found there.
 
