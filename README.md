@@ -1,70 +1,31 @@
-# Getting Started with Create React App
+# ExchangeHub
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a project for the course [DH2642](https://www.kth.se/student/kurser/kurs/DH2642?l=en) at [KTH](https://www.kth.se/en).
 
-## Available Scripts
+[Deployed website](http://159.69.42.15:3000)
 
-In the project directory, you can run:
+## Description
 
-### `npm start`
+ExchangeHub is a website for EPFL student planning to do an exchange at KTH. This platform helps future KTH exchange students to prepare their exchange in terms of course and lifestyle based on previous exchange students that left comments and reviewed.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Under **courses** tab, the users can search for KTH courses based on their search criterias. They can learn more about a specific course by clicking on it. In the detailed view, the users have access to more information about the course and also to students reviews and ratings about it.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Under **lifestyle** tab, the users can found information about the life in Sweden and Stochholm. Study tips can also be found there.
 
-### `npm test`
+Under **students** tab, the users can found all comments and reviewed per students.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Finally, the previous exchange students have the possibility to write reviews and comments. To do this, they have to login under the **profile** page.
 
-### `npm run build`
+## Project Structure
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Implemented features
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Now, only the **courses** tab is implemented. The users can search for KTH courses and get more information on the ones they want to learn more about. Right now, the comments and reviews of courses are not implemented yet. However, you can see sample hard-coded comments for the course DH2642.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Upcomming features
 
-### `npm run eject`
+- The **lifestyle** tab
+- The **students** tab
+- Login feature and therefore the possibility to write comments and reviews
+- Persistence of comments and reviews in *Firebase*
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
