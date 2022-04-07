@@ -28,4 +28,3 @@ Now, only the **courses** tab is implemented. The users can search for KTH cours
 - The **students** tab
 - Login feature and therefore the possibility to write comments and reviews
 - Persistence of comments and reviews in *Firebase*
-
