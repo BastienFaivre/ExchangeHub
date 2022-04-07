@@ -15,7 +15,6 @@ function transformDetailsACB(data) {
 }
 
 export function searchCourses(apiParam) {
-	console.log(apiParam)
 	return fetch(
 		"http://159.69.42.15:1234/" +
 			BASE_URL +

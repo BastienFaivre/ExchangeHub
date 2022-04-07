@@ -97,18 +97,12 @@ export function saveFilterSearchCourses(searchFilter) {
 	return async function saveFilterSearchCoursesThunk(dispatch, getState) {
 		try {
 			let state = getState()
-			console.log(
-				isObjectEqual(searchFilter, state.courses.searchFilter),
-				searchFilter,
-				state.courses.searchFilter
-			)
 			// // checking is search filter is same as before to avoid fetching twice on the same filter
 			if (!isObjectEqual(searchFilter, state.courses.searchFilter)) {
 				dispatch({
 					type: "COURSE_SET_SEARCH_FILTER",
 					payload: { searchFilter },
 				})
-				console.log("FILTER", searchFilter)
 				const results = await searchCourses(searchFilter)
 
 				// Checking to see that the search filter hasn't been changed while waiting for the resulsts
