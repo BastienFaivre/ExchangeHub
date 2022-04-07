@@ -16,7 +16,7 @@ import theme from "./MUI/theme"
 import CssBaseline from "@mui/material/CssBaseline"
 
 // FIREBASE
-// import firebaseConfig from "./config/firebaseConfig"
+import firebaseConfig from "./config/firebaseConfig"
 import { initializeApp } from "firebase/app"
 import {
 	getAuth,
@@ -26,17 +26,6 @@ import {
 import { saveFilterSearchCourses } from "./redux/reducers/coursesReducer"
 
 // import { saveNewTodo, fetchTodos } from "./redux/reducers/todos"
-
-const firebaseConfig = {
-	apiKey: process.env.REACT_APP_API_KEY,
-	authDomain: "exchange-hub-dh2642.firebaseapp.com",
-	projectId: "exchange-hub-dh2642",
-	storageBucket: "exchange-hub-dh2642.appspot.com",
-	messagingSenderId: process.env.REACT_SENDER_ID,
-	appId: process.env.REACT_APP_APP_ID,
-	databaseURL:
-		"https://exchange-hub-dh2642-default-rtdb.europe-west1.firebasedatabase.app/",
-}
 
 const app = initializeApp(firebaseConfig)
 const auth = getAuth(app)
