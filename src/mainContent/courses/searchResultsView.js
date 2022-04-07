@@ -6,10 +6,7 @@ import Grid from "@mui/material/Grid"
 import React from "react"
 import { Link } from "react-router-dom"
 
-export default function SearchResultsView({
-	searchResults,
-	courseClicked,
-}) {
+export default function SearchResultsView({ searchResults, courseClicked }) {
 	function resultCB(res) {
 		function courseClickedACB() {
 			courseClicked(res.courseCode)
@@ -20,12 +17,21 @@ export default function SearchResultsView({
 				<Card variant="outlined" sx={{ backgroundColor: "grey.100" }}>
 					<CardContent>
 						<Grid container>
-							<Grid item xs={10}>{res.courseCode} {res.title}</Grid>
-							<Grid item xs={2} sx={{ textAlign: "end" }}>{res.credits} hp</Grid>
+							<Grid item xs={10}>
+								{res.courseCode} {res.title}
+							</Grid>
+							<Grid item xs={2} sx={{ textAlign: "end" }}>
+								{res.credits} hp
+							</Grid>
 						</Grid>
 					</CardContent>
 					<CardActions>
-						<Button onClick={courseClickedACB} to={`${res.courseCode}`} component={Link}>More Information</Button>
+						<Button
+							onClick={courseClickedACB}
+							to={`${res.courseCode}`}
+							component={Link}>
+							More Information
+						</Button>
 					</CardActions>
 				</Card>
 			</Grid>

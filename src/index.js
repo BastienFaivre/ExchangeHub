@@ -49,15 +49,15 @@ const auth = getAuth(app)
 // 	databaseURL:
 // 		"https://exchange-hub-dh2642-default-rtdb.europe-west1.firebasedatabase.app/",
 // }
-const unsubscribe = store.subscribe(() =>
-	console.log("State after dispatch: ", store.getState())
-)
+// const unsubscribe = store.subscribe(() =>
+// 	console.log("State after dispatch: ", store.getState())
+// )
 
-store.dispatch(
-	saveFilterSearchCourses({
-		text_pattern: "queuing",
-	})
-)
+// store.dispatch(
+// 	saveFilterSearchCourses({
+// 		text_pattern: "queuing",
+// 	})
+// )
 
 // Will update the todos in the reducer everytime there is a change
 // store.dispatch(fetchTodos)

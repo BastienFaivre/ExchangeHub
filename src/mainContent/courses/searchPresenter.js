@@ -18,7 +18,9 @@ export default function SearchPresenter(props) {
 	const dispatch = useDispatch()
 
 	function doSearchACB(searchText) {
-		dispatch(saveFilterSearchCourses({ text_pattern: searchText }))
+		if (searchText && searchText.length > 0) {
+			dispatch(saveFilterSearchCourses({ text_pattern: searchText }))
+		}
 	}
 
 	function courseClickedACB(courseCode) {
@@ -28,17 +30,18 @@ export default function SearchPresenter(props) {
 	return (
 		<Box>
 			<SearchFormView search={doSearchACB} />
-			{data.length > 0 && <SearchResultsView
-				searchResults={data}
-				courseClicked={courseClickedACB}
-			/>}
+			{data.length > 0 && (
+				<SearchResultsView
+					searchResults={data}
+					courseClicked={courseClickedACB}
+				/>
+			)}
 			{loading && (
 				<Box sx={{ width: "fit-content", mx: "auto" }}>
 					<CircularProgress color="primary" m="auto" />
 				</Box>
 			)}
 			{error && <p>Error</p>}
-
 		</Box>
 	)
 }
