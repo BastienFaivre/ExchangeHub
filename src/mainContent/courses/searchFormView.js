@@ -1,4 +1,3 @@
-import TextField from "@mui/material/TextField"
 import InputLabel from "@mui/material/InputLabel"
 import MenuItem from "@mui/material/MenuItem"
 import FormControl from "@mui/material/FormControl"
@@ -9,6 +8,7 @@ import InputBase from "@mui/material/InputBase"
 import IconButton from "@mui/material/IconButton"
 import SearchIcon from "@mui/icons-material/Search"
 import { useState } from "react"
+import { schools, departments } from "../../utils/departments"
 
 export default function SearchFormView({ search }) {
 	const [searchInput, setSearchInput] = useState("")
@@ -22,6 +22,22 @@ export default function SearchFormView({ search }) {
 	function doSearchACB(e) {
 		e.preventDefault()
 		search(searchInput)
+	}
+
+	function listSchoolsCB(school) {
+
+		return (
+			<MenuItem key={school.departmentPrefix} value={school.departmentPrefix}>{school.name}</MenuItem>
+		);
+
+	}
+
+	function listDepartmentsCB(department) {
+
+		return (
+			<MenuItem key={department.code} value={department.code}>{department.name}</MenuItem>
+		);
+
 	}
 
 	return (
@@ -54,10 +70,11 @@ export default function SearchFormView({ search }) {
 				<FormControl sx={{ width: "100%" }}>
 					<InputLabel>School</InputLabel>
 					<Select
-						value={search}
+						value={searchSchool}
 						label="School"
 					>
 						<MenuItem value="">All</MenuItem>
+						{schools.map(listSchoolsCB)}
 					</Select>
 				</FormControl>
 			</Grid>
@@ -65,29 +82,14 @@ export default function SearchFormView({ search }) {
 				<FormControl sx={{ width: "100%" }}>
 					<InputLabel>Department</InputLabel>
 					<Select
-						value={""}
+						value={searchDepartment}
 						label="Department"
 					>
 						<MenuItem value="">All</MenuItem>
+						{departments.map(listDepartmentsCB)}
 					</Select>
 				</FormControl>
 			</Grid>
 		</Grid>
-		// <Stack direction="row" spacing={2} padding="20px">
-		//     <TextField id="outlined-basic" label="Course" variant="outlined" onChange={inputChangedACB} />
-		//     <Button
-		//     {/* <FormControl sx={{ m: 1, minWidth: 200 }}>
-		//         <InputLabel id="demo-simple-select-helper-label">Department</InputLabel>
-		//         <Select
-		//         value={""}
-		//         label="Department"
-		//         >
-		//         <MenuItem value="">
-		//             <em>None</em>
-		//         </MenuItem>
-		//         <MenuItem value={"EECS"}>EECS</MenuItem>
-		//         </Select>
-		//     </FormControl> */}
-		// </Stack>
 	)
 }
