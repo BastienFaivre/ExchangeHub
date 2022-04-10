@@ -10,8 +10,7 @@ import SearchIcon from "@mui/icons-material/Search"
 import { useState } from "react"
 import { schools, departments } from "../../utils/departments"
 
-export default function SearchFormView({ search }) {
-	const [searchInput, setSearchInput] = useState("")
+export default function SearchFormView({ search, searchInput, setSearchInput }) {
 	const [searchSchool, setSearchSchool] = useState("")
 	const [searchDepartment, setSearchDepartment] = useState("")
 
@@ -21,7 +20,7 @@ export default function SearchFormView({ search }) {
 
 	function doSearchACB(e) {
 		e.preventDefault()
-		search(searchInput)
+		search()
 	}
 
 	function listSchoolsCB(school) {
