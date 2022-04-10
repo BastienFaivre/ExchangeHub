@@ -10,24 +10,36 @@ import SearchIcon from "@mui/icons-material/Search"
 import { useState } from "react"
 import { schools, departments } from "../../utils/departments"
 
-export default function SearchFormView({ search, searchInput, setSearchInput }) {
-	const [searchSchool, setSearchSchool] = useState("")
-	const [searchDepartment, setSearchDepartment] = useState("")
+export default function SearchFormView(props) {
 
 	function handleInputChangeACB(event) {
-		setSearchInput(event.target.value)
+		props.setSearchInput(event.target.value);
+	}
+
+	function handleSchoolChangeACB(event) {
+		props.setSearchSchool(event.target.value);
+	}
+
+	function handleDepartmentChangeACB(event) {
+		props.setSearchDepartment(event.target.value);
 	}
 
 	function doSearchACB(e) {
 		e.preventDefault()
-		search()
+		props.search()
 	}
 
 	function listSchoolsCB(school) {
 
 		return (
-			<MenuItem key={school.departmentPrefix} value={school.departmentPrefix}>{school.name}</MenuItem>
+			<MenuItem key={school.code} value={school.code}>{school.name}</MenuItem>
 		);
+
+	}
+
+	function filterIfSchoolCB(department) {
+
+		return props.searchSchool === "" || department.name.startsWith(props.searchSchool);
 
 	}
 
@@ -53,7 +65,7 @@ export default function SearchFormView({ search, searchInput, setSearchInput }) 
 						sx={{ ml: 1, flex: 1 }}
 						placeholder="Search For Course"
 						inputProps={{ "aria-label": "search course" }}
-						value={searchInput}
+						value={props.searchInput}
 						onChange={handleInputChangeACB}
 					/>
 					<IconButton
@@ -69,8 +81,9 @@ export default function SearchFormView({ search, searchInput, setSearchInput }) 
 				<FormControl sx={{ width: "100%" }}>
 					<InputLabel>School</InputLabel>
 					<Select
-						value={searchSchool}
+						value={props.searchSchool}
 						label="School"
+						onChange={handleSchoolChangeACB}
 					>
 						<MenuItem value="">All</MenuItem>
 						{schools.map(listSchoolsCB)}
@@ -81,11 +94,12 @@ export default function SearchFormView({ search, searchInput, setSearchInput }) 
 				<FormControl sx={{ width: "100%" }}>
 					<InputLabel>Department</InputLabel>
 					<Select
-						value={searchDepartment}
+						value={props.searchDepartment}
 						label="Department"
+						onChange={handleDepartmentChangeACB}
 					>
 						<MenuItem value="">All</MenuItem>
-						{departments.map(listDepartmentsCB)}
+						{departments.filter(filterIfSchoolCB).map(listDepartmentsCB)}
 					</Select>
 				</FormControl>
 			</Grid>

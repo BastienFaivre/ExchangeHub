@@ -16,6 +16,8 @@ import { useState } from "react"
 export default function SearchPresenter(props) {
 
 	const [searchInput, setSearchInput] = useState("")
+	const [searchSchool, setSearchSchool] = useState("")
+	const [searchDepartment, setSearchDepartment] = useState("")
 
 	const { loading, error, data } = useSelector(
 		(state) => state.courses.results
@@ -24,8 +26,11 @@ export default function SearchPresenter(props) {
 	const dispatch = useDispatch()
 
 	function doSearchACB() {
-		if (searchInput && searchInput.length > 0) {
-			dispatch(saveFilterSearchCourses({ text_pattern: searchInput }))
+		if ((searchInput && searchInput.length > 0) ||
+			searchDepartment !== "") {
+			dispatch(saveFilterSearchCourses({ text_pattern: searchInput, department_prefix: searchDepartment }))
+		} else {
+			alert("You should at least specify a text pattern or choose a department!")
 		}
 	}
 
@@ -39,7 +44,10 @@ export default function SearchPresenter(props) {
 
 	return (
 		<Box>
-			<SearchFormView search={doSearchACB} searchInput={searchInput} setSearchInput={inputChangedACB} />
+			<SearchFormView search={doSearchACB} searchInput={searchInput} setSearchInput={inputChangedACB}
+				searchSchool={searchSchool} setSearchSchool={setSearchSchool}
+				searchDepartment={searchDepartment} setSearchDepartment={setSearchDepartment}
+			/>
 			{data.length > 0 && (
 				<SearchResultsView
 					searchResults={data}
