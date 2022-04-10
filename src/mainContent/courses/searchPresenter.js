@@ -4,6 +4,7 @@ import SearchResultsView from "./searchResultsView"
 import { useDispatch, useSelector } from "react-redux"
 
 import Box from "@mui/material/Box"
+import Typography from "@mui/material/Typography"
 import { CircularProgress } from "@mui/material"
 import {
 	getCourseDetails,
@@ -45,6 +46,11 @@ export default function SearchPresenter(props) {
 					courseClicked={courseClickedACB}
 				/>
 			)}
+			{data.length === 0 &&
+				<Typography variant="h5" sx={{ padding: "20px", textAlign: "center" }}>
+					No courses matching the specified search terms
+				</Typography>
+			}
 			{loading && (
 				<Box sx={{ width: "fit-content", mx: "auto" }}>
 					<CircularProgress color="primary" m="auto" />
