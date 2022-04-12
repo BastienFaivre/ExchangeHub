@@ -87,3 +87,5 @@ export function saveNewTodo(content) {
         })
     }
 }
+
+export function testDB() {}
