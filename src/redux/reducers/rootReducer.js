@@ -6,9 +6,9 @@ import { profileReducer } from "./profileReducer"
 // Import all reducers
 
 export default combineReducers({
-	profile: profileReducer,
-	courses: coursesReducer,
-	// todos: todoReducer,
-	// counter: counterReducer,
-	// all other reducers
+    profile: profileReducer,
+    courses: coursesReducer,
+    // todos: todoReducer,
+    // counter: counterReducer,
+    // all other reducers
 })

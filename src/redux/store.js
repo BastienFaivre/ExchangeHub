@@ -4,6 +4,6 @@ import { composeWithDevTools } from "@redux-devtools/extension"
 import rootReducer from "./reducers/rootReducer"
 
 export default createStore(
-	rootReducer,
-	composeWithDevTools(applyMiddleware(thunkMiddleware))
+    rootReducer,
+    composeWithDevTools(applyMiddleware(thunkMiddleware))
 )
