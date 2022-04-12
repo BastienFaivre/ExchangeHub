@@ -1,14 +1,13 @@
 import { Routes, Route } from "react-router-dom"
-import Courses from "./mainContent/courses/coursePresenter"
 import Lifestyle from "./mainContent/lifestyle/tipsPresenter"
-import Profile from "./mainContent/profile/profilePresenter"
 import Students from "./mainContent/students/studentPresenter"
 import Home from "./home/homePresenter"
-import Navigation from "./navigation/navigationPresenter"
-import Sidebar from "./sidebar/sidebarPresenter"
 import MainContent from "./mainContent/MainContentView"
 import SearchPresenter from "./mainContent/courses/searchPresenter"
 import CoursePresenter from "./mainContent/courses/coursePresenter"
+import ProfileLoginPresenter from "./mainContent/profile/profileLoginPresenter"
+import ProfilePresenter from "./mainContent/profile/profilePresenter"
+import ProfileRegisterPresenter from "./mainContent/profile/profileRegisterPresenter"
 
 function App() {
     return (
@@ -25,7 +24,23 @@ function App() {
                 path="/profile"
                 element={
                     <MainContent>
-                        <Profile />
+                        <ProfilePresenter />
+                    </MainContent>
+                }
+            />
+            <Route
+                path="/login"
+                element={
+                    <MainContent>
+                        <ProfileLoginPresenter />
+                    </MainContent>
+                }
+            />
+            <Route
+                path="/register"
+                element={
+                    <MainContent>
+                        <ProfileRegisterPresenter />
                     </MainContent>
                 }
             />
