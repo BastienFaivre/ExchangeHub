@@ -1,0 +1,39 @@
+name: Format with Prettier
+
+on:
+  push:
+    branches:
+      - master
+
+permissions:
+  checks: write
+  contents: write
+
+jobs:
+  test:
+    name: Run action
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository (push)
+        if: ${{ github.event_name == 'push' }}
+        uses: actions/checkout@v3
+
+      - name: Check out repository (pull_request_target)
+        if: ${{ github.event_name == 'pull_request_target' }}
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 12
+
+      - name: Install Node.js dependencies
+        run: npm install
+        
+      - name: Run linters
+        uses: wearerequired/lint-action@v1
+        with:
+          prettier: true
+          auto_fix: true

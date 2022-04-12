@@ -19,9 +19,9 @@ import CssBaseline from "@mui/material/CssBaseline"
 import firebaseConfig from "./config/firebaseConfig"
 import { initializeApp } from "firebase/app"
 import {
-	getAuth,
-	createUserWithEmailAndPassword,
-	signInWithEmailAndPassword,
+    getAuth,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
 } from "firebase/auth"
 import { saveFilterSearchCourses } from "./redux/reducers/coursesReducer"
 
@@ -72,13 +72,13 @@ const auth = getAuth(app)
 // store.dispatch({ type: "TOGGLE_TODO", payload: { id: 1 } })
 
 ReactDOM.render(
-	<BrowserRouter>
-		<Provider store={store}>
-			<ThemeProvider theme={theme}>
-				<CssBaseline />
-				<App />
-			</ThemeProvider>
-		</Provider>
-	</BrowserRouter>,
-	document.getElementById("root")
+    <BrowserRouter>
+        <Provider store={store}>
+            <ThemeProvider theme={theme}>
+                <CssBaseline />
+                <App />
+            </ThemeProvider>
+        </Provider>
+    </BrowserRouter>,
+    document.getElementById("root")
 )

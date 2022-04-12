@@ -10,92 +10,102 @@ import SearchIcon from "@mui/icons-material/Search"
 import { schools, departments } from "../../utils/departments"
 
 export default function SearchFormView(props) {
+    function handleInputChangeACB(event) {
+        props.setSearchInput(event.target.value)
+    }
 
-	function handleInputChangeACB(event) {
-		props.setSearchInput(event.target.value);
-	}
+    function handleSchoolChangeACB(event) {
+        props.setSearchSchool(event.target.value)
+    }
 
-	function handleSchoolChangeACB(event) {
-		props.setSearchSchool(event.target.value);
-	}
+    function handleDepartmentChangeACB(event) {
+        props.setSearchDepartment(event.target.value)
+    }
 
-	function handleDepartmentChangeACB(event) {
-		props.setSearchDepartment(event.target.value);
-	}
+    function doSearchACB(e) {
+        e.preventDefault()
+        props.search()
+    }
 
-	function doSearchACB(e) {
-		e.preventDefault()
-		props.search()
-	}
+    function listSchoolsCB(school) {
+        return (
+            <MenuItem key={school.code} value={school.code}>
+                {school.name}
+            </MenuItem>
+        )
+    }
 
-	function listSchoolsCB(school) {
-		return (
-			<MenuItem key={school.code} value={school.code}>{school.name}</MenuItem>
-		);
-	}
+    function filterIfSchoolCB(department) {
+        return (
+            props.searchSchool === "" ||
+            department.name.startsWith(props.searchSchool)
+        )
+    }
 
-	function filterIfSchoolCB(department) {
-		return props.searchSchool === "" || department.name.startsWith(props.searchSchool);
-	}
+    function listDepartmentsCB(department) {
+        return (
+            <MenuItem key={department.code} value={department.code}>
+                {department.name}
+            </MenuItem>
+        )
+    }
 
-	function listDepartmentsCB(department) {
-		return (
-			<MenuItem key={department.code} value={department.code}>{department.name}</MenuItem>
-		);
-	}
-
-	return (
-		<Grid container spacing={2}>
-			<Grid item xs={12} lg={4}>
-				<Paper
-					component="form"
-					sx={{
-						p: "2px 4px",
-						display: "flex",
-						alignItems: "center",
-					}}>
-					<InputBase
-						sx={{ ml: 1, flex: 1 }}
-						placeholder="Search For Course"
-						inputProps={{ "aria-label": "search course" }}
-						value={props.searchInput}
-						onChange={handleInputChangeACB}
-					/>
-					<IconButton
-						type="submit"
-						sx={{ p: "10px" }}
-						aria-label="search"
-						onClick={doSearchACB}>
-						<SearchIcon />
-					</IconButton>
-				</Paper>
-			</Grid>
-			<Grid item xs={6} lg={4}>
-				<FormControl sx={{ width: "100%" }}>
-					<InputLabel>School</InputLabel>
-					<Select
-						value={props.searchSchool}
-						label="School"
-						onChange={handleSchoolChangeACB}
-					>
-						<MenuItem value="">All</MenuItem>
-						{schools.map(listSchoolsCB)}
-					</Select>
-				</FormControl>
-			</Grid>
-			<Grid item xs={6} lg={4}>
-				<FormControl sx={{ width: "100%" }}>
-					<InputLabel>Department</InputLabel>
-					<Select
-						value={props.searchDepartment}
-						label="Department"
-						onChange={handleDepartmentChangeACB}
-					>
-						<MenuItem value="">All</MenuItem>
-						{departments.filter(filterIfSchoolCB).map(listDepartmentsCB)}
-					</Select>
-				</FormControl>
-			</Grid>
-		</Grid>
-	)
+    return (
+        <Grid container spacing={2}>
+            <Grid item xs={12} lg={4}>
+                <Paper
+                    component="form"
+                    sx={{
+                        p: "2px 4px",
+                        display: "flex",
+                        alignItems: "center",
+                    }}
+                >
+                    <InputBase
+                        sx={{ ml: 1, flex: 1 }}
+                        placeholder="Search For Course"
+                        inputProps={{ "aria-label": "search course" }}
+                        value={props.searchInput}
+                        onChange={handleInputChangeACB}
+                    />
+                    <IconButton
+                        type="submit"
+                        sx={{ p: "10px" }}
+                        aria-label="search"
+                        onClick={doSearchACB}
+                    >
+                        <SearchIcon />
+                    </IconButton>
+                </Paper>
+            </Grid>
+            <Grid item xs={6} lg={4}>
+                <FormControl sx={{ width: "100%" }}>
+                    <InputLabel>School</InputLabel>
+                    <Select
+                        value={props.searchSchool}
+                        label="School"
+                        onChange={handleSchoolChangeACB}
+                    >
+                        <MenuItem value="">All</MenuItem>
+                        {schools.map(listSchoolsCB)}
+                    </Select>
+                </FormControl>
+            </Grid>
+            <Grid item xs={6} lg={4}>
+                <FormControl sx={{ width: "100%" }}>
+                    <InputLabel>Department</InputLabel>
+                    <Select
+                        value={props.searchDepartment}
+                        label="Department"
+                        onChange={handleDepartmentChangeACB}
+                    >
+                        <MenuItem value="">All</MenuItem>
+                        {departments
+                            .filter(filterIfSchoolCB)
+                            .map(listDepartmentsCB)}
+                    </Select>
+                </FormControl>
+            </Grid>
+        </Grid>
+    )
 }

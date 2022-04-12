@@ -7,42 +7,41 @@ import React from "react"
 import { Link } from "react-router-dom"
 
 export default function SearchResultsView({ searchResults, courseClicked }) {
-	
-	function resultCB(res) {
-		
-		function courseClickedACB() {
-			courseClicked(res.courseCode)
-		}
+    function resultCB(res) {
+        function courseClickedACB() {
+            courseClicked(res.courseCode)
+        }
 
-		return (
-			<Grid item xs={12} md={12} lg={6} key={res.courseCode}>
-				<Card variant="outlined" sx={{ backgroundColor: "grey.100" }}>
-					<CardContent>
-						<Grid container>
-							<Grid item xs={10}>
-								{res.courseCode} {res.title}
-							</Grid>
-							<Grid item xs={2} sx={{ textAlign: "end" }}>
-								{res.credits} hp
-							</Grid>
-						</Grid>
-					</CardContent>
-					<CardActions>
-						<Button
-							onClick={courseClickedACB}
-							to={`${res.courseCode}`}
-							component={Link}>
-							More Information
-						</Button>
-					</CardActions>
-				</Card>
-			</Grid>
-		)
-	}
+        return (
+            <Grid item xs={12} md={12} lg={6} key={res.courseCode}>
+                <Card variant="outlined" sx={{ backgroundColor: "grey.100" }}>
+                    <CardContent>
+                        <Grid container>
+                            <Grid item xs={10}>
+                                {res.courseCode} {res.title}
+                            </Grid>
+                            <Grid item xs={2} sx={{ textAlign: "end" }}>
+                                {res.credits} hp
+                            </Grid>
+                        </Grid>
+                    </CardContent>
+                    <CardActions>
+                        <Button
+                            onClick={courseClickedACB}
+                            to={`${res.courseCode}`}
+                            component={Link}
+                        >
+                            More Information
+                        </Button>
+                    </CardActions>
+                </Card>
+            </Grid>
+        )
+    }
 
-	return (
-		<Grid container spacing={2} padding="20px 0">
-			{searchResults.map(resultCB)}
-		</Grid>
-	)
+    return (
+        <Grid container spacing={2} padding="20px 0">
+            {searchResults.map(resultCB)}
+        </Grid>
+    )
 }

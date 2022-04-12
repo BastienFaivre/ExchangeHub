@@ -2,17 +2,19 @@ import { Grid, Stack, Typography } from "@mui/material"
 import CardContent from "@mui/material/CardContent"
 import Card from "@mui/material/Card"
 import Button from "@mui/material/Button"
-import Rating from '@mui/material/Rating'
-import RateReviewIcon from '@mui/icons-material/RateReview'
-import CommentsDisabledIcon from '@mui/icons-material/CommentsDisabled'
+import Rating from "@mui/material/Rating"
+import RateReviewIcon from "@mui/icons-material/RateReview"
+import CommentsDisabledIcon from "@mui/icons-material/CommentsDisabled"
 import { Link } from "react-router-dom"
 
 export default function CourseView({ courseData, comments }) {
-
     function commentCB(comment) {
-
         return (
-            <Card variant="outlined" key={comment.uuid} sx={{ backgroundColor: "grey.100" }}>
+            <Card
+                variant="outlined"
+                key={comment.uuid}
+                sx={{ backgroundColor: "grey.100" }}
+            >
                 <CardContent>
                     <Grid container>
                         <Grid container item sx={{ paddingBottom: "10px" }}>
@@ -20,7 +22,11 @@ export default function CourseView({ courseData, comments }) {
                                 {comment.title}
                             </Grid>
                             <Grid item xs={3} sx={{ textAlign: "end" }}>
-                                <Rating value={comment.rating} readOnly precision={0.5} />
+                                <Rating
+                                    value={comment.rating}
+                                    readOnly
+                                    precision={0.5}
+                                />
                             </Grid>
                         </Grid>
                         <Grid container item sx={{ paddingBottom: "10px" }}>
@@ -41,57 +47,107 @@ export default function CourseView({ courseData, comments }) {
                                 Author: {comment.forname} {comment.lastname}
                             </Grid>
                             <Grid item xs={6} sx={{ textAlign: "end" }}>
-                                <Button href={"mailto:" + comment.contact}>Contact</Button>
+                                <Button href={"mailto:" + comment.contact}>
+                                    Contact
+                                </Button>
                             </Grid>
                         </Grid>
                     </Grid>
                 </CardContent>
             </Card>
-        );
-
+        )
     }
 
     return (
         <Grid container spacing={2}>
             <Grid container item xs={12} md={12} lg={6} sx={{ height: 1 }}>
-                <Grid container item sx={{ paddingBottom: "10px", textAlign: "center" }}>
+                <Grid
+                    container
+                    item
+                    sx={{ paddingBottom: "10px", textAlign: "center" }}
+                >
                     <Grid item xs={12}>
-                        <Typography variant="h5" sx={{ fontWeight: "bold", paddingBottom: "10px" }}>
+                        <Typography
+                            variant="h5"
+                            sx={{ fontWeight: "bold", paddingBottom: "10px" }}
+                        >
                             About the Course
                         </Typography>
                     </Grid>
                 </Grid>
                 <Grid container item xs={12}>
                     <Grid item xs={12}>
-                        <Card variant="outlined" sx={{ backgroundColor: "grey.300" }}>
+                        <Card
+                            variant="outlined"
+                            sx={{ backgroundColor: "grey.300" }}
+                        >
                             <CardContent>
-                                <Grid container item sx={{ paddingBottom: "10px" }}>
-                                    <Grid item xs={2} sx={{ fontWeight: "bold" }}>
+                                <Grid
+                                    container
+                                    item
+                                    sx={{ paddingBottom: "10px" }}
+                                >
+                                    <Grid
+                                        item
+                                        xs={2}
+                                        sx={{ fontWeight: "bold" }}
+                                    >
                                         {courseData.code}
                                     </Grid>
-                                    <Grid item xs={8} sx={{ fontWeight: "bold" }}>
+                                    <Grid
+                                        item
+                                        xs={8}
+                                        sx={{ fontWeight: "bold" }}
+                                    >
                                         {courseData.title.en}
                                     </Grid>
                                     <Grid item xs={2} sx={{ textAlign: "end" }}>
                                         {courseData.credits} Credits
                                     </Grid>
                                 </Grid>
-                                <Grid container item sx={{ paddingBottom: "10px" }}>
+                                <Grid
+                                    container
+                                    item
+                                    sx={{ paddingBottom: "10px" }}
+                                >
                                     <Grid item xs={4}>
                                         Level: {courseData.level.en}
                                     </Grid>
                                     <Grid item xs={8} sx={{ textAlign: "end" }}>
-                                        Department: {courseData.department.name.en}
+                                        Department:{" "}
+                                        {courseData.department.name.en}
                                     </Grid>
                                 </Grid>
-                                <Grid container item sx={{ paddingBottom: "10px" }}>
-                                    <Grid item xs={12} sx={{ textAlign: "justify" }}>
-                                        {new DOMParser().parseFromString(courseData.info.en, "text/html").documentElement.textContent}
+                                <Grid
+                                    container
+                                    item
+                                    sx={{ paddingBottom: "10px" }}
+                                >
+                                    <Grid
+                                        item
+                                        xs={12}
+                                        sx={{ textAlign: "justify" }}
+                                    >
+                                        {
+                                            new DOMParser().parseFromString(
+                                                courseData.info.en,
+                                                "text/html"
+                                            ).documentElement.textContent
+                                        }
                                     </Grid>
                                 </Grid>
                                 <Grid container item>
-                                    <Grid item xs={12} sx={{ textAlign: "end" }}>
-                                    <Button target="_blank" href={courseData.href.en}>More On KTH Website</Button>
+                                    <Grid
+                                        item
+                                        xs={12}
+                                        sx={{ textAlign: "end" }}
+                                    >
+                                        <Button
+                                            target="_blank"
+                                            href={courseData.href.en}
+                                        >
+                                            More On KTH Website
+                                        </Button>
                                     </Grid>
                                 </Grid>
                             </CardContent>
@@ -100,27 +156,41 @@ export default function CourseView({ courseData, comments }) {
                 </Grid>
             </Grid>
             <Grid container item xs={12} md={12} lg={6}>
-                <Grid item xs={6} sx={{ paddingBottom: "10px", textAlign: "center" }}>
-                    <Typography variant="h5" sx={{ fontWeight: "bold", paddingBottom: "10px" }}>
+                <Grid
+                    item
+                    xs={6}
+                    sx={{ paddingBottom: "10px", textAlign: "center" }}
+                >
+                    <Typography
+                        variant="h5"
+                        sx={{ fontWeight: "bold", paddingBottom: "10px" }}
+                    >
                         Students Comments ({comments.length})
                     </Typography>
                 </Grid>
                 <Grid item xs={6} sx={{ textAlign: "center" }}>
-                    <Button to={`/profile`} component={Link}><RateReviewIcon />&nbsp;&nbsp;Write a Comment</Button>
+                    <Button to={`/profile`} component={Link}>
+                        <RateReviewIcon />
+                        &nbsp;&nbsp;Write a Comment
+                    </Button>
                 </Grid>
-                <Stack direction="column" spacing={2} width={"100%"} height={"100%"}>
+                <Stack
+                    direction="column"
+                    spacing={2}
+                    width={"100%"}
+                    height={"100%"}
+                >
                     {comments.map(commentCB)}
-                    {comments.length === 0 &&
+                    {comments.length === 0 && (
                         <Grid item xs={12} sx={{ textAlign: "center" }}>
                             <Typography variant="h5" sx={{ padding: "10px" }}>
                                 This course has not been reviewed yet.
                             </Typography>
                             <CommentsDisabledIcon fontSize="large" />
                         </Grid>
-                    }
+                    )}
                 </Stack>
             </Grid>
         </Grid>
-    );
-
+    )
 }

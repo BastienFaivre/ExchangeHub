@@ -68,7 +68,7 @@ Now, only the **courses** tab is implemented. The users can search for KTH cours
 
 ## Upcomming features
 
--  The **lifestyle** tab
--  The **students** tab
--  Login feature and therefore the possibility to write comments and reviews
--  Persistence of comments and reviews in _Firebase_
+-   The **lifestyle** tab
+-   The **students** tab
+-   Login feature and therefore the possibility to write comments and reviews
+-   Persistence of comments and reviews in _Firebase_

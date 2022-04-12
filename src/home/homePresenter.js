@@ -1,3 +1,3 @@
 export default function HomePresenter() {
-	return <div>HOME</div>
+    return <div>HOME</div>
 }
