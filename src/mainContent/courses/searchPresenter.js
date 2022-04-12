@@ -14,16 +14,29 @@ import {
 import { useState } from "react"
 
 export default function SearchPresenter(props) {
-
-	const [searchInput, setSearchInput] = useState("")
-	const [searchSchool, setSearchSchool] = useState("")
-	const [searchDepartment, setSearchDepartment] = useState("")
-
+	
+	const dispatch = useDispatch()
 	const { loading, error, data } = useSelector(
 		(state) => state.courses.results
 	)
 
-	const dispatch = useDispatch()
+	const [searchInput, setSearchInput] = useState("")
+	const [searchSchool, setSearchSchool] = useState("")
+	const [searchDepartment, setSearchDepartment] = useState("")
+	
+	function inputChangedACB(input) {
+		setSearchInput(input)
+	}
+
+	function schoolChangedACB(schoolCode) {
+		setSearchSchool(schoolCode)
+		// this also reset the department
+		setSearchDepartment("")
+	}
+
+	function departmentChangedACB(departmentCode) {
+		setSearchDepartment(departmentCode)
+	}
 
 	function doSearchACB() {
 		if ((searchInput && searchInput.length > 0) ||
@@ -34,10 +47,6 @@ export default function SearchPresenter(props) {
 		}
 	}
 
-	function inputChangedACB(input) {
-		setSearchInput(input)
-	}
-
 	function courseClickedACB(courseCode) {
 		dispatch(getCourseDetails(courseCode))
 	}
@@ -45,8 +54,8 @@ export default function SearchPresenter(props) {
 	return (
 		<Box>
 			<SearchFormView search={doSearchACB} searchInput={searchInput} setSearchInput={inputChangedACB}
-				searchSchool={searchSchool} setSearchSchool={setSearchSchool}
-				searchDepartment={searchDepartment} setSearchDepartment={setSearchDepartment}
+				searchSchool={searchSchool} setSearchSchool={schoolChangedACB}
+				searchDepartment={searchDepartment} setSearchDepartment={departmentChangedACB}
 			/>
 			{data.length > 0 && (
 				<SearchResultsView

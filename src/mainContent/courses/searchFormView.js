@@ -7,7 +7,6 @@ import Paper from "@mui/material/Paper"
 import InputBase from "@mui/material/InputBase"
 import IconButton from "@mui/material/IconButton"
 import SearchIcon from "@mui/icons-material/Search"
-import { useState } from "react"
 import { schools, departments } from "../../utils/departments"
 
 export default function SearchFormView(props) {
@@ -30,25 +29,19 @@ export default function SearchFormView(props) {
 	}
 
 	function listSchoolsCB(school) {
-
 		return (
 			<MenuItem key={school.code} value={school.code}>{school.name}</MenuItem>
 		);
-
 	}
 
 	function filterIfSchoolCB(department) {
-
 		return props.searchSchool === "" || department.name.startsWith(props.searchSchool);
-
 	}
 
 	function listDepartmentsCB(department) {
-
 		return (
 			<MenuItem key={department.code} value={department.code}>{department.name}</MenuItem>
 		);
-
 	}
 
 	return (
