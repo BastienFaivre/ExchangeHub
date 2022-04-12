@@ -14,22 +14,45 @@ import {
 import { useState } from "react"
 
 export default function SearchPresenter(props) {
-    const [searchInput, setSearchInput] = useState("")
-
+    const dispatch = useDispatch()
     const { loading, error, data } = useSelector(
         (state) => state.courses.results
     )
 
-    const dispatch = useDispatch()
-
-    function doSearchACB() {
-        if (searchInput && searchInput.length > 0) {
-            dispatch(saveFilterSearchCourses({ text_pattern: searchInput }))
-        }
-    }
+    const [searchInput, setSearchInput] = useState("")
+    const [searchSchool, setSearchSchool] = useState("")
+    const [searchDepartment, setSearchDepartment] = useState("")
 
     function inputChangedACB(input) {
         setSearchInput(input)
+    }
+
+    function schoolChangedACB(schoolCode) {
+        setSearchSchool(schoolCode)
+        // this also reset the department
+        setSearchDepartment("")
+    }
+
+    function departmentChangedACB(departmentCode) {
+        setSearchDepartment(departmentCode)
+    }
+
+    function doSearchACB() {
+        if (
+            (searchInput && searchInput.length > 0) ||
+            searchDepartment !== ""
+        ) {
+            dispatch(
+                saveFilterSearchCourses({
+                    text_pattern: searchInput,
+                    department_prefix: searchDepartment,
+                })
+            )
+        } else {
+            alert(
+                "You should at least specify a text pattern or choose a department!"
+            )
+        }
     }
 
     function courseClickedACB(courseCode) {
@@ -42,6 +65,10 @@ export default function SearchPresenter(props) {
                 search={doSearchACB}
                 searchInput={searchInput}
                 setSearchInput={inputChangedACB}
+                searchSchool={searchSchool}
+                setSearchSchool={schoolChangedACB}
+                searchDepartment={searchDepartment}
+                setSearchDepartment={departmentChangedACB}
             />
             {data.length > 0 && (
                 <SearchResultsView

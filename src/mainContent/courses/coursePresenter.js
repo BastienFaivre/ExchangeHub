@@ -7,12 +7,11 @@ import { useParams } from "react-router-dom"
 import { getCourseDetails } from "../../redux/reducers/coursesReducer"
 
 export default function CoursePresenter() {
+    const params = useParams()
+    const dispatch = useDispatch()
     const { loading, error, courseCode, data } = useSelector(
         (state) => state.courses.courseDetails
     )
-
-    const params = useParams()
-    const dispatch = useDispatch()
 
     useEffect(() => {
         if (!courseCode && params.id) {
