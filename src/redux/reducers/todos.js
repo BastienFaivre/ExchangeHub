@@ -1,4 +1,5 @@
-import { getDatabase, ref, push, onValue } from "firebase/database"
+// import { getDatabase, ref, push, onValue } from "firebase/database"
+
 // import firebase from "firebase/app"
 // EXAMPLE REDUCER
 
@@ -59,33 +60,31 @@ export function todoReducer(state = initialState, action) {
 }
 
 // Thunk reducer
-export async function fetchTodos(dispatch, getState) {
-    const db = getDatabase()
-    const todosRef = ref(db, "todos")
-    // Will update the todos in the reducer everytime there is a change
-    // Can be used for example for updating the form in the profile
-    // but it is not a good idea to do this with the rest, since we will only fetch on demand
-    // using the search presenters
-    onValue(todosRef, (snapshot) => {
-        const data = snapshot.val()
-        console.log(data)
-        dispatch({
-            type: "RESET_TODOS",
-            payload: { todos: data },
-        })
-    })
-}
+// export async function fetchTodos(dispatch, getState) {
+//     const db = getDatabase()
+//     const todosRef = ref(db, "todos")
+//     // Will update the todos in the reducer everytime there is a change
+//     // Can be used for example for updating the form in the profile
+//     // but it is not a good idea to do this with the rest, since we will only fetch on demand
+//     // using the search presenters
+//     onValue(todosRef, (snapshot) => {
+//         const data = snapshot.val()
+//         console.log(data)
+//         dispatch({
+//             type: "RESET_TODOS",
+//             payload: { todos: data },
+//         })
+//     })
+// }
 
-export function saveNewTodo(content) {
-    return async function saveNewTodoThunk(dispatch, getState) {
-        const initialTodo = { content, completed: false }
-        const db = getDatabase()
-        const todoRef = await push(ref(db, "todos"), initialTodo)
-        dispatch({
-            type: "ADD_TODO",
-            payload: { id: todoRef.key, content },
-        })
-    }
-}
-
-export function testDB() {}
+// export function saveNewTodo(content) {
+//     return async function saveNewTodoThunk(dispatch, getState) {
+//         const initialTodo = { content, completed: false }
+//         const db = getDatabase()
+//         const todoRef = await push(ref(db, "todos"), initialTodo)
+//         dispatch({
+//             type: "ADD_TODO",
+//             payload: { id: todoRef.key, content },
+//         })
+//     }
+// }
