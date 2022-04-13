@@ -1,6 +1,9 @@
 import { getDatabase, ref, push, onValue } from "firebase/database"
 
-import { searchCourses, getCourseDetails as getDetails } from "../../coursesAPI"
+import {
+    searchCourses,
+    getCourseDetails as getDetails,
+} from "../../API/coursesAPI"
 import isObjectEqual from "../../utils/isObjectEqual"
 
 const initialState = {
