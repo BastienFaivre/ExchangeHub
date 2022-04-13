@@ -18,20 +18,74 @@ import CssBaseline from "@mui/material/CssBaseline"
 // FIREBASE
 import firebaseConfig from "./config/firebaseConfig"
 import { initializeApp } from "firebase/app"
+import { getFirestore } from "firebase/firestore"
 import {
     getAuth,
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
 } from "firebase/auth"
 import { saveFilterSearchCourses } from "./redux/reducers/coursesReducer"
+import {
+    getCommentsByCourseCode,
+    getUsers,
+    getUsersWithLimit,
+    saveComment,
+    saveUser,
+    saveUser2,
+    updateUserForm,
+} from "./API/firebaseAPI"
 
 // import { saveNewTodo, fetchTodos } from "./redux/reducers/todos"
 
 const app = initializeApp(firebaseConfig)
 const auth = getAuth(app)
+const db = getFirestore(app)
 
 // createUserWithEmailAndPassword(auth, "philip.hamelink@gmail.com", "password")
-// signInWithEmailAndPassword(auth, "philip.hamelink@gmail.com", "password")
+// signInWithEmailAndPassword(auth, "philip.hamelink@gmail.com", "password").then(
+//     () => {
+//         const comment = {
+//             courseCode: "DH2642",
+//             title: "Very good course!",
+//             rating: 4.5,
+//             difficulty: "Intermediate",
+//             equivalence: "Programmation web",
+//             description:
+//                 "This course is awesome, I learnt so much! I really recommend it.",
+//             forname: "Bastien",
+//             lastname: "Faivre",
+//             contact: "bastien.faivre@epfl.ch",
+//         }
+//         updateUserForm({
+//             comment: {
+//                 courseCode: "DH2642",
+//                 title: "Very good course!",
+//                 rating: 4.5,
+//                 difficulty: "Intermediate",
+//                 equivalence: "Programmation web",
+//                 description: "This course is awesome, I lear",
+//                 forname: "Philip",
+//                 lastname: "Hamelink",
+//             },
+//         })
+//         getCommentsByCourseCode("DH2642")
+//         saveComment(comment)
+//         getUsers()
+//         getUsersWithLimit()
+//         const user = {
+//             name: "Philip",
+//             age: 23,
+//             info: {
+//                 nationality: "CH",
+//             },
+//             form: {
+//                 comment: { courseCode: "DDHS2" },
+//             },
+//         }
+//         saveUser2(user)
+//         saveUser(user)
+//     }
+// )
 
 // console.log(auth)
 
