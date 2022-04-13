@@ -52,9 +52,9 @@ export default function SearchFormView(props) {
     }
 
     return (
-        <Card variant="outlined" sx={{ p: 2, bgcolor: "grey.100" }}>
-            <Grid spacing={2} container alignItems={"center"}>
-                <Grid item xs={6} lg={4}>
+        <Card variant="outlined" sx={{ p: 2, bgcolor: "grey.50" }}>
+            <Grid spacing={2} container alignItems="center">
+                <Grid item xs={12} lg={4}>
                     <Paper
                         component="form"
                         sx={{
@@ -81,7 +81,7 @@ export default function SearchFormView(props) {
                         </IconButton>
                     </Paper>
                 </Grid>
-                <Grid item xs={6} lg={4}>
+                <Grid item xs={12} md={6} lg={4}>
                     <FormControl sx={{ width: "100%", bgcolor: "white" }}>
                         <InputLabel>School</InputLabel>
                         <Select
@@ -94,7 +94,7 @@ export default function SearchFormView(props) {
                         </Select>
                     </FormControl>
                 </Grid>
-                <Grid item xs={6} lg={4}>
+                <Grid item xs={12} md={6} lg={4}>
                     <FormControl sx={{ width: "100%", bgcolor: "white" }}>
                         <InputLabel>Department</InputLabel>
                         <Select
