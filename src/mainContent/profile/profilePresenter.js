@@ -5,8 +5,6 @@ import { useDispatch, useSelector } from "react-redux"
 import { fetchStudentProfile } from "../../redux/reducers/profileReducer"
 
 export default function ProfilePresenter() {
-  
-    const auth = getAuth()
     const { loading, error, courses, info, tips, form } = useSelector(
         (state) => state.profile
     )
@@ -18,12 +16,11 @@ export default function ProfilePresenter() {
     }, [])
 
     console.log(loading, error, courses, info, tips, form)
-  
+
     function logoutACB() {
         const auth = getAuth()
         signOut(auth).catch(console.log)
     }
 
     return <ProfileView logout={logoutACB} />
-    
 }
