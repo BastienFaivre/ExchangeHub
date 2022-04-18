@@ -7,9 +7,13 @@ import {
     Typography,
 } from "@mui/material"
 import AccountCircleIcon from "@mui/icons-material/AccountCircle"
-import { Link } from "react-router-dom"
 
 export default function ProfileLoginView(props) {
+    function changeRegisteredStateACB(event) {
+        event.preventDefault()
+        props.setRegistered(!props.registered)
+    }
+
     function handleEmailChangeACB(event) {
         props.setEmail(event.target.value)
     }
@@ -40,7 +44,9 @@ export default function ProfileLoginView(props) {
                         fontSize="large"
                         sx={{ alignSelf: "center" }}
                     />
-                    <Typography variant="h5">Login</Typography>
+                    <Typography variant="h5">
+                        {props.registered ? "Login" : "Register"}
+                    </Typography>
                     <TextField
                         label="Email"
                         variant="outlined"
@@ -57,12 +63,25 @@ export default function ProfileLoginView(props) {
                         onChange={handlePasswordChangeACB}
                         required
                     />
-                    <Button variant="contained" type="submit" onClick={loginACB}>
-                        Login
+                    <Button
+                        variant="contained"
+                        type="submit"
+                        onClick={loginACB}
+                    >
+                        {props.registered ? "Login" : "Register"}
                     </Button>
+                    {props.error && (
+                        <Typography variant="body1" color="error">
+                            {props.error.message}
+                        </Typography>
+                    )}
                     <Typography variant="body1">
-                        Don't have an account?{" "}
-                        <Link to={`/register`}>Register</Link>
+                        {props.registered
+                            ? "Don't have an account ? "
+                            : "Already have an account ? "}
+                        <a href="" onClick={changeRegisteredStateACB}>
+                            {props.registered ? "Register" : "Login"}
+                        </a>
                     </Typography>
                 </Stack>
             </CardContent>

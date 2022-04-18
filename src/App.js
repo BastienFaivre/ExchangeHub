@@ -7,9 +7,15 @@ import SearchPresenter from "./mainContent/courses/searchPresenter"
 import CoursePresenter from "./mainContent/courses/coursePresenter"
 import ProfileLoginPresenter from "./mainContent/profile/profileLoginPresenter"
 import ProfilePresenter from "./mainContent/profile/profilePresenter"
-import ProfileRegisterPresenter from "./mainContent/profile/profileRegisterPresenter"
+import { getAuth, onAuthStateChanged } from "firebase/auth"
+import { useState } from "react"
 
 function App() {
+    const [user, setUser] = useState(null)
+
+    const auth = getAuth()
+
+    onAuthStateChanged(auth, setUser)
     return (
         <Routes>
             <Route
@@ -24,23 +30,8 @@ function App() {
                 path="/profile"
                 element={
                     <MainContent>
-                        <ProfilePresenter />
-                    </MainContent>
-                }
-            />
-            <Route
-                path="/login"
-                element={
-                    <MainContent>
-                        <ProfileLoginPresenter />
-                    </MainContent>
-                }
-            />
-            <Route
-                path="/register"
-                element={
-                    <MainContent>
-                        <ProfileRegisterPresenter />
+                        {user && <ProfilePresenter />}
+                        {!user && <ProfileLoginPresenter />}
                     </MainContent>
                 }
             />
