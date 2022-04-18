@@ -34,6 +34,7 @@ import {
     saveUser2,
     updateUserForm,
 } from "./API/firebaseAPI"
+import { getStudentProfile } from "./API/firebase/students"
 
 // import { saveNewTodo, fetchTodos } from "./redux/reducers/todos"
 
@@ -42,48 +43,49 @@ const auth = getAuth(app)
 const db = getFirestore(app)
 
 // createUserWithEmailAndPassword(auth, "philip.hamelink@gmail.com", "password")
-// signInWithEmailAndPassword(auth, "philip.hamelink@gmail.com", "password").then(
-//     () => {
-//         const comment = {
-//             courseCode: "DH2642",
-//             title: "Very good course!",
-//             rating: 4.5,
-//             difficulty: "Intermediate",
-//             equivalence: "Programmation web",
-//             description:
-//                 "This course is awesome, I learnt so much! I really recommend it.",
-//             forname: "Bastien",
-//             lastname: "Faivre",
-//             contact: "bastien.faivre@epfl.ch",
-//         }
-//         updateUserForm({
-//             comment: {
-//                 courseCode: "DH2642",
-//                 title: "Very good course!",
-//                 rating: 4.5,
-//                 difficulty: "Intermediate",
-//                 equivalence: "Programmation web",
-//                 description: "This course is awesome, I lear",
-//                 forname: "Philip",
-//                 lastname: "Hamelink",
-//             },
-//         })
-//         getCommentsByCourseCode("DH2642")
-//         saveComment(comment)
-//         getUsers()
-//         getUsersWithLimit()
-//         const user = {
-//             name: "Philip",
-//             age: 23,
-//             info: {
-//                 nationality: "CH",
-//             },
-//             form: {
-//                 comment: { courseCode: "DDHS2" },
-//             },
-//         }
-//         saveUser2(user)
-//         saveUser(user)
+// signInWithEmailAndPassword(auth, "philip.hamelink@gmail.com", "password")
+// .then(
+// () => {
+// const comment = {
+//     courseCode: "DH2642",
+//     title: "Very good course!",
+//     rating: 4.5,
+//     difficulty: "Intermediate",
+//     equivalence: "Programmation web",
+//     description:
+//         "This course is awesome, I learnt so much! I really recommend it.",
+//     forname: "Bastien",
+//     lastname: "Faivre",
+//     contact: "bastien.faivre@epfl.ch",
+// }
+// updateUserForm({
+//     comment: {
+//         courseCode: "DH2642",
+//         title: "Very good course!",
+//         rating: 4.5,
+//         difficulty: "Intermediate",
+//         equivalence: "Programmation web",
+//         description: "This course is awesome, I lear",
+//         forname: "Philip",
+//         lastname: "Hamelink",
+//     },
+// })
+// getCommentsByCourseCode("DH2642")
+// saveComment(comment)
+// getUsers()
+// getUsersWithLimit()
+// const user = {
+//     name: "Philip",
+//     age: 23,
+//     info: {
+//         nationality: "CH",
+//     },
+//     form: {
+//         comment: { courseCode: "DDHS2" },
+//     },
+// }
+// saveUser2(user)
+// saveUser(user)
 //     }
 // )
 
@@ -124,15 +126,16 @@ const db = getFirestore(app)
 // store.dispatch({ type: "ADD_TODO", payload: { id: 1, content: "First todo" } })
 // store.dispatch({ type: "ADD_TODO", payload: { id: 2, content: "Second todo" } })
 // store.dispatch({ type: "TOGGLE_TODO", payload: { id: 1 } })
-
-ReactDOM.render(
-    <BrowserRouter>
-        <Provider store={store}>
-            <ThemeProvider theme={theme}>
-                <CssBaseline />
-                <App />
-            </ThemeProvider>
-        </Provider>
-    </BrowserRouter>,
-    document.getElementById("root")
+signInWithEmailAndPassword(auth, "philip.hamelink@gmail.com", "password").then(
+    ReactDOM.render(
+        <BrowserRouter>
+            <Provider store={store}>
+                <ThemeProvider theme={theme}>
+                    <CssBaseline />
+                    <App />
+                </ThemeProvider>
+            </Provider>
+        </BrowserRouter>,
+        document.getElementById("root")
+    )
 )

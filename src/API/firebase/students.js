@@ -1,8 +1,3 @@
-// DEPRECATED!!!!
-// This file is no longer used.
-// These functions only serve as examples, and should not be used in the project.
-// Use the functions in src/API/firebase/* instead.
-
 import {
     collection,
     addDoc,
@@ -14,11 +9,12 @@ import {
     getDocs,
     limit,
     updateDoc,
+    getDoc,
 } from "firebase/firestore"
 
 import { getAuth } from "firebase/auth"
 
-export async function saveUser(userData) {
+export async function createUserProfile(userData) {
     try {
         const db = getFirestore()
         const auth = getAuth()
@@ -26,9 +22,32 @@ export async function saveUser(userData) {
         if (!userId) {
             throw new Error("User needs to be logged in")
         }
+        console.log("SAVING USER", userData)
         await setDoc(doc(db, "students", `${userId}`), userData)
     } catch (e) {
         console.error(e.message)
+    }
+}
+
+export async function getStudentProfile() {
+    try {
+        const db = getFirestore()
+        const auth = getAuth()
+        const userId = auth?.currentUser?.uid ?? false
+        if (!userId) {
+            throw new Error("User needs to be logged in")
+        }
+        const studentDocRef = doc(db, "students", userId)
+        const snapshot = await getDoc(studentDocRef)
+        const studentInfo = snapshot.data()
+        if (!studentInfo) {
+            return undefined
+        }
+        const { form, info } = studentInfo
+        return { form, info }
+    } catch (e) {
+        console.error(e.message)
+        throw e
     }
 }
 
@@ -99,59 +118,6 @@ export async function getUsersByNationality(nationality) {
         const users = snapshot.docs.map((doc) => doc.data())
         console.log(users)
         return users
-    } catch (e) {
-        console.error(e.message)
-    }
-}
-
-export async function saveComment(comment) {
-    try {
-        const db = getFirestore()
-        const auth = getAuth()
-        const userId = auth?.currentUser?.uid ?? false
-        if (!userId) {
-            throw new Error("User needs to be logged in")
-        }
-
-        await addDoc(collection(db, "comments"), { ...comment, userId })
-    } catch (e) {
-        console.error(e.message)
-    }
-}
-
-export async function getCommentsByCourseCode(courseCode) {
-    try {
-        const db = getFirestore()
-        const q = query(
-            collection(db, "comments"),
-            where("courseCode", "==", courseCode)
-        )
-
-        const snapshot = await getDocs(q)
-        const comments = snapshot.docs.map((doc) => doc.data())
-        console.log(comments, snapshot.size)
-        return { comments, length: snapshot.size }
-    } catch (e) {
-        console.error(e.message)
-    }
-}
-
-export async function getCommentsForProfile() {
-    try {
-        const db = getFirestore()
-        const auth = getAuth()
-        const userId = auth?.currentUser?.uid ?? false
-        if (!userId) {
-            throw new Error("User needs to be logged in")
-        }
-        const q = query(
-            collection(db, "comments"),
-            where("userId", "==", userId)
-        )
-        const snapshot = await getDocs(q)
-        const comments = snapshot.docs.map((doc) => doc.data())
-        console.log(comments)
-        return comments
     } catch (e) {
         console.error(e.message)
     }
