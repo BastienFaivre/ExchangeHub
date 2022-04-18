@@ -1,3 +1,8 @@
+import { getAuth } from "firebase/auth";
+import ProfileView from "./profileView";
+
 export default function ProfilePresenter() {
-    return <></>
+    //console.log(getAuth().currentUser);
+    
+    return <ProfileView />
 }
