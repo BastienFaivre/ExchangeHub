@@ -2,12 +2,10 @@ import {Grid, Icon, Stack, Typography } from "@mui/material"
 import CardContent from "@mui/material/CardContent"
 import Card from "@mui/material/Card"
 import Button from "@mui/material/Button";
-import Avatar from '@mui/material/Avatar';
 import CardHeader from '@mui/material/CardHeader';
 import ArticleIcon from '@mui/icons-material/Article';
-import IconButton from '@mui/material/IconButton';
-import CardMedia from '@mui/material/CardMedia';
-import AccountCircle from "@mui/icons-material/AccountCircle"
+import AccountCircle from "@mui/icons-material/AccountCircle";
+import Box from '@mui/material/Box';
 
 export default function ProfileView(props) {
     function logoutACB(event) {
@@ -146,14 +144,32 @@ export default function ProfileView(props) {
                             <Grid item xs={12}>?</Grid>
                         </Card>
                     </Grid>
-                    <Grid container 
-                        alignItems="center" 
-                        justify="center"
-                        sx={{paddingLeft:"15px", paddingTop:"20px"}} 
-                        display="flex"
-                        justifyContent="center"
+                    <Grid container xs={12}>
+                        <Grid item
+                            xs={6}
+                            alignItems="left"
+                            sx={{ paddingLeft: "15px", paddingTop: "20px" }}
+                            justifyContent="left"
                         >
-                        <Button variant="contained">Update</Button>
+                            <Box
+                                display="flex"
+                                justifyContent="flex-start"
+                            >
+                                <Button variant="contained">Update</Button>
+                            </Box>
+                        </Grid>
+                        <Grid item
+                            xs={6}
+                            alignItems="left"
+                            sx={{ paddingLeft: "15px", paddingTop: "20px" }}
+                        >
+                            <Box 
+                                display="flex" 
+                                justifyContent="flex-end"
+                            >
+                                <Button variant="contained" onClick={logoutACB}>Logout</Button>
+                            </Box>
+                        </Grid>
                     </Grid>
                 </Grid>
             </CardContent>
