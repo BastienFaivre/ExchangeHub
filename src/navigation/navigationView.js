@@ -44,7 +44,7 @@ export default function NavigationView() {
                         to="/profile"
                         component={Link}
                     >
-                        <AccountCircle sx={{ color: "#D5D3D2"}}/>
+                        <AccountCircle sx={{ color: "#D5D3D2" }} />
                     </IconButton>
                 </Toolbar>
             </AppBar>
