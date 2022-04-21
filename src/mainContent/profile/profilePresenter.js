@@ -1,4 +1,4 @@
-import { getAuth, onAuthStateChanged, signOut } from "firebase/auth"
+import { getAuth, signOut } from "firebase/auth"
 import ProfileView from "./profileView"
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
@@ -22,5 +22,11 @@ export default function ProfilePresenter() {
         signOut(auth).catch(console.log)
     }
 
-    return <ProfileView logout={logoutACB} />
+    const profile_example = {
+        name: "Bastien Faivre",
+        nationality: "Switzerland",
+        department: "Computer Science",
+    }
+
+    return <ProfileView profile={profile_example} logout={logoutACB} />
 }

@@ -17,17 +17,17 @@ export default function TipsSearchPresenter() {
 
     const tips = [
         {
-            type: "food",
+            type: "Food",
             title: "Where to eat around the campus",
             description: "Nymble is a good place to eat ...",
         },
         {
-            type: "sport",
+            type: "Sport",
             title: "Gym at KTH Hallen",
             description: "The gym is located on the campus and ...",
         },
         {
-            type: "nightlife",
+            type: "Nightlife",
             title: "O'learys Norrtull",
             description:
                 "The bar is located at Norrtull and is super cool to watch football matches ...",

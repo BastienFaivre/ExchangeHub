@@ -2,7 +2,6 @@ import {
     Card,
     FormControl,
     Grid,
-    IconButton,
     InputBase,
     InputLabel,
     MenuItem,
@@ -56,7 +55,7 @@ export default function TipsSearchFormView(props) {
                             onChange={handleTypeChangeACB}
                         >
                             <MenuItem value="">All</MenuItem>
-                            {["food", "sport", "nightlife"].map(listTypesCB)}
+                            {["Food", "Sport", "Nightlife"].map(listTypesCB)}
                         </Select>
                     </FormControl>
                 </Grid>
