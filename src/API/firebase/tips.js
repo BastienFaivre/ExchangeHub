@@ -1,14 +1,10 @@
 import {
     collection,
     addDoc,
-    doc,
-    setDoc,
     getFirestore,
     query,
     where,
     getDocs,
-    limit,
-    updateDoc,
 } from "firebase/firestore"
 
 import { getAuth } from "firebase/auth"
@@ -44,5 +40,18 @@ export async function saveTip(tip) {
     } catch (e) {
         console.error(e.message)
         throw e
+    }
+}
+
+export async function getAllTips() {
+    try {
+        const db = getFirestore()
+        const q = query(collection(db, "tips"))
+        const snapshot = await getDocs(q)
+        const tips = snapshot.docs.map((doc) => doc.data())
+        console.log(tips)
+        return tips
+    } catch (e) {
+        console.error(e.message)
     }
 }

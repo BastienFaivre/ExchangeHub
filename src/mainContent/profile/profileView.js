@@ -1,11 +1,10 @@
-import { Grid, Icon, Stack, Typography } from "@mui/material"
+import { Grid, Typography } from "@mui/material"
 import CardContent from "@mui/material/CardContent"
 import Card from "@mui/material/Card"
 import Button from "@mui/material/Button"
 import CardHeader from "@mui/material/CardHeader"
 import ArticleIcon from "@mui/icons-material/Article"
 import AccountCircle from "@mui/icons-material/AccountCircle"
-import Box from "@mui/material/Box"
 
 export default function ProfileView(props) {
     function logoutACB(event) {
@@ -19,12 +18,12 @@ export default function ProfileView(props) {
                 style={{ padding: "40px" }}
                 avatar={
                     <AccountCircle
-                        sx={{ color: "#D5D3D2", width: 130, height: 130 }}
+                        sx={{ color: "lightgrey", width: 130, height: 130 }}
                     />
                 }
                 title={
                     <Typography variant="h5" sx={{ fontWeight: "bold" }}>
-                        Student Name
+                        {props.profile.name}
                     </Typography>
                 }
                 subheader={<Typography variant="h7">Username</Typography>}
@@ -57,33 +56,11 @@ export default function ProfileView(props) {
                                     variant="h7"
                                     sx={{ fontWeight: "bold" }}
                                 >
-                                    Gender:
+                                    Nationality
                                 </Typography>
                             </Grid>
                             <Grid item xs={12}>
-                                Penguin
-                            </Grid>
-                            <Grid item xs={12} sx={{ paddingTop: "10px" }}>
-                                <Typography
-                                    variant="h7"
-                                    sx={{ fontWeight: "bold" }}
-                                >
-                                    Birth Dath:
-                                </Typography>
-                            </Grid>
-                            <Grid item xs={12}>
-                                Pingu
-                            </Grid>
-                            <Grid item xs={12} sx={{ paddingTop: "10px" }}>
-                                <Typography
-                                    variant="h7"
-                                    sx={{ fontWeight: "bold" }}
-                                >
-                                    IDK:
-                                </Typography>
-                            </Grid>
-                            <Grid item xs={12}>
-                                YDK?
+                                {props.profile.nationality}
                             </Grid>
                         </Card>
                     </Grid>
@@ -106,48 +83,32 @@ export default function ProfileView(props) {
                                     variant="h7"
                                     sx={{ fontWeight: "bold" }}
                                 >
-                                    IDK:
+                                    Department
                                 </Typography>
                             </Grid>
                             <Grid item xs={12}>
-                                IDK
-                            </Grid>
-                            <Grid item xs={12} sx={{ paddingTop: "10px" }}>
-                                <Typography
-                                    variant="h7"
-                                    sx={{ fontWeight: "bold" }}
-                                >
-                                    Still dk:
-                                </Typography>
-                            </Grid>
-                            <Grid item xs={12}>
-                                ?
+                                {props.profile.department}
                             </Grid>
                         </Card>
                     </Grid>
-                    <Grid container xs={12}>
+                    <Grid container>
                         <Grid
                             item
                             xs={6}
                             alignItems="left"
                             sx={{ paddingLeft: "15px", paddingTop: "20px" }}
-                            justifyContent="left"
                         >
-                            <Box display="flex" justifyContent="flex-start">
-                                <Button variant="contained">Update</Button>
-                            </Box>
+                            <Button variant="contained">Update</Button>
                         </Grid>
                         <Grid
                             item
                             xs={6}
                             alignItems="left"
-                            sx={{ paddingLeft: "15px", paddingTop: "20px" }}
+                            sx={{ paddingTop: "20px", textAlign: "right" }}
                         >
-                            <Box display="flex" justifyContent="flex-end">
-                                <Button variant="contained" onClick={logoutACB}>
-                                    Logout
-                                </Button>
-                            </Box>
+                            <Button variant="contained" onClick={logoutACB}>
+                                Logout
+                            </Button>
                         </Grid>
                     </Grid>
                 </Grid>

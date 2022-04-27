@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom"
-import Lifestyle from "./mainContent/lifestyle/tipsPresenter"
+import TipsSearchPresenter from "./mainContent/lifestyle/searchPresenter"
 import Students from "./mainContent/students/studentPresenter"
 import Home from "./home/homePresenter"
 import MainContent from "./mainContent/MainContentView"
@@ -65,7 +65,7 @@ function App() {
                 path="/lifestyle"
                 element={
                     <MainContent>
-                        <Lifestyle />
+                        <TipsSearchPresenter />
                     </MainContent>
                 }
             />
