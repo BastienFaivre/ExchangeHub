@@ -1,6 +1,5 @@
 import { Routes, Route } from "react-router-dom"
 import TipsSearchPresenter from "./mainContent/lifestyle/searchPresenter"
-import Students from "./mainContent/students/studentPresenter"
 import Home from "./home/homePresenter"
 import MainContent from "./mainContent/MainContentView"
 import SearchPresenter from "./mainContent/courses/searchPresenter"
@@ -9,6 +8,7 @@ import ProfileLoginPresenter from "./mainContent/profile/profileLoginPresenter"
 import ProfilePresenter from "./mainContent/profile/profilePresenter"
 import { getAuth, onAuthStateChanged } from "firebase/auth"
 import { useState } from "react"
+import StudentsSearchPresenter from "./mainContent/students/searchPresenter"
 
 function App() {
     const [user, setUser] = useState(null)
@@ -39,7 +39,7 @@ function App() {
                 path="/students"
                 element={
                     <MainContent>
-                        <Students />
+                        <StudentsSearchPresenter />
                     </MainContent>
                 }
             />

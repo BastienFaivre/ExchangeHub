@@ -34,6 +34,15 @@ export default function TipsSearchPresenter() {
         },
     ]
 
+    // TODO query all tips if no search type is selected
+    // otherwise query only tips of the selected type
+    // the sort made with the search input is done in the result view
+
+    // The name of the author of each query has also to be queried
+    // so that the user can click on the author name and is redirect to
+    // the author profile page
+    // The code of the view need to be updated to display the author name
+
     return (
         <Box>
             <TipsSearchFormView

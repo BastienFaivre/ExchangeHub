@@ -1,10 +1,6 @@
 import { Box, Card, CardContent, Grid, Typography } from "@mui/material"
 
 export default function TipsResultsView(props) {
-    function isTipOfTypeCB(tip) {
-        return props.searchType === "" || tip.type === props.searchType
-    }
-
     function containsSearchInputCB(tip) {
         return (
             props.searchInput === "" ||
@@ -46,7 +42,7 @@ export default function TipsResultsView(props) {
         )
     }
 
-    let tips = props.tips.filter(isTipOfTypeCB).filter(containsSearchInputCB)
+    let tips = props.tips.filter(containsSearchInputCB)
 
     return (
         <Box>
