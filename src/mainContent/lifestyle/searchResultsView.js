@@ -45,20 +45,8 @@ export default function TipsResultsView(props) {
     let tips = props.tips.filter(containsSearchInputCB)
 
     return (
-        <Box>
-            {tips.length !== 0 && (
-                <Grid container spacing={2} padding="20px 0">
-                    {tips.map(tipCB)}
-                </Grid>
-            )}
-            {tips.length === 0 && (
-                <Typography
-                    variant="h5"
-                    sx={{ padding: "20px", textAlign: "center" }}
-                >
-                    No tips matching the specified search terms
-                </Typography>
-            )}
-        </Box>
+        <Grid container spacing={2} padding="20px 0">
+            {tips.map(tipCB)}
+        </Grid>
     )
 }
