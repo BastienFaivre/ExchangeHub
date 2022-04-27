@@ -55,3 +55,17 @@ export async function getAllTips() {
         console.error(e.message)
     }
 }
+
+export async function getTipsByType(type) {
+    try {
+        const db = getFirestore()
+        const q = query(collection(db, "tips"), where("type", "==", type))
+
+        const snapshot = await getDocs(q)
+        const tips = snapshot.docs.map((doc) => doc.data())
+        console.log(tips)
+        return tips
+    } catch (e) {
+        console.error(e.message)
+    }
+}

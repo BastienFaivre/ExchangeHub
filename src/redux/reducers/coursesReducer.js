@@ -100,7 +100,7 @@ export function saveFilterSearchCourses(searchFilter) {
     return async function saveFilterSearchCoursesThunk(dispatch, getState) {
         try {
             let state = getState()
-            // // checking is search filter is same as before to avoid fetching twice on the same filter
+            // checking is search filter is same as before to avoid fetching twice on the same filter
             if (!isObjectEqual(searchFilter, state.courses.searchFilter)) {
                 dispatch({
                     type: "COURSE_SET_SEARCH_FILTER",
