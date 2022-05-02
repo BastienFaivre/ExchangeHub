@@ -13,15 +13,19 @@ import {
 
 import { useState } from "react"
 
-export default function SearchPresenter(props) {
+export default function SearchPresenter() {
     const dispatch = useDispatch()
     const { loading, error, data } = useSelector(
         (state) => state.courses.results
     )
 
+    // search parameters
     const [searchInput, setSearchInput] = useState("")
     const [searchSchool, setSearchSchool] = useState("")
     const [searchDepartment, setSearchDepartment] = useState("")
+
+    // Note: the school parameter is not used in the API query,
+    // it is only used to choose a department more easily
 
     function inputChangedACB(input) {
         setSearchInput(input)
@@ -29,7 +33,7 @@ export default function SearchPresenter(props) {
 
     function schoolChangedACB(schoolCode) {
         setSearchSchool(schoolCode)
-        // this also reset the department
+        // changing the school also resets the department
         setSearchDepartment("")
     }
 
@@ -38,6 +42,11 @@ export default function SearchPresenter(props) {
     }
 
     function doSearchACB() {
+        // at least one of the search parameters must be set (excluding the school)
+        // in order to do the API query. This is due to the fact that the API needs
+        // at least one parameter.
+        // see API endpoint "/api/kopps/v2/courses/search" (https://www.kth.se/api/kopps/v2/apiInfo/courses)
+        // for more information
         if (
             (searchInput && searchInput.length > 0) ||
             searchDepartment !== ""

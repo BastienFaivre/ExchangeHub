@@ -6,10 +6,10 @@ import Grid from "@mui/material/Grid"
 import React from "react"
 import { Link } from "react-router-dom"
 
-export default function SearchResultsView({ searchResults, courseClicked }) {
+export default function SearchResultsView(props) {
     function resultCB(res) {
         function courseClickedACB() {
-            courseClicked(res.courseCode)
+            props.courseClicked(res.courseCode)
         }
 
         return (
@@ -41,7 +41,7 @@ export default function SearchResultsView({ searchResults, courseClicked }) {
 
     return (
         <Grid container spacing={2} padding="20px 0">
-            {searchResults.map(resultCB)}
+            {props.searchResults.map(resultCB)}
         </Grid>
     )
 }
