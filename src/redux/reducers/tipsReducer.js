@@ -51,12 +51,15 @@ export function tipsReducer(state = initialState, action) {
     }
 }
 
-export function saveFilterSearchTips(searchFilter) {
+export function saveFilterSearchTips(searchFilter, isFirstSearch = false) {
     return async function saveFilterSearchTipsThunk(dispatch, getState) {
         try {
             let state = getState()
             // checking is search filter is same as before to avoid fetching twice on the same filter
-            if (!isObjectEqual(searchFilter, state.tips.searchFilter)) {
+            if (
+                isFirstSearch ||
+                !isObjectEqual(searchFilter, state.tips.searchFilter)
+            ) {
                 dispatch({
                     type: "TIPS_SET_SEARCH_FILTER",
                     payload: { searchFilter },

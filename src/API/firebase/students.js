@@ -1,6 +1,5 @@
 import {
     collection,
-    addDoc,
     doc,
     setDoc,
     getFirestore,
@@ -86,7 +85,6 @@ export async function getUsers() {
         const db = getFirestore()
         const snapshot = await getDocs(collection(db, "students"))
         const users = snapshot.docs.map((doc) => doc.data())
-        console.log(users)
         return users
     } catch (e) {
         console.error(e.message)
@@ -99,7 +97,6 @@ export async function getUsersWithLimit(lim = 2) {
         const q = query(collection(db, "students"), limit(lim))
         const snapshot = await getDocs(q)
         const users = snapshot.docs.map((doc) => doc.data())
-        console.log(users)
         return users
     } catch (e) {
         console.error(e.message)
@@ -116,7 +113,49 @@ export async function getUsersByNationality(nationality) {
 
         const snapshot = await getDocs(q)
         const users = snapshot.docs.map((doc) => doc.data())
-        console.log(users)
+        return users
+    } catch (e) {
+        console.error(e.message)
+    }
+}
+
+export async function getUsersByDepartment(department) {
+    try {
+        const db = getFirestore()
+        const q = query(
+            collection(db, "students"),
+            where("info.department", "==", department)
+        )
+
+        const snapshot = await getDocs(q)
+        const users = snapshot.docs.map((doc) => doc.data())
+        return users
+    } catch (e) {
+        console.error(e.message)
+    }
+}
+
+export async function getUsersByNationalityAndDepartment(
+    nationality,
+    department
+) {
+    try {
+        const db = getFirestore()
+        const q = query(
+            collection(db, "students"),
+            where(
+                "info.nationality",
+                "==",
+                nationality,
+                "&&",
+                "info.department",
+                "==",
+                department
+            )
+        )
+
+        const snapshot = await getDocs(q)
+        const users = snapshot.docs.map((doc) => doc.data())
         return users
     } catch (e) {
         console.error(e.message)

@@ -1,6 +1,6 @@
 import { CircularProgress, Typography } from "@mui/material"
 import { Box } from "@mui/system"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { saveFilterSearchTips } from "../../redux/reducers/tipsReducer"
 import TipsSearchFormView from "./searchFormView"
@@ -30,6 +30,17 @@ export default function TipsSearchPresenter() {
         )
     }
 
+    useEffect(function initialSearchCB() {
+        dispatch(
+            saveFilterSearchTips(
+                {
+                    type: searchType,
+                },
+                true
+            )
+        )
+    }, [])
+
     const types = ["Food", "Sport", "Nightlife"]
 
     return (
@@ -53,7 +64,7 @@ export default function TipsSearchPresenter() {
                     variant="h5"
                     sx={{ padding: "20px", textAlign: "center" }}
                 >
-                    No courses matching the specified search type
+                    No tips matching the specified search type
                 </Typography>
             )}
             {loading && (
