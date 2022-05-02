@@ -55,7 +55,7 @@ export default function TipsSearchFormView(props) {
                             onChange={handleTypeChangeACB}
                         >
                             <MenuItem value="">All</MenuItem>
-                            {["Food", "Sport", "Nightlife"].map(listTypesCB)}
+                            {props.types.map(listTypesCB)}
                         </Select>
                     </FormControl>
                 </Grid>

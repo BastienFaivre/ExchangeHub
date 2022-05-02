@@ -25,7 +25,9 @@ export default function SearchPresenter() {
     const [searchDepartment, setSearchDepartment] = useState("")
 
     // Note: the school parameter is not used in the API query,
-    // it is only used to choose a department more easily
+    // it is only used to choose a department more easily.
+    // This is also due to the fact the the API query has not
+    // a school parameter.
 
     function inputChangedACB(input) {
         setSearchInput(input)

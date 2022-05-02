@@ -10,8 +10,12 @@ export default function TipsSearchPresenter() {
     const dispatch = useDispatch()
     const { loading, error, data } = useSelector((state) => state.tips.results)
 
+    // search parameters
     const [searchInput, setSearchInput] = useState("")
     const [searchType, setSearchType] = useState("")
+
+    // Note: the input parameter is not used in the Firebase query,
+    // it is only used to sort the fetched tips more easily
 
     function inputChangedACB(input) {
         setSearchInput(input)
@@ -26,6 +30,8 @@ export default function TipsSearchPresenter() {
         )
     }
 
+    const types = ["Food", "Sport", "Nightlife"]
+
     return (
         <Box>
             <TipsSearchFormView
@@ -33,6 +39,7 @@ export default function TipsSearchPresenter() {
                 searchType={searchType}
                 setSearchInput={inputChangedACB}
                 setSearchType={typeChangedACB}
+                types={types}
             />
             {data.length > 0 && (
                 <TipsResultsView

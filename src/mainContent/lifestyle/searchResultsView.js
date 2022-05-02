@@ -1,4 +1,4 @@
-import { Box, Card, CardContent, Grid, Typography } from "@mui/material"
+import { Card, CardContent, Grid } from "@mui/material"
 
 export default function TipsResultsView(props) {
     function containsSearchInputCB(tip) {
@@ -42,11 +42,9 @@ export default function TipsResultsView(props) {
         )
     }
 
-    let tips = props.tips.filter(containsSearchInputCB)
-
     return (
         <Grid container spacing={2} padding="20px 0">
-            {tips.map(tipCB)}
+            {props.tips.filter(containsSearchInputCB).map(tipCB)}
         </Grid>
     )
 }
