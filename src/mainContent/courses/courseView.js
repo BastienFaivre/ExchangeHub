@@ -12,7 +12,7 @@ export default function CourseView({ courseData, comments }) {
         return (
             <Card
                 variant="outlined"
-                key={comment.uuid}
+                key={comment.userId}
                 sx={{ backgroundColor: "grey.100" }}
             >
                 <CardContent>
