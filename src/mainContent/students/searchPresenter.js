@@ -4,6 +4,7 @@ import StudentsSearchFormView from "./searchFormView"
 import StudentsResultsView from "./searchResultsView"
 
 export default function StudentsSearchPresenter() {
+    // search parameters
     const [searchNationality, setSearchNationality] = useState("")
     const [searchDepartment, setSearchDepartment] = useState("")
 
@@ -36,6 +37,9 @@ export default function StudentsSearchPresenter() {
         },
     ]
 
+    const nationalities = ["Switzerland", "France", "Germany"]
+    const departments = ["Computer Science", "Mathematics", "Physics"]
+
     // TODO retrieve user based on the search criterias
     // clicking on a student should open the student profile
 
@@ -46,6 +50,8 @@ export default function StudentsSearchPresenter() {
                 searchDepartment={searchDepartment}
                 setSearchNationality={nationalityChangedACB}
                 setSearchDepartment={departementChangedACB}
+                nationalities={nationalities}
+                departments={departments}
             />
             <StudentsResultsView students={students} />
         </Box>

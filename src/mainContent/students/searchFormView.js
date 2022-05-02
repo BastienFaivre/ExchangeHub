@@ -44,9 +44,7 @@ export default function StudentsSearchFormView(props) {
                             onChange={handleNationalityChangeACB}
                         >
                             <MenuItem value="">All</MenuItem>
-                            {["Switzerland", "France", "Germany"].map(
-                                listNationalitiesCB
-                            )}
+                            {props.nationalities.map(listNationalitiesCB)}
                         </Select>
                     </FormControl>
                 </Grid>
@@ -59,9 +57,7 @@ export default function StudentsSearchFormView(props) {
                             onChange={handleDepartmentChangeACB}
                         >
                             <MenuItem value="">All</MenuItem>
-                            {["Computer Science", "Mathematics", "Physics"].map(
-                                listDepartmentsCB
-                            )}
+                            {props.departments.map(listDepartmentsCB)}
                         </Select>
                     </FormControl>
                 </Grid>
