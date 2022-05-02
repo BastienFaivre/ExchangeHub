@@ -79,9 +79,16 @@ export default function ProfileLoginView(props) {
                         {props.registered
                             ? "Don't have an account ? "
                             : "Already have an account ? "}
-                        <a href="" onClick={changeFormStateACB}>
+                        <span
+                            style={{
+                                color: "#B51F1F",
+                                textDecoration: "underline",
+                                cursor: "pointer",
+                            }}
+                            onClick={changeFormStateACB}
+                        >
                             {props.registered ? "Register" : "Login"}
-                        </a>
+                        </span>
                     </Typography>
                 </Stack>
             </CardContent>
