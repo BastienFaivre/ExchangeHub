@@ -9,9 +9,9 @@ import {
 import AccountCircleIcon from "@mui/icons-material/AccountCircle"
 
 export default function ProfileLoginView(props) {
-    function changeRegisteredStateACB(event) {
+    function changeFormStateACB(event) {
         event.preventDefault()
-        props.setRegistered(!props.registered)
+        props.changeFormState()
     }
 
     function handleEmailChangeACB(event) {
@@ -79,7 +79,7 @@ export default function ProfileLoginView(props) {
                         {props.registered
                             ? "Don't have an account ? "
                             : "Already have an account ? "}
-                        <a href="" onClick={changeRegisteredStateACB}>
+                        <a href="" onClick={changeFormStateACB}>
                             {props.registered ? "Register" : "Login"}
                         </a>
                     </Typography>

@@ -9,6 +9,7 @@ import {
 } from "firebase/auth"
 
 export default function ProfileLoginPresenter() {
+    // this state is used to switch between sign in and sign up
     const [registered, setRegistered] = useState(true)
 
     const [email, setEmail] = useState("")
@@ -16,6 +17,9 @@ export default function ProfileLoginPresenter() {
 
     const [error, setError] = useState(null)
 
+    function formStateChangedACB() {
+        setRegistered(!registered)
+    }
     function emailChangedACB(newEmail) {
         setEmail(newEmail)
     }
@@ -45,7 +49,7 @@ export default function ProfileLoginPresenter() {
             registered={registered}
             email={email}
             password={password}
-            setRegistered={setRegistered}
+            changeFormState={formStateChangedACB}
             setEmail={emailChangedACB}
             setPassword={passwordChangedACB}
             login={loginACB}
