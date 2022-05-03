@@ -1,4 +1,5 @@
 import { Button, Card, CardActions, CardContent, Grid } from "@mui/material"
+import { Link } from "react-router-dom"
 
 export default function StudentsResultsView(props) {
     function studentCB(student) {
@@ -8,7 +9,7 @@ export default function StudentsResultsView(props) {
                 xs={12}
                 md={12}
                 lg={6}
-                key={student.info.forname + student.info.lastname}
+                key={student.data.info.forname + student.data.info.lastname}
             >
                 <Card variant="outlined" sx={{ backgroundColor: "grey.100" }}>
                     <CardContent>
@@ -16,14 +17,14 @@ export default function StudentsResultsView(props) {
                             <Grid container item>
                                 <Grid item xs={6}>
                                     <span style={{ fontWeight: "bold" }}>
-                                        {student.info.forname}{" "}
-                                        {student.info.lastname}
+                                        {student.data.info.forname}{" "}
+                                        {student.data.info.lastname}
                                     </span>{" "}
-                                    ({student.info.nationality})
+                                    ({student.data.info.nationality})
                                 </Grid>
                                 <Grid item xs={6} sx={{ textAlign: "end" }}>
-                                    {student.info.department},{" "}
-                                    {student.info.year}
+                                    {student.data.info.department},{" "}
+                                    {student.data.info.year}
                                 </Grid>
                             </Grid>
                             <Grid container item>
@@ -32,7 +33,9 @@ export default function StudentsResultsView(props) {
                         </Grid>
                     </CardContent>
                     <CardActions>
-                        <Button>Visit Profile</Button>
+                        <Button
+                            to={`${student.userId}`}
+                            component={Link}>Visit Profile</Button>
                     </CardActions>
                 </Card>
             </Grid>

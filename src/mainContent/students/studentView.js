@@ -10,8 +10,6 @@ import {
 import CommentsDisabledIcon from "@mui/icons-material/CommentsDisabled"
 
 export default function StudentView(props) {
-    console.log(props.comments)
-
     function commentCB(comment) {
         return (
             <Card
