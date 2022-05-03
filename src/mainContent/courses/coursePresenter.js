@@ -25,7 +25,7 @@ export default function CoursePresenter() {
                 <CourseView courseData={data} comments={comments} />
             )}
             {loading && (
-                <Box sx={{ width: "fit-content", mx: "auto" }}>
+                <Box sx={{ width: "fit-content", mx: "auto", padding: "20px" }}>
                     <CircularProgress color="primary" m="auto" />
                 </Box>
             )}

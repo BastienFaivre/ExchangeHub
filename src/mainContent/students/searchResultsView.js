@@ -3,7 +3,13 @@ import { Button, Card, CardActions, CardContent, Grid } from "@mui/material"
 export default function StudentsResultsView(props) {
     function studentCB(student) {
         return (
-            <Grid item xs={12} md={12} lg={6} key={student.info.name}>
+            <Grid
+                item
+                xs={12}
+                md={12}
+                lg={6}
+                key={student.info.forname + student.info.lastname}
+            >
                 <Card variant="outlined" sx={{ backgroundColor: "grey.100" }}>
                     <CardContent>
                         <Grid container>

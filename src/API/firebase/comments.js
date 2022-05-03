@@ -9,14 +9,9 @@ import {
 
 import { getAuth } from "firebase/auth"
 
-export async function getCommentsByStudentId() {
+export async function getCommentsByStudentId(userId) {
     try {
         const db = getFirestore()
-        const auth = getAuth()
-        const userId = auth?.currentUser?.uid ?? false
-        if (!userId) {
-            throw new Error("User needs to be logged in")
-        }
         const q = query(
             collection(db, "comments"),
             where("userId", "==", userId)

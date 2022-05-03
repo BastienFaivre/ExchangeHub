@@ -91,6 +91,17 @@ export async function getUsers() {
     }
 }
 
+export async function getUser(userId) {
+    try {
+        const db = getFirestore()
+        const snapshot = await getDoc(doc(db, "students", userId))
+        const user = snapshot.data()
+        return user
+    } catch (e) {
+        console.error(e.message)
+    }
+}
+
 export async function getUsersWithLimit(lim = 2) {
     try {
         const db = getFirestore()
