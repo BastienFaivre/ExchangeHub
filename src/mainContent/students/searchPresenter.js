@@ -2,6 +2,7 @@ import { Box, CircularProgress, Typography } from "@mui/material"
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { saveFilterSearchStudents } from "../../redux/reducers/studentsReducer"
+import { nationalities } from "../../utils/nationalities"
 import StudentsSearchFormView from "./searchFormView"
 import StudentsResultsView from "./searchResultsView"
 
@@ -47,7 +48,6 @@ export default function StudentsSearchPresenter() {
         )
     }, [])
 
-    const nationalities = ["Switzerland", "France", "Germany", "Norway"]
     const departments = [
         "Computer Science",
         "Mathematics",
