@@ -9,6 +9,27 @@ import {
 
 import { getAuth } from "firebase/auth"
 
+export async function getCommentsForProfile() {
+    try {
+        const db = getFirestore()
+        const auth = getAuth()
+        const userId = auth?.currentUser?.uid ?? false
+        if (!userId) {
+            throw new Error("User needs to be logged in")
+        }
+        const q = query(
+            collection(db, "comments"),
+            where("userId", "==", userId)
+        )
+        const snapshot = await getDocs(q)
+        const comments = snapshot.docs.map((doc) => doc.data())
+        return comments
+    } catch (e) {
+        console.error(e.message)
+        throw e
+    }
+}
+
 export async function getCommentsByStudentId(userId) {
     try {
         const db = getFirestore()
