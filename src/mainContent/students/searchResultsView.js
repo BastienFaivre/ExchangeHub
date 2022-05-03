@@ -10,7 +10,8 @@ export default function StudentsResultsView(props) {
                             <Grid container item>
                                 <Grid item xs={6}>
                                     <span style={{ fontWeight: "bold" }}>
-                                        {student.info.name}
+                                        {student.info.forname}{" "}
+                                        {student.info.lastname}
                                     </span>{" "}
                                     ({student.info.nationality})
                                 </Grid>

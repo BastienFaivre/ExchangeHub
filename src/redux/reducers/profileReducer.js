@@ -17,7 +17,8 @@ const initialState = {
     courses: [],
     tips: [],
     info: {
-        name: "",
+        forname: "",
+        lastname: "",
         nationality: "",
         department: "",
         year: new Date().getFullYear(),
@@ -36,7 +37,8 @@ const initialState = {
             description: "",
         },
         info: {
-            name: "",
+            forname: "",
+            lastname: "",
             nationality: "",
             department: "",
             year: new Date().getFullYear(),

@@ -32,7 +32,7 @@ export default function TipsResultsView(props) {
                             </Grid>
                             <Grid container item sx={{ paddingBottom: "10px" }}>
                                 <Grid item xs={12}>
-                                    author ?
+                                    {tip.forname} {tip.lastname}
                                 </Grid>
                             </Grid>
                         </Grid>
