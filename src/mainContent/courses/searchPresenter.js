@@ -87,7 +87,7 @@ export default function SearchPresenter() {
                     courseClicked={courseClickedACB}
                 />
             )}
-            {data.length === 0 && (
+            {data.length === 0 && !loading && (
                 <Typography
                     variant="h5"
                     sx={{ padding: "20px", textAlign: "center" }}
@@ -96,7 +96,7 @@ export default function SearchPresenter() {
                 </Typography>
             )}
             {loading && (
-                <Box sx={{ width: "fit-content", mx: "auto" }}>
+                <Box sx={{ width: "fit-content", mx: "auto", padding: "20px" }}>
                     <CircularProgress color="primary" m="auto" />
                 </Box>
             )}
