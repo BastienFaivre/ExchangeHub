@@ -41,6 +41,16 @@ export default function TipsSearchPresenter() {
         )
     }, [])
 
+    function containsSearchInputCB(tip) {
+        return (
+            searchInput === "" ||
+            tip.title.toLowerCase().includes(searchInput.toLowerCase()) ||
+            tip.description.toLowerCase().includes(searchInput.toLowerCase())
+        )
+    }
+
+    const tips = data.filter(containsSearchInputCB)
+
     const types = ["Food", "Sport", "Nightlife"]
 
     return (
@@ -52,14 +62,8 @@ export default function TipsSearchPresenter() {
                 setSearchType={typeChangedACB}
                 types={types}
             />
-            {data.length > 0 && (
-                <TipsResultsView
-                    searchInput={searchInput}
-                    searchType={searchType}
-                    tips={data}
-                />
-            )}
-            {data.length === 0 && (
+            {tips.length > 0 && <TipsResultsView tips={tips} />}
+            {tips.length === 0 && !loading && (
                 <Typography
                     variant="h5"
                     sx={{ padding: "20px", textAlign: "center" }}

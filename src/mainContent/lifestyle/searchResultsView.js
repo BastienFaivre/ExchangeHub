@@ -1,16 +1,6 @@
 import { Card, CardContent, Grid } from "@mui/material"
 
 export default function TipsResultsView(props) {
-    function containsSearchInputCB(tip) {
-        return (
-            props.searchInput === "" ||
-            tip.title.toLowerCase().includes(props.searchInput.toLowerCase()) ||
-            tip.description
-                .toLowerCase()
-                .includes(props.searchInput.toLowerCase())
-        )
-    }
-
     function tipCB(tip) {
         return (
             <Grid item xs={12} md={12} lg={6} key={tip.title}>
@@ -44,7 +34,7 @@ export default function TipsResultsView(props) {
 
     return (
         <Grid container spacing={2} padding="20px 0">
-            {props.tips.filter(containsSearchInputCB).map(tipCB)}
+            {props.tips.map(tipCB)}
         </Grid>
     )
 }

@@ -66,7 +66,7 @@ export default function StudentsSearchPresenter() {
                 departments={departments}
             />
             {data.length > 0 && <StudentsResultsView students={data} />}
-            {data.length === 0 && (
+            {data.length === 0 && !loading && (
                 <Typography
                     variant="h5"
                     sx={{ padding: "20px", textAlign: "center" }}
