@@ -30,10 +30,7 @@ export default function CourseView({ courseData, comments }) {
                             </Grid>
                         </Grid>
                         <Grid container item sx={{ paddingBottom: "10px" }}>
-                            <Grid item xs={8}>
-                                Equivalence: {comment.equivalence}
-                            </Grid>
-                            <Grid item xs={4} sx={{ textAlign: "end" }}>
+                            <Grid item xs={12}>
                                 Difficulty: {comment.difficulty}
                             </Grid>
                         </Grid>

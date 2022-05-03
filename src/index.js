@@ -51,7 +51,6 @@ const db = getFirestore(app)
 //     title: "Very good course!",
 //     rating: 4.5,
 //     difficulty: "Intermediate",
-//     equivalence: "Programmation web",
 //     description:
 //         "This course is awesome, I learnt so much! I really recommend it.",
 //     forname: "Bastien",
@@ -64,7 +63,6 @@ const db = getFirestore(app)
 //         title: "Very good course!",
 //         rating: 4.5,
 //         difficulty: "Intermediate",
-//         equivalence: "Programmation web",
 //         description: "This course is awesome, I lear",
 //         forname: "Philip",
 //         lastname: "Hamelink",
