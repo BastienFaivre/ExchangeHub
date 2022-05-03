@@ -17,6 +17,7 @@ const initialState = {
     courses: [],
     tips: [],
     info: {
+        name: "",
         nationality: "",
         department: "",
         year: new Date().getFullYear(),
@@ -35,6 +36,7 @@ const initialState = {
             description: "",
         },
         info: {
+            name: "",
             nationality: "",
             department: "",
             year: new Date().getFullYear(),
@@ -117,7 +119,7 @@ export function profileReducer(state = initialState, action) {
 }
 
 export function fetchStudentProfile() {
-    return async function fetchStudentProfileThunk(dispatch, getState) {
+    return async function fetchStudentProfileThunk(dispatch) {
         try {
             dispatch({
                 type: "PROFILE_FETCH_DATA",

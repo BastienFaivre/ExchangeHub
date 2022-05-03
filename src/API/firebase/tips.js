@@ -49,7 +49,6 @@ export async function getAllTips() {
         const q = query(collection(db, "tips"))
         const snapshot = await getDocs(q)
         const tips = snapshot.docs.map((doc) => doc.data())
-        console.log(tips)
         return tips
     } catch (e) {
         console.error(e.message)
@@ -63,7 +62,6 @@ export async function getTipsByType(type) {
 
         const snapshot = await getDocs(q)
         const tips = snapshot.docs.map((doc) => doc.data())
-        console.log(tips)
         return tips
     } catch (e) {
         console.error(e.message)
