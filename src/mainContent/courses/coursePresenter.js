@@ -9,7 +9,7 @@ import { getCourseDetails } from "../../redux/reducers/coursesReducer"
 export default function CoursePresenter() {
     const params = useParams()
     const dispatch = useDispatch()
-    const { loading, error, courseCode, data } = useSelector(
+    const { loading, error, courseCode, data, comments } = useSelector(
         (state) => state.courses.courseDetails
     )
 
@@ -18,38 +18,6 @@ export default function CoursePresenter() {
             dispatch(getCourseDetails(params.id))
         }
     }, [])
-
-    // This is hard coded comments for debug purpose !
-    let comments = [
-        {
-            title: "Very good course!",
-            rating: 4.5,
-            difficulty: "Intermediate",
-            equivalence: "Programmation web",
-            description:
-                "This course is awesome, I learnt so much! I really recommend it.",
-            forname: "Bastien",
-            lastname: "Faivre",
-            contact: "bastien.faivre@epfl.ch",
-            uuid: 1,
-        },
-        {
-            title: "Interesting course!",
-            rating: 4,
-            difficulty: "Intermediate",
-            equivalence: "Programmation web",
-            description:
-                "I coded with React for the first time, the lectures are really interesting. The labs help us to understand the content presented in the lecture. I recommend this course for people who want to learn more about interaction web programming.",
-            forname: "Philip",
-            lastname: "Hamelink",
-            contact: "philip.hamelink@epfl.ch",
-            uuid: 2,
-        },
-    ]
-
-    if (courseCode !== "DH2642") {
-        comments = []
-    }
 
     return (
         <Box>

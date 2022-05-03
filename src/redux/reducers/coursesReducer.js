@@ -1,9 +1,8 @@
-import { getDatabase, ref, push, onValue } from "firebase/database"
-
 import {
     searchCourses,
     getCourseDetails as getDetails,
 } from "../../API/coursesAPI"
+import { getCommentsByCourseCode } from "../../API/firebase/comments"
 import isObjectEqual from "../../utils/isObjectEqual"
 
 const initialState = {
@@ -17,6 +16,7 @@ const initialState = {
         error: false,
         courseCode: null,
         data: {},
+        comments: [],
     },
     searchFilter: {
         text_pattern: "",
@@ -67,6 +67,7 @@ export function coursesReducer(state = initialState, action) {
                     loading: true,
                     error: false,
                     data: {},
+                    comments: [],
                 },
             }
         case "COURSE_SET_ERROR_DETAILS":
@@ -77,10 +78,11 @@ export function coursesReducer(state = initialState, action) {
                     loading: false,
                     error: true,
                     data: {},
+                    comments: [],
                 },
             }
         case "COURSE_SET_COURSE_DETAILS":
-            const { courseDetails } = action.payload
+            const { courseDetails, comments } = action.payload
             return {
                 ...state,
                 courseDetails: {
@@ -88,6 +90,7 @@ export function coursesReducer(state = initialState, action) {
                     loading: false,
                     error: false,
                     data: courseDetails,
+                    comments: comments,
                 },
             }
 
@@ -136,7 +139,10 @@ export function getCourseDetails(courseCode) {
                     payload: { courseCode },
                 })
 
-                const detailsResponse = await getDetails(courseCode)
+                const [detailsResponse, commentsResponse] = await Promise.all([
+                    getDetails(courseCode),
+                    getCommentsByCourseCode(courseCode),
+                ])
 
                 // Checking to see that the course code hasn't been changed while waiting for the resulsts
                 // to avoid race condition
@@ -144,9 +150,10 @@ export function getCourseDetails(courseCode) {
 
                 if (courseCode === state.courses.courseDetails.courseCode) {
                     const courseDetails = detailsResponse
+                    const comments = commentsResponse
                     dispatch({
                         type: "COURSE_SET_COURSE_DETAILS",
-                        payload: { courseDetails },
+                        payload: { courseDetails, comments },
                     })
                 }
             }

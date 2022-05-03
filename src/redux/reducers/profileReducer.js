@@ -27,7 +27,6 @@ const initialState = {
             rating: 0,
             title: "",
             description: "",
-            equivalentEPFL: "",
             review: "",
         },
         tip: {

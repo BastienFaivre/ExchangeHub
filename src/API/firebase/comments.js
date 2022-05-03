@@ -1,14 +1,10 @@
 import {
     collection,
     addDoc,
-    doc,
-    setDoc,
     getFirestore,
     query,
     where,
     getDocs,
-    limit,
-    updateDoc,
 } from "firebase/firestore"
 
 import { getAuth } from "firebase/auth"
@@ -60,8 +56,7 @@ export async function getCommentsByCourseCode(courseCode) {
 
         const snapshot = await getDocs(q)
         const comments = snapshot.docs.map((doc) => doc.data())
-        console.log(comments, snapshot.size)
-        return { comments, length: snapshot.size }
+        return comments
     } catch (e) {
         console.error(e.message)
     }
