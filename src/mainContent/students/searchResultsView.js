@@ -3,6 +3,10 @@ import { Link } from "react-router-dom"
 
 export default function StudentsResultsView(props) {
     function studentCB(student) {
+        function studentClickedACB() {
+            props.studentClicked(student.userId)
+        }
+
         return (
             <Grid
                 item
@@ -34,8 +38,12 @@ export default function StudentsResultsView(props) {
                     </CardContent>
                     <CardActions>
                         <Button
+                            onClick={studentClickedACB}
                             to={`${student.userId}`}
-                            component={Link}>Visit Profile</Button>
+                            component={Link}
+                        >
+                            Visit Profile
+                        </Button>
                     </CardActions>
                 </Card>
             </Grid>

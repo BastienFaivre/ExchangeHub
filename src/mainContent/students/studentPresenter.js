@@ -14,7 +14,7 @@ export default function StudentPresenter() {
     )
 
     useEffect(() => {
-        if (studentId !== params.id) {
+        if (!studentId && params.id) {
             dispatch(getStudentDetails(params.id))
         }
     }, [])

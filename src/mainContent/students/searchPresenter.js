@@ -1,7 +1,10 @@
 import { Box, CircularProgress, Typography } from "@mui/material"
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { saveFilterSearchStudents } from "../../redux/reducers/studentsReducer"
+import {
+    getStudentDetails,
+    saveFilterSearchStudents,
+} from "../../redux/reducers/studentsReducer"
 import { nationalities } from "../../utils/nationalities"
 import StudentsSearchFormView from "./searchFormView"
 import StudentsResultsView from "./searchResultsView"
@@ -36,6 +39,10 @@ export default function StudentsSearchPresenter() {
         )
     }
 
+    function studentClickedACB(userId) {
+        dispatch(getStudentDetails(userId))
+    }
+
     useEffect(function initialSearchCB() {
         dispatch(
             saveFilterSearchStudents(
@@ -65,7 +72,12 @@ export default function StudentsSearchPresenter() {
                 nationalities={nationalities}
                 departments={departments}
             />
-            {data.length > 0 && <StudentsResultsView students={data} />}
+            {data.length > 0 && (
+                <StudentsResultsView
+                    students={data}
+                    studentClicked={studentClickedACB}
+                />
+            )}
             {data.length === 0 && !loading && (
                 <Typography
                     variant="h5"
