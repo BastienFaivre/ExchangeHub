@@ -18,14 +18,14 @@ import CssBaseline from "@mui/material/CssBaseline"
 // FIREBASE
 import firebaseConfig from "./config/firebaseConfig"
 import { initializeApp } from "firebase/app"
-import { getFirestore } from "firebase/firestore"
+// import { getFirestore } from "firebase/firestore"
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth"
 
 // import { saveNewTodo, fetchTodos } from "./redux/reducers/todos"
 
 const app = initializeApp(firebaseConfig)
 const auth = getAuth(app)
-const db = getFirestore(app)
+// const db = getFirestore(app)
 
 // createUserWithEmailAndPassword(auth, "philip.hamelink@gmail.com", "password")
 // signInWithEmailAndPassword(auth, "philip.hamelink@gmail.com", "password")

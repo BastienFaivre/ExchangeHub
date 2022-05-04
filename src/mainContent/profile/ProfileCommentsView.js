@@ -1,13 +1,7 @@
 import { Grid, Typography } from "@mui/material"
 import CardContent from "@mui/material/CardContent"
 import Card from "@mui/material/Card"
-import Button from "@mui/material/Button"
-import CardHeader from "@mui/material/CardHeader"
-import CardActions from "@mui/material/CardActions"
-import ArticleIcon from "@mui/icons-material/Article"
-import AccountCircle from "@mui/icons-material/AccountCircle"
 import Rating from "@mui/material/Rating"
-import RateReviewIcon from "@mui/icons-material/RateReview"
 import { useEffect } from "react"
 
 export default function ProfileCommentsView({ comments, setEdit }) {
