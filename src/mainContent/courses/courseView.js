@@ -7,8 +7,12 @@ import RateReviewIcon from "@mui/icons-material/RateReview"
 import CommentsDisabledIcon from "@mui/icons-material/CommentsDisabled"
 import { Link } from "react-router-dom"
 
-export default function CourseView({ courseData, comments }) {
+export default function CourseView({ courseData, comments, commentClicked }) {
     function commentCB(comment) {
+        function commentClickedACB() {
+            commentClicked(comment.userId)
+        }
+
         return (
             <Card
                 variant="outlined"
@@ -44,8 +48,12 @@ export default function CourseView({ courseData, comments }) {
                                 Author: {comment.forname} {comment.lastname}
                             </Grid>
                             <Grid item xs={6} sx={{ textAlign: "end" }}>
-                                <Button href={"mailto:" + comment.contact}>
-                                    Contact
+                                <Button
+                                    onClick={commentClickedACB}
+                                    to={`/students/${comment.userId}`}
+                                    component={Link}
+                                >
+                                    View author profile
                                 </Button>
                             </Grid>
                         </Grid>
