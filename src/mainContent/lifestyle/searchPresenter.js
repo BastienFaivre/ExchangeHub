@@ -54,6 +54,7 @@ export default function TipsSearchPresenter() {
         )
     }
 
+    // sort tips based on search input
     const tips = data.filter(containsSearchInputCB)
 
     const types = ["Food", "Sport", "Nightlife"]

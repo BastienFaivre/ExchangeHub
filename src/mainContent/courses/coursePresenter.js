@@ -15,10 +15,12 @@ export default function CoursePresenter() {
     )
 
     function commentClickedACB(userId) {
+        // Clicking on a comment will open the student profile
         dispatch(getStudentDetails(userId))
     }
 
-    useEffect(() => {
+    // TODO: CB or ACB ?
+    useEffect(function componentWasCreatedACB() {
         if (!courseCode && params.id) {
             dispatch(getCourseDetails(params.id))
         }

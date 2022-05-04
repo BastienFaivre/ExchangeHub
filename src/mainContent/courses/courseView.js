@@ -7,10 +7,10 @@ import RateReviewIcon from "@mui/icons-material/RateReview"
 import CommentsDisabledIcon from "@mui/icons-material/CommentsDisabled"
 import { Link } from "react-router-dom"
 
-export default function CourseView({ courseData, comments, commentClicked }) {
+export default function CourseView(props) {
     function commentCB(comment) {
         function commentClickedACB() {
-            commentClicked(comment.userId)
+            props.commentClicked(comment.userId)
         }
 
         return (
@@ -97,17 +97,17 @@ export default function CourseView({ courseData, comments, commentClicked }) {
                                         xs={2}
                                         sx={{ fontWeight: "bold" }}
                                     >
-                                        {courseData.code}
+                                        {props.courseData.code}
                                     </Grid>
                                     <Grid
                                         item
                                         xs={8}
                                         sx={{ fontWeight: "bold" }}
                                     >
-                                        {courseData.title.en}
+                                        {props.courseData.title.en}
                                     </Grid>
                                     <Grid item xs={2} sx={{ textAlign: "end" }}>
-                                        {courseData.credits} Credits
+                                        {props.courseData.credits} Credits
                                     </Grid>
                                 </Grid>
                                 <Grid
@@ -116,11 +116,11 @@ export default function CourseView({ courseData, comments, commentClicked }) {
                                     sx={{ paddingBottom: "10px" }}
                                 >
                                     <Grid item xs={4}>
-                                        Level: {courseData.level.en}
+                                        Level: {props.courseData.level.en}
                                     </Grid>
                                     <Grid item xs={8} sx={{ textAlign: "end" }}>
                                         Department:{" "}
-                                        {courseData.department.name.en}
+                                        {props.courseData.department.name.en}
                                     </Grid>
                                 </Grid>
                                 <Grid
@@ -135,7 +135,7 @@ export default function CourseView({ courseData, comments, commentClicked }) {
                                     >
                                         {
                                             new DOMParser().parseFromString(
-                                                courseData.info.en,
+                                                props.courseData.info.en,
                                                 "text/html"
                                             ).documentElement.textContent
                                         }
@@ -149,7 +149,7 @@ export default function CourseView({ courseData, comments, commentClicked }) {
                                     >
                                         <Button
                                             target="_blank"
-                                            href={courseData.href.en}
+                                            href={props.courseData.href.en}
                                         >
                                             More On KTH Website
                                         </Button>
@@ -170,7 +170,7 @@ export default function CourseView({ courseData, comments, commentClicked }) {
                         variant="h5"
                         sx={{ fontWeight: "bold", paddingBottom: "10px" }}
                     >
-                        Students Comments ({comments.length})
+                        Students Comments ({props.comments.length})
                     </Typography>
                 </Grid>
                 <Grid item xs={6} sx={{ textAlign: "center" }}>
@@ -185,8 +185,8 @@ export default function CourseView({ courseData, comments, commentClicked }) {
                     width={"100%"}
                     height={"100%"}
                 >
-                    {comments.map(commentCB)}
-                    {comments.length === 0 && (
+                    {props.comments.map(commentCB)}
+                    {props.comments.length === 0 && (
                         <Grid item xs={12} sx={{ textAlign: "center" }}>
                             <Typography variant="h5" sx={{ padding: "10px" }}>
                                 This course has not been reviewed yet.

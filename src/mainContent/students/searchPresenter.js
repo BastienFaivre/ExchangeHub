@@ -43,7 +43,8 @@ export default function StudentsSearchPresenter() {
         dispatch(getStudentDetails(userId))
     }
 
-    useEffect(function initialSearchCB() {
+    // TODO: CB or ACB ?
+    useEffect(function initialSearchACB() {
         dispatch(
             saveFilterSearchStudents(
                 {

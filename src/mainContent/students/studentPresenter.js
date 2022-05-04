@@ -13,7 +13,8 @@ export default function StudentPresenter() {
         (state) => state.students.studentDetails
     )
 
-    useEffect(() => {
+    // TODO: CB or ACB ?
+    useEffect(function componentWasCreatedACB() {
         if (!studentId && params.id) {
             dispatch(getStudentDetails(params.id))
         }

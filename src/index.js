@@ -19,22 +19,7 @@ import CssBaseline from "@mui/material/CssBaseline"
 import firebaseConfig from "./config/firebaseConfig"
 import { initializeApp } from "firebase/app"
 import { getFirestore } from "firebase/firestore"
-import {
-    getAuth,
-    createUserWithEmailAndPassword,
-    signInWithEmailAndPassword,
-} from "firebase/auth"
-import { saveFilterSearchCourses } from "./redux/reducers/coursesReducer"
-import {
-    getCommentsByCourseCode,
-    getUsers,
-    getUsersWithLimit,
-    saveComment,
-    saveUser,
-    saveUser2,
-    updateUserForm,
-} from "./API/firebaseAPI"
-import { getStudentProfile } from "./API/firebase/students"
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth"
 
 // import { saveNewTodo, fetchTodos } from "./redux/reducers/todos"
 
