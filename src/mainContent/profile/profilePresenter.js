@@ -15,6 +15,7 @@ import ProfileCommentsView from "./ProfileCommentsView"
 export default function ProfilePresenter() {
     const [editInfo, setEditInfo] = useState(false)
     const [editComment, setEditComment] = useState(false)
+    const [addComment, setAddComment] = useState(false)
     const [editTip, setEditTip] = useState(false)
 
     const { loading, error, courses, info, tips, form } = useSelector(
@@ -90,6 +91,11 @@ export default function ProfilePresenter() {
         }
     }
 
+    function setEditCommentsACB(courseCode) {
+        // setEditComment(true)
+        console.log(courseCode)
+    }
+
     return (
         <Card>
             {editInfo ? (
@@ -109,7 +115,10 @@ export default function ProfilePresenter() {
                     setEdit={setEditInfoACB}
                 />
             )}
-            <ProfileCommentsView comments={courses} />
+            <ProfileCommentsView
+                comments={courses}
+                setEdit={setEditCommentsACB}
+            />
         </Card>
     )
 }
