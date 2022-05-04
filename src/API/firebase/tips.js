@@ -9,14 +9,9 @@ import {
 
 import { getAuth } from "firebase/auth"
 
-export async function getTipsByStudentId() {
+export async function getTipsByStudentId(userId) {
     try {
         const db = getFirestore()
-        const auth = getAuth()
-        const userId = auth?.currentUser?.uid ?? false
-        if (!userId) {
-            throw new Error("User needs to be logged in")
-        }
         const q = query(collection(db, "tips"), where("userId", "==", userId))
         const snapshot = await getDocs(q)
         const tips = snapshot.docs.map((doc) => doc.data())

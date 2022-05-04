@@ -84,8 +84,22 @@ export async function getUsers() {
     try {
         const db = getFirestore()
         const snapshot = await getDocs(collection(db, "students"))
-        const users = snapshot.docs.map((doc) => doc.data())
+        const users = snapshot.docs.map((doc) => ({
+            data: doc.data(),
+            userId: doc._key.path.segments[doc._key.path.segments.length - 1],
+        }))
         return users
+    } catch (e) {
+        console.error(e.message)
+    }
+}
+
+export async function getUser(userId) {
+    try {
+        const db = getFirestore()
+        const snapshot = await getDoc(doc(db, "students", userId))
+        const user = snapshot.data()
+        return user
     } catch (e) {
         console.error(e.message)
     }
@@ -112,7 +126,10 @@ export async function getUsersByNationality(nationality) {
         )
 
         const snapshot = await getDocs(q)
-        const users = snapshot.docs.map((doc) => doc.data())
+        const users = snapshot.docs.map((doc) => ({
+            data: doc.data(),
+            userId: doc._key.path.segments[doc._key.path.segments.length - 1],
+        }))
         return users
     } catch (e) {
         console.error(e.message)
@@ -128,7 +145,10 @@ export async function getUsersByDepartment(department) {
         )
 
         const snapshot = await getDocs(q)
-        const users = snapshot.docs.map((doc) => doc.data())
+        const users = snapshot.docs.map((doc) => ({
+            data: doc.data(),
+            userId: doc._key.path.segments[doc._key.path.segments.length - 1],
+        }))
         return users
     } catch (e) {
         console.error(e.message)
@@ -143,19 +163,15 @@ export async function getUsersByNationalityAndDepartment(
         const db = getFirestore()
         const q = query(
             collection(db, "students"),
-            where(
-                "info.nationality",
-                "==",
-                nationality,
-                "&&",
-                "info.department",
-                "==",
-                department
-            )
+            where("info.nationality", "==", nationality),
+            where("info.department", "==", department)
         )
 
         const snapshot = await getDocs(q)
-        const users = snapshot.docs.map((doc) => doc.data())
+        const users = snapshot.docs.map((doc) => ({
+            data: doc.data(),
+            userId: doc._key.path.segments[doc._key.path.segments.length - 1],
+        }))
         return users
     } catch (e) {
         console.error(e.message)

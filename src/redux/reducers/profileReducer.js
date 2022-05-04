@@ -1,5 +1,5 @@
 import {
-    getCommentsByStudentId,
+    getCommentsForProfile,
     saveComment,
 } from "../../API/firebase/comments"
 import {
@@ -131,7 +131,7 @@ export function fetchStudentProfile() {
 
             console.log("STUDENT PROFILE", studentProfile)
 
-            const comments = await getCommentsByStudentId()
+            const comments = await getCommentsForProfile()
 
             const tips = []
 

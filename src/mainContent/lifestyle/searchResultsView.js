@@ -1,7 +1,12 @@
-import { Card, CardContent, Grid } from "@mui/material"
+import { Button, Card, CardContent, Grid } from "@mui/material"
+import { Link } from "react-router-dom"
 
 export default function TipsResultsView(props) {
     function tipCB(tip) {
+        function tipClickedACB() {
+            props.tipClicked(tip.userId)
+        }
+
         return (
             <Grid item xs={12} md={12} lg={6} key={tip.title}>
                 <Card variant="outlined" sx={{ backgroundColor: "grey.100" }}>
@@ -21,8 +26,17 @@ export default function TipsResultsView(props) {
                                 </Grid>
                             </Grid>
                             <Grid container item sx={{ paddingBottom: "10px" }}>
-                                <Grid item xs={12}>
-                                    {tip.forname} {tip.lastname}
+                                <Grid item xs={6}>
+                                    Author: {tip.forname} {tip.lastname}
+                                </Grid>
+                                <Grid item xs={6} sx={{ textAlign: "end" }}>
+                                    <Button
+                                        onClick={tipClickedACB}
+                                        to={`/students/${tip.userId}`}
+                                        component={Link}
+                                    >
+                                        View author profile
+                                    </Button>
                                 </Grid>
                             </Grid>
                         </Grid>
