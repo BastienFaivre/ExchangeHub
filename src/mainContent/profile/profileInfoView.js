@@ -6,14 +6,19 @@ import CardHeader from "@mui/material/CardHeader"
 import ArticleIcon from "@mui/icons-material/Article"
 import AccountCircle from "@mui/icons-material/AccountCircle"
 
-export default function ProfileView(props) {
+export default function ProfileInfoView(props) {
     function logoutACB(event) {
         event.preventDefault()
         props.logout()
     }
 
+    function setEditMode(event) {
+        event.preventDefault()
+        props.setEdit()
+    }
+
     return (
-        <Card>
+        <>
             <CardHeader
                 style={{ padding: "40px" }}
                 avatar={
@@ -23,14 +28,26 @@ export default function ProfileView(props) {
                 }
                 title={
                     <Typography variant="h5" sx={{ fontWeight: "bold" }}>
-                        {props.profile.name}
+                        {[props.profile.forname, props.profile.lastname].join(
+                            " "
+                        )}
                     </Typography>
                 }
-                subheader={<Typography variant="h7">Username</Typography>}
+                subheader={
+                    <Typography variant="h7">{props.profile.year}</Typography>
+                }
                 action={
                     <Grid sx={{ paddingTop: "35px" }}>
-                        <Button variant="contained" startIcon={<ArticleIcon />}>
-                            View Report
+                        <Button
+                            onClick={setEditMode}
+                            sx={{ margin: 3 }}
+                            variant="contained"
+                            startIcon={<ArticleIcon />}
+                        >
+                            Edit Personal info
+                        </Button>
+                        <Button variant="contained" onClick={logoutACB}>
+                            Logout
                         </Button>
                     </Grid>
                 }
@@ -91,28 +108,8 @@ export default function ProfileView(props) {
                             </Grid>
                         </Card>
                     </Grid>
-                    <Grid container>
-                        <Grid
-                            item
-                            xs={6}
-                            alignItems="left"
-                            sx={{ paddingLeft: "15px", paddingTop: "20px" }}
-                        >
-                            <Button variant="contained">Update</Button>
-                        </Grid>
-                        <Grid
-                            item
-                            xs={6}
-                            alignItems="left"
-                            sx={{ paddingTop: "20px", textAlign: "right" }}
-                        >
-                            <Button variant="contained" onClick={logoutACB}>
-                                Logout
-                            </Button>
-                        </Grid>
-                    </Grid>
                 </Grid>
             </CardContent>
-        </Card>
+        </>
     )
 }

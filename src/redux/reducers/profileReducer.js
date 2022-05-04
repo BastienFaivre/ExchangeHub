@@ -49,7 +49,7 @@ export function profileReducer(state = initialState, action) {
             return {
                 ...state,
                 loading: true,
-                error: false,
+                error: [false, ""],
             }
         case "PROFILE_SET_ERROR":
             const { errorMessage } = action.payload
@@ -66,7 +66,7 @@ export function profileReducer(state = initialState, action) {
                 courses: comments,
                 info,
                 tips,
-                form,
+                form: { ...form, info },
             }
         case "PROFILE_ADD_COURSE":
             const { formCourse } = action.payload
@@ -112,8 +112,24 @@ export function profileReducer(state = initialState, action) {
                 error: [false, ""],
                 form: formToSave,
             }
+        case "PROFILE_EDIT_FORM_INFO":
+            const editedFormInfo = action.payload.formInfo
+            return {
+                ...state,
+                form: {
+                    ...state.form,
+                    info: { ...state.form.info, ...editedFormInfo },
+                },
+            }
         default:
             return state
+    }
+}
+
+export function editFormInfo(formInfo) {
+    return {
+        type: "PROFILE_EDIT_FORM_INFO",
+        payload: { formInfo },
     }
 }
 
@@ -125,8 +141,6 @@ export function fetchStudentProfile() {
             })
 
             const studentProfile = await getStudentProfile()
-
-            console.log("STUDENT PROFILE", studentProfile)
 
             const comments = await getCommentsForProfile()
 
@@ -228,7 +242,7 @@ export function addTip() {
     }
 }
 
-export async function saveForm() {
+export function saveForm() {
     return async function saveFormThunk(dispatch, getState) {
         try {
             dispatch({
@@ -255,7 +269,7 @@ export async function saveForm() {
     }
 }
 
-export async function saveInfo() {
+export function saveInfo() {
     return async function saveInfoThunk(dispatch, getState) {
         try {
             dispatch({
@@ -264,11 +278,11 @@ export async function saveInfo() {
 
             const state = getState().profile
 
-            const info = state.info
+            const info = state.form.info
 
             await updateUserInfo(info)
 
-            const formInfo = getState().profile.info
+            const formInfo = getState().profile.form.info
 
             if (isObjectEqual(formInfo, info)) {
                 dispatch({ type: "PROFILE_UPDATE_INFO", payload: { formInfo } })
