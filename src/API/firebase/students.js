@@ -128,7 +128,7 @@ export async function getUsersByNationality(nationality) {
         const snapshot = await getDocs(q)
         const users = snapshot.docs.map((doc) => ({
             data: doc.data(),
-            userId: doc._key.path.segments[doc._key.path.segments.length - 1],
+            userId: doc.id,
         }))
         return users
     } catch (e) {
@@ -147,7 +147,7 @@ export async function getUsersByDepartment(department) {
         const snapshot = await getDocs(q)
         const users = snapshot.docs.map((doc) => ({
             data: doc.data(),
-            userId: doc._key.path.segments[doc._key.path.segments.length - 1],
+            userId: doc.id,
         }))
         return users
     } catch (e) {
@@ -170,7 +170,7 @@ export async function getUsersByNationalityAndDepartment(
         const snapshot = await getDocs(q)
         const users = snapshot.docs.map((doc) => ({
             data: doc.data(),
-            userId: doc._key.path.segments[doc._key.path.segments.length - 1],
+            userId: doc.id,
         }))
         return users
     } catch (e) {
