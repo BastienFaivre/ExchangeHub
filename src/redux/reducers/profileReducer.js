@@ -1,7 +1,4 @@
-import {
-    getCommentsForProfile,
-    saveComment,
-} from "../../API/firebase/comments"
+import { getCommentsForProfile, saveComment } from "../../API/firebase/comments"
 import {
     createUserProfile,
     getStudentProfile,
