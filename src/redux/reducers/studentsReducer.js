@@ -1,9 +1,12 @@
+import { getCommentsByStudentId } from "../../API/firebase/comments"
 import {
+    getUser,
     getUsers,
     getUsersByDepartment,
     getUsersByNationality,
     getUsersByNationalityAndDepartment,
 } from "../../API/firebase/students"
+import { getTipsByStudentId } from "../../API/firebase/tips"
 import isObjectEqual from "../../utils/isObjectEqual"
 
 const initialState = {
@@ -11,6 +14,14 @@ const initialState = {
         loading: false,
         error: false,
         data: [],
+    },
+    studentDetails: {
+        loading: false,
+        error: false,
+        studentId: null,
+        data: {},
+        comments: [],
+        tips: [],
     },
     searchFilter: {
         nationality: "",
@@ -48,6 +59,44 @@ export function studentsReducer(state = initialState, action) {
                     loading: false,
                     error: false,
                     data: results,
+                },
+            }
+        case "STUDENTS_BEGIN_FETCH_DETAILS":
+            const { studentId } = action.payload
+            return {
+                ...state,
+                studentDetails: {
+                    studentId,
+                    loading: true,
+                    error: false,
+                    data: {},
+                    comments: [],
+                    tips: [],
+                },
+            }
+        case "STUDENTS_SET_ERROR_DETAILS":
+            return {
+                ...state,
+                studentDetails: {
+                    studentId: state.studentDetails.studentId,
+                    loading: false,
+                    error: true,
+                    data: {},
+                    comments: [],
+                    tips: [],
+                },
+            }
+        case "STUDENTS_SET_STUDENT_DETAILS":
+            const { studentDetails, comments, tips } = action.payload
+            return {
+                ...state,
+                studentDetails: {
+                    studentId: state.studentDetails.studentId,
+                    loading: false,
+                    error: false,
+                    data: studentDetails,
+                    comments: comments,
+                    tips: tips,
                 },
             }
 
@@ -101,6 +150,44 @@ export function saveFilterSearchStudents(searchFilter, isFirstSearch = false) {
             }
         } catch (e) {
             dispatch({ type: "STUDENTS_SET_ERROR" })
+        }
+    }
+}
+
+export function getStudentDetails(studentId) {
+    return async function getStudentDetailsThunk(dispatch, getState) {
+        try {
+            let state = getState()
+            // checking is search filter is same as before to avoid fetching twice on the same filter
+            if (studentId !== state.students.studentDetails.studentId) {
+                dispatch({
+                    type: "STUDENTS_BEGIN_FETCH_DETAILS",
+                    payload: { studentId },
+                })
+                const [detailsResponse, commentsResponse, tipsResponse] =
+                    await Promise.all([
+                        getUser(studentId),
+                        getCommentsByStudentId(studentId),
+                        getTipsByStudentId(studentId),
+                    ])
+                state = getState()
+
+                if (studentId === state.students.studentDetails.studentId) {
+                    const studentDetails = detailsResponse
+                    const comments = commentsResponse
+                    const tips = tipsResponse
+                    dispatch({
+                        type: "STUDENTS_SET_STUDENT_DETAILS",
+                        payload: {
+                            studentDetails,
+                            comments,
+                            tips,
+                        },
+                    })
+                }
+            }
+        } catch (e) {
+            dispatch({ type: "STUDENTS_SET_ERROR_DETAILS" })
         }
     }
 }

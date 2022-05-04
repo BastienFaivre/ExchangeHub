@@ -9,6 +9,7 @@ import ProfilePresenter from "./mainContent/profile/profilePresenter"
 import { getAuth, onAuthStateChanged } from "firebase/auth"
 import { useState } from "react"
 import StudentsSearchPresenter from "./mainContent/students/searchPresenter"
+import StudentPresenter from "./mainContent/students/studentPresenter"
 
 function App() {
     const [user, setUser] = useState(null)
@@ -35,14 +36,24 @@ function App() {
                     </MainContent>
                 }
             />
-            <Route
-                path="/students"
-                element={
-                    <MainContent>
-                        <StudentsSearchPresenter />
-                    </MainContent>
-                }
-            />
+            <Route path="/students">
+                <Route
+                    index
+                    element={
+                        <MainContent>
+                            <StudentsSearchPresenter />
+                        </MainContent>
+                    }
+                />
+                <Route
+                    path=":id"
+                    element={
+                        <MainContent>
+                            <StudentPresenter />
+                        </MainContent>
+                    }
+                />
+            </Route>
             <Route path="/courses">
                 <Route
                     index

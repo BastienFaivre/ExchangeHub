@@ -1,38 +1,32 @@
-import CourseView from "./courseView"
-import { useDispatch, useSelector } from "react-redux"
-import Box from "@mui/material/Box"
 import { CircularProgress } from "@mui/material"
+import { Box } from "@mui/system"
 import { useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
-import { getCourseDetails } from "../../redux/reducers/coursesReducer"
 import { getStudentDetails } from "../../redux/reducers/studentsReducer"
+import StudentView from "./studentView"
 
-export default function CoursePresenter() {
+export default function StudentPresenter() {
     const params = useParams()
     const dispatch = useDispatch()
-    const { loading, error, courseCode, data, comments } = useSelector(
-        (state) => state.courses.courseDetails
+    const { loading, error, studentId, data, comments, tips } = useSelector(
+        (state) => state.students.studentDetails
     )
-
-    function commentClickedACB(userId) {
-        // Clicking on a comment will open the student profile
-        dispatch(getStudentDetails(userId))
-    }
 
     // TODO: CB or ACB ?
     useEffect(function componentWasCreatedACB() {
-        if (!courseCode && params.id) {
-            dispatch(getCourseDetails(params.id))
+        if (!studentId && params.id) {
+            dispatch(getStudentDetails(params.id))
         }
     }, [])
 
     return (
         <Box>
             {Object.keys(data).length > 0 && (
-                <CourseView
-                    courseData={data}
+                <StudentView
+                    studentData={data}
                     comments={comments}
-                    commentClicked={commentClickedACB}
+                    tips={tips}
                 />
             )}
             {loading && (

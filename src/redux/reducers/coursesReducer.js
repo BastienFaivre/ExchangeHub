@@ -132,7 +132,7 @@ export function getCourseDetails(courseCode) {
     return async function getCourseDetailsThunk(dispatch, getState) {
         try {
             let state = getState()
-            // // checking course code is same as previous to avoid fetching again
+            // checking course code is same as previous to avoid fetching again
             if (courseCode !== state.courses.courseDetails.courseCode) {
                 dispatch({
                     type: "COURSE_BEGIN_FETCH_DETAILS",

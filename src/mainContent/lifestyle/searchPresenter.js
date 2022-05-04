@@ -2,6 +2,7 @@ import { CircularProgress, Typography } from "@mui/material"
 import { Box } from "@mui/system"
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
+import { getStudentDetails } from "../../redux/reducers/studentsReducer"
 import { saveFilterSearchTips } from "../../redux/reducers/tipsReducer"
 import TipsSearchFormView from "./searchFormView"
 import TipsResultsView from "./searchResultsView"
@@ -30,6 +31,10 @@ export default function TipsSearchPresenter() {
         )
     }
 
+    function tipClickedACB(userId) {
+        dispatch(getStudentDetails(userId))
+    }
+
     useEffect(function initialSearchCB() {
         dispatch(
             saveFilterSearchTips(
@@ -49,6 +54,7 @@ export default function TipsSearchPresenter() {
         )
     }
 
+    // sort tips based on search input
     const tips = data.filter(containsSearchInputCB)
 
     const types = ["Food", "Sport", "Nightlife"]
@@ -62,7 +68,9 @@ export default function TipsSearchPresenter() {
                 setSearchType={typeChangedACB}
                 types={types}
             />
-            {tips.length > 0 && <TipsResultsView tips={tips} />}
+            {tips.length > 0 && (
+                <TipsResultsView tips={tips} tipClicked={tipClickedACB} />
+            )}
             {tips.length === 0 && !loading && (
                 <Typography
                     variant="h5"
