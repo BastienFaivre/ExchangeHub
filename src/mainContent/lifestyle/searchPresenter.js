@@ -6,6 +6,7 @@ import { getStudentDetails } from "../../redux/reducers/studentsReducer"
 import { saveFilterSearchTips } from "../../redux/reducers/tipsReducer"
 import TipsSearchFormView from "./searchFormView"
 import TipsResultsView from "./searchResultsView"
+import TIP_TYPES from "../../utils/tipTypes"
 
 export default function TipsSearchPresenter() {
     const dispatch = useDispatch()
@@ -57,8 +58,6 @@ export default function TipsSearchPresenter() {
     // sort tips based on search input
     const tips = data.filter(containsSearchInputCB)
 
-    const types = ["Food", "Sport", "Nightlife"]
-
     return (
         <Box>
             <TipsSearchFormView
@@ -66,7 +65,7 @@ export default function TipsSearchPresenter() {
                 searchType={searchType}
                 setSearchInput={inputChangedACB}
                 setSearchType={typeChangedACB}
-                types={types}
+                types={TIP_TYPES}
             />
             {tips.length > 0 && (
                 <TipsResultsView tips={tips} tipClicked={tipClickedACB} />

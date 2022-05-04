@@ -21,6 +21,7 @@ export default function SidebarPresenter() {
         "/courses/:id",
         "/lifestyle",
         "/students",
+        "/students/:id",
     ])
     // If current tab is undefined, return false so we do not select any tabs
     const currentTab = routeMatch ?? false

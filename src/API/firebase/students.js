@@ -86,7 +86,7 @@ export async function getUsers() {
         const snapshot = await getDocs(collection(db, "students"))
         const users = snapshot.docs.map((doc) => ({
             data: doc.data(),
-            userId: doc._key.path.segments[doc._key.path.segments.length - 1],
+            userId: doc.id,
         }))
         return users
     } catch (e) {
