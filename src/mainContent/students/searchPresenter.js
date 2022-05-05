@@ -6,6 +6,7 @@ import {
     saveFilterSearchStudents,
 } from "../../redux/reducers/studentsReducer"
 import { nationalities } from "../../utils/nationalities"
+import { universities } from "../../utils/universities"
 import StudentsSearchFormView from "./searchFormView"
 import StudentsResultsView from "./searchResultsView"
 
@@ -17,6 +18,7 @@ export default function StudentsSearchPresenter() {
 
     // search parameters
     const [searchNationality, setSearchNationality] = useState("")
+    const [searchUniversity, setSearchUniversity] = useState("")
     const [searchDepartment, setSearchDepartment] = useState("")
 
     function nationalityChangedACB(newNationality) {
@@ -24,6 +26,18 @@ export default function StudentsSearchPresenter() {
         dispatch(
             saveFilterSearchStudents({
                 nationality: newNationality,
+                university: searchUniversity,
+                department: searchDepartment,
+            })
+        )
+    }
+
+    function universityChangedACB(newUniversity) {
+        setSearchUniversity(newUniversity)
+        dispatch(
+            saveFilterSearchStudents({
+                nationalities: searchNationality,
+                university: newUniversity,
                 department: searchDepartment,
             })
         )
@@ -34,6 +48,7 @@ export default function StudentsSearchPresenter() {
         dispatch(
             saveFilterSearchStudents({
                 nationality: searchNationality,
+                university: searchUniversity,
                 department: newDepartment,
             })
         )
@@ -49,6 +64,7 @@ export default function StudentsSearchPresenter() {
             saveFilterSearchStudents(
                 {
                     nationality: searchNationality,
+                    university: searchUniversity,
                     department: searchDepartment,
                 },
                 true
@@ -67,10 +83,13 @@ export default function StudentsSearchPresenter() {
         <Box>
             <StudentsSearchFormView
                 searchNationality={searchNationality}
+                searchUniversity={searchUniversity}
                 searchDepartment={searchDepartment}
                 setSearchNationality={nationalityChangedACB}
+                setSearchUniversity={universityChangedACB}
                 setSearchDepartment={departementChangedACB}
                 nationalities={nationalities}
+                universities={universities}
                 departments={departments}
             />
             {data.length > 0 && (

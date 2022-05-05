@@ -1,10 +1,7 @@
 import { getCommentsByStudentId } from "../../API/firebase/comments"
 import {
     getUser,
-    getUsers,
-    getUsersByDepartment,
-    getUsersByNationality,
-    getUsersByNationalityAndDepartment,
+    getUsersByNationalityAndUniversityAndDepartment,
 } from "../../API/firebase/students"
 import { getTipsByStudentId } from "../../API/firebase/tips"
 import isObjectEqual from "../../utils/isObjectEqual"
@@ -25,6 +22,7 @@ const initialState = {
     },
     searchFilter: {
         nationality: "",
+        university: "",
         department: "",
     },
 }
@@ -118,26 +116,13 @@ export function saveFilterSearchStudents(searchFilter, isFirstSearch = false) {
                     type: "STUDENTS_SET_SEARCH_FILTER",
                     payload: { searchFilter },
                 })
-                let results
-                if (
-                    searchFilter.nationality === "" &&
-                    searchFilter.department === ""
-                ) {
-                    results = await getUsers()
-                } else if (searchFilter.department === "") {
-                    results = await getUsersByNationality(
-                        searchFilter.nationality
-                    )
-                } else if (searchFilter.nationality === "") {
-                    results = await getUsersByDepartment(
-                        searchFilter.department
-                    )
-                } else {
-                    results = await getUsersByNationalityAndDepartment(
+
+                let results =
+                    await getUsersByNationalityAndUniversityAndDepartment(
                         searchFilter.nationality,
+                        searchFilter.university,
                         searchFilter.department
                     )
-                }
 
                 state = getState()
 

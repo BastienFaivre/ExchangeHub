@@ -16,6 +16,14 @@ export default function StudentsSearchFormView(props) {
         )
     }
 
+    function listUniversitiesCB(university) {
+        return (
+            <MenuItem key={university.title} value={university.title}>
+                {university.title}
+            </MenuItem>
+        )
+    }
+
     function listDepartmentsCB(department) {
         return (
             <MenuItem key={department} value={department}>
@@ -28,6 +36,10 @@ export default function StudentsSearchFormView(props) {
         props.setSearchNationality(event.target.value)
     }
 
+    function handleUniversityChangeACB(event) {
+        props.setSearchUniversity(event.target.value)
+    }
+
     function handleDepartmentChangeACB(event) {
         props.setSearchDepartment(event.target.value)
     }
@@ -35,7 +47,7 @@ export default function StudentsSearchFormView(props) {
     return (
         <Card variant="outlined" sx={{ p: 2, bgcolor: "grey.50" }}>
             <Grid spacing={2} container alignItems="center">
-                <Grid item xs={12} md={6}>
+                <Grid item xs={12} lg={4}>
                     <FormControl sx={{ width: "100%", bgcolor: "white" }}>
                         <InputLabel>Nationality</InputLabel>
                         <Select
@@ -48,7 +60,20 @@ export default function StudentsSearchFormView(props) {
                         </Select>
                     </FormControl>
                 </Grid>
-                <Grid item xs={12} md={6}>
+                <Grid item xs={12} lg={4}>
+                    <FormControl sx={{ width: "100%", bgcolor: "white" }}>
+                        <InputLabel>University</InputLabel>
+                        <Select
+                            value={props.searchUniversity}
+                            label="University"
+                            onChange={handleUniversityChangeACB}
+                        >
+                            <MenuItem value="">All</MenuItem>
+                            {props.universities.map(listUniversitiesCB)}
+                        </Select>
+                    </FormControl>
+                </Grid>
+                <Grid item xs={12} lg={4}>
                     <FormControl sx={{ width: "100%", bgcolor: "white" }}>
                         <InputLabel>Department</InputLabel>
                         <Select

@@ -18,21 +18,21 @@ export default function StudentsResultsView(props) {
                 <Card variant="outlined" sx={{ backgroundColor: "grey.100" }}>
                     <CardContent>
                         <Grid container>
-                            <Grid container item>
-                                <Grid item xs={6}>
-                                    <span style={{ fontWeight: "bold" }}>
-                                        {student.data.info.forname}{" "}
-                                        {student.data.info.lastname}
-                                    </span>{" "}
-                                    ({student.data.info.nationality})
-                                </Grid>
-                                <Grid item xs={6} sx={{ textAlign: "end" }}>
-                                    {student.data.info.department},{" "}
-                                    {student.data.info.year}
-                                </Grid>
+                            <Grid item xs={8}>
+                                <span style={{ fontWeight: "bold" }}>
+                                    {student.data.info.forname}{" "}
+                                    {student.data.info.lastname}
+                                </span>{" "}
+                                ({student.data.info.nationality})
                             </Grid>
-                            <Grid container item>
-                                <Grid item xs={6}></Grid>
+                            <Grid item xs={4} sx={{ textAlign: "end" }}>
+                                {student.data.info.year}
+                            </Grid>
+                            <Grid item xs={6}>
+                                {student.data.info.university}
+                            </Grid>
+                            <Grid item xs={6} sx={{ textAlign: "end" }}>
+                                {student.data.info.department}
                             </Grid>
                         </Grid>
                     </CardContent>
