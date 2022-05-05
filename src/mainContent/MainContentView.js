@@ -1,8 +1,6 @@
 import Sidebar from "../sidebar/sidebarPresenter"
 import Navigation from "../navigation/navigationPresenter"
 
-import Grid from "@mui/material/Grid"
-import Stack from "@mui/material/Stack"
 import Box from "@mui/material/Box"
 import CssBaseline from "@mui/material/CssBaseline"
 import Toolbar from "@mui/material/Toolbar"

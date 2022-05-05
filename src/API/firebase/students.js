@@ -117,55 +117,57 @@ export async function getUsersWithLimit(lim = 2) {
     }
 }
 
-export async function getUsersByNationality(nationality) {
-    try {
-        const db = getFirestore()
-        const q = query(
-            collection(db, "students"),
-            where("info.nationality", "==", nationality)
-        )
-
-        const snapshot = await getDocs(q)
-        const users = snapshot.docs.map((doc) => ({
-            data: doc.data(),
-            userId: doc.id,
-        }))
-        return users
-    } catch (e) {
-        console.error(e.message)
-    }
-}
-
-export async function getUsersByDepartment(department) {
-    try {
-        const db = getFirestore()
-        const q = query(
-            collection(db, "students"),
-            where("info.department", "==", department)
-        )
-
-        const snapshot = await getDocs(q)
-        const users = snapshot.docs.map((doc) => ({
-            data: doc.data(),
-            userId: doc.id,
-        }))
-        return users
-    } catch (e) {
-        console.error(e.message)
-    }
-}
-
-export async function getUsersByNationalityAndDepartment(
+export async function getUsersByNationalityAndUniversityAndDepartment(
     nationality,
+    university,
     department
 ) {
     try {
         const db = getFirestore()
-        const q = query(
-            collection(db, "students"),
-            where("info.nationality", "==", nationality),
-            where("info.department", "==", department)
-        )
+        let q
+        if (!nationality && !university && !department) {
+            q = query(collection(db, "students"))
+        } else if (nationality && !university && !department) {
+            q = query(
+                collection(db, "students"),
+                where("info.nationality", "==", nationality)
+            )
+        } else if (!nationality && university && !department) {
+            q = query(
+                collection(db, "students"),
+                where("info.university", "==", university)
+            )
+        } else if (!nationality && !university && department) {
+            q = query(
+                collection(db, "students"),
+                where("info.department", "==", department)
+            )
+        } else if (nationality && university && !department) {
+            q = query(
+                collection(db, "students"),
+                where("info.nationality", "==", nationality),
+                where("info.university", "==", university)
+            )
+        } else if (nationality && !university && department) {
+            q = query(
+                collection(db, "students"),
+                where("info.nationality", "==", nationality),
+                where("info.department", "==", department)
+            )
+        } else if (!nationality && university && department) {
+            q = query(
+                collection(db, "students"),
+                where("info.university", "==", university),
+                where("info.department", "==", department)
+            )
+        } else if (nationality && university && department) {
+            q = query(
+                collection(db, "students"),
+                where("info.nationality", "==", nationality),
+                where("info.university", "==", university),
+                where("info.department", "==", department)
+            )
+        }
 
         const snapshot = await getDocs(q)
         const users = snapshot.docs.map((doc) => ({
