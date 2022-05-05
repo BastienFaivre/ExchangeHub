@@ -8,9 +8,14 @@ import {
     Typography,
 } from "@mui/material"
 import CommentsDisabledIcon from "@mui/icons-material/CommentsDisabled"
+import { Link } from "react-router-dom"
 
 export default function StudentView(props) {
     function commentCB(comment) {
+        function commentClickedACB() {
+            props.commentClicked(comment.courseCode)
+        }
+
         return (
             <Card
                 variant="outlined"
@@ -20,12 +25,17 @@ export default function StudentView(props) {
                 <CardContent>
                     <Grid container>
                         <Grid container item sx={{ paddingBottom: "10px" }}>
-                            <Grid
-                                item
-                                xs={12}
-                                sx={{ textAlign: "center", fontWeight: "bold" }}
-                            >
+                            <Grid item xs={6} sx={{ fontWeight: "bold" }}>
                                 Course: {comment.courseCode}
+                            </Grid>
+                            <Grid item xs={6} sx={{ textAlign: "end" }}>
+                                <Button
+                                    onClick={commentClickedACB}
+                                    to={`/courses/${comment.courseCode}`}
+                                    component={Link}
+                                >
+                                    View this course
+                                </Button>
                             </Grid>
                         </Grid>
                         <Grid container item sx={{ paddingBottom: "10px" }}>

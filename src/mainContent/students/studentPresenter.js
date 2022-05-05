@@ -3,6 +3,7 @@ import { Box } from "@mui/system"
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
+import { getCourseDetails } from "../../API/coursesAPI"
 import { getStudentDetails } from "../../redux/reducers/studentsReducer"
 import StudentView from "./studentView"
 
@@ -12,6 +13,10 @@ export default function StudentPresenter() {
     const { loading, error, studentId, data, comments, tips } = useSelector(
         (state) => state.students.studentDetails
     )
+
+    function commentClickedACB(courseCode) {
+        dispatch(getCourseDetails(courseCode))
+    }
 
     // TODO: CB or ACB ?
     useEffect(function componentWasCreatedACB() {
@@ -27,6 +32,7 @@ export default function StudentPresenter() {
                     studentData={data}
                     comments={comments}
                     tips={tips}
+                    commentClicked={commentClickedACB}
                 />
             )}
             {loading && (
