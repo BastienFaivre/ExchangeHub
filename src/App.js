@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom"
 import TipsSearchPresenter from "./mainContent/lifestyle/searchPresenter"
-import Home from "./home/homePresenter"
+import Home from "./mainContent/home/homePresenter"
 import MainContent from "./mainContent/MainContentView"
 import SearchPresenter from "./mainContent/courses/searchPresenter"
 import CoursePresenter from "./mainContent/courses/coursePresenter"
