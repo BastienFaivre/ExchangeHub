@@ -7,6 +7,7 @@ import ArticleIcon from "@mui/icons-material/Article"
 import AccountCircle from "@mui/icons-material/AccountCircle"
 import Autocomplete from "@mui/material/Autocomplete"
 import { nationalities } from "../../utils/nationalities"
+import { universities } from "../../utils/universities"
 
 export default function ProfileInfoFormView({
     form,
@@ -117,6 +118,39 @@ export default function ProfileInfoFormView({
                                                 required
                                                 name="nationality"
                                                 label="Nationality"
+                                                variant="filled"
+                                                sx={{ marginY: 2 }}
+                                            />
+                                        )
+                                    }}
+                                />
+                            </Grid>
+                            <Grid item xs={12} sx={{ paddingTop: "10px" }}>
+                                <Typography
+                                    variant="h7"
+                                    sx={{ fontWeight: "bold" }}
+                                >
+                                    University
+                                </Typography>
+                            </Grid>
+                            <Grid item xs={12}>
+                                <Autocomplete
+                                    disablePortal
+                                    options={universities.map((u) => u.title)}
+                                    getOptionLabel={(option) => option}
+                                    value={form.university}
+                                    onChange={handleAutoSelectACB}
+                                    inputValue={autoSelectForm.university}
+                                    onInputChange={handleAutoSelectACB}
+                                    id="university"
+                                    sx={{ width: 300 }}
+                                    renderInput={(params) => {
+                                        return (
+                                            <TextField
+                                                {...params}
+                                                required
+                                                name="university"
+                                                label="University"
                                                 variant="filled"
                                                 sx={{ marginY: 2 }}
                                             />

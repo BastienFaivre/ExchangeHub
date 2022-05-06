@@ -1,4 +1,9 @@
-import { getCommentsForProfile, saveComment } from "../../API/firebase/comments"
+import {
+    getCommentsForProfile,
+    saveComment,
+    updateComment,
+    removeComment,
+} from "../../API/firebase/comments"
 import {
     createUserProfile,
     getStudentProfile,
@@ -27,7 +32,7 @@ const initialState = {
             rating: 0,
             title: "",
             description: "",
-            review: "",
+            difficulty: "",
         },
         tip: {
             type: "",
@@ -106,6 +111,36 @@ export function profileReducer(state = initialState, action) {
                     info: formInfo,
                 },
             }
+        case "PROFILE_UPDATE_COMMENT":
+            const { formCourseEdited } = action.payload
+            return {
+                ...state,
+                loading: false,
+                error: [false, ""],
+                courses: [
+                    ...state.courses.filter(
+                        (course) =>
+                            course.courseCode !== formCourseEdited.courseCode
+                    ),
+                    formCourseEdited,
+                ],
+                form: {
+                    ...state.form,
+                    course: initialState.form.course,
+                },
+            }
+        case "PROFILE_REMOVE_COMMENT":
+            const { commentId } = action.payload
+            return {
+                ...state,
+                loading: false,
+                error: [false, ""],
+                courses: [
+                    ...state.courses.filter(
+                        (course) => course.id !== commentId
+                    ),
+                ],
+            }
         case "PROFILE_SAVE_FORM":
             const formToSave = action.payload.form
             return {
@@ -123,8 +158,24 @@ export function profileReducer(state = initialState, action) {
                     info: { ...state.form.info, ...editedFormInfo },
                 },
             }
+        case "PROFILE_EDIT_FORM_COMMENT":
+            const editedFormComment = action.payload.formComment
+            return {
+                ...state,
+                form: {
+                    ...state.form,
+                    course: { ...state.form.course, ...editedFormComment },
+                },
+            }
         default:
             return state
+    }
+}
+
+export function editFormComment(formComment) {
+    return {
+        type: "PROFILE_EDIT_FORM_COMMENT",
+        payload: { formComment },
     }
 }
 
@@ -189,22 +240,90 @@ export function addComment() {
 
             const comment = state.form.course
 
+            if (!comment.courseCode) {
+                throw new Error("No course code")
+            }
+
             if (
                 state.courses.find((c) => c.courseCode === comment.courseCode)
             ) {
                 throw new Error("User already reviewed this course")
             }
 
-            await saveComment(comment)
+            const commentId = await saveComment(comment)
 
             const formCourse = getState().profile.form.course
 
             if (isObjectEqual(formCourse, comment)) {
                 dispatch({
                     type: "PROFILE_ADD_COURSE",
-                    payload: { formCourse },
+                    payload: { formCourse: { ...formCourse, id: commentId } },
                 })
             }
+        } catch (e) {
+            dispatch({
+                type: "PROFILE_SET_ERROR",
+                payload: { errorMessage: e.message },
+            })
+        }
+    }
+}
+
+export function editComment() {
+    return async function editCommentThunk(dispatch, getState) {
+        try {
+            dispatch({
+                type: "PROFILE_FETCH_DATA",
+            })
+
+            const state = getState().profile
+
+            const comment = state.form.course
+
+            if (!comment.courseCode) {
+                throw new Error("No course code")
+            }
+
+            await updateComment(comment)
+
+            const formCourse = getState().profile.form.course
+
+            if (isObjectEqual(formCourse, comment)) {
+                dispatch({
+                    type: "PROFILE_UPDATE_COMMENT",
+                    payload: { formCourseEdited: formCourse },
+                })
+            }
+        } catch (e) {
+            dispatch({
+                type: "PROFILE_SET_ERROR",
+                payload: { errorMessage: e.message },
+            })
+        }
+    }
+}
+
+export function deleteComment(commentId) {
+    return async function deleteCommentThunk(dispatch, getState) {
+        try {
+            dispatch({
+                type: "PROFILE_FETCH_DATA",
+            })
+
+            const state = getState().profile
+
+            const comment = state.courses.find((c) => c.id === commentId)
+
+            if (!commentId || !comment) {
+                throw new Error("Comment id not found")
+            }
+
+            dispatch({
+                type: "PROFILE_REMOVE_COMMENT",
+                payload: { commentId },
+            })
+
+            await removeComment(commentId)
         } catch (e) {
             dispatch({
                 type: "PROFILE_SET_ERROR",

@@ -5,6 +5,9 @@ import {
     query,
     where,
     getDocs,
+    doc,
+    updateDoc,
+    deleteDoc,
 } from "firebase/firestore"
 
 import { getAuth } from "firebase/auth"
@@ -22,7 +25,10 @@ export async function getCommentsForProfile() {
             where("userId", "==", userId)
         )
         const snapshot = await getDocs(q)
-        const comments = snapshot.docs.map((doc) => doc.data())
+        const comments = snapshot.docs.map((doc) => ({
+            ...doc.data(),
+            id: doc.id,
+        }))
         return comments
     } catch (e) {
         console.error(e.message)
@@ -38,8 +44,29 @@ export async function getCommentsByStudentId(userId) {
             where("userId", "==", userId)
         )
         const snapshot = await getDocs(q)
-        const comments = snapshot.docs.map((doc) => doc.data())
+
+        const comments = snapshot.docs.map((doc) => ({
+            ...doc.data(),
+            id: doc.id,
+        }))
         return comments
+    } catch (e) {
+        console.error(e.message)
+        throw e
+    }
+}
+
+export async function updateComment(newComment) {
+    try {
+        const db = getFirestore()
+        const auth = getAuth()
+        const userId = auth?.currentUser?.uid ?? false
+        if (!userId) {
+            throw new Error("User needs to be logged in")
+        }
+        const { id, ...comment } = newComment
+        const commentRef = doc(db, `comments/${id}`)
+        await updateDoc(commentRef, comment)
     } catch (e) {
         console.error(e.message)
         throw e
@@ -55,7 +82,27 @@ export async function saveComment(comment) {
             throw new Error("User needs to be logged in")
         }
 
-        await addDoc(collection(db, "comments"), { ...comment, userId })
+        const { id } = await addDoc(collection(db, "comments"), {
+            ...comment,
+            userId,
+        })
+        return id
+    } catch (e) {
+        console.error(e.message)
+        throw e
+    }
+}
+
+export async function removeComment(commentId) {
+    try {
+        const db = getFirestore()
+        const auth = getAuth()
+        const userId = auth?.currentUser?.uid ?? false
+        if (!userId) {
+            throw new Error("User needs to be logged in")
+        }
+        const commentRef = doc(db, `comments/${commentId}`)
+        await deleteDoc(commentRef)
     } catch (e) {
         console.error(e.message)
         throw e
