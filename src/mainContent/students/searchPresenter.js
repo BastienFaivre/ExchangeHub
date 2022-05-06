@@ -15,6 +15,7 @@ export default function StudentsSearchPresenter() {
     const { loading, error, data } = useSelector(
         (state) => state.students.results
     )
+    const searchFilter = useSelector((state) => state.students.searchFilter)
 
     // search parameters
     const [searchNationality, setSearchNationality] = useState("")
@@ -36,7 +37,7 @@ export default function StudentsSearchPresenter() {
         setSearchUniversity(newUniversity)
         dispatch(
             saveFilterSearchStudents({
-                nationalities: searchNationality,
+                nationality: searchNationality,
                 university: newUniversity,
                 department: searchDepartment,
             })
@@ -58,19 +59,14 @@ export default function StudentsSearchPresenter() {
         dispatch(getStudentDetails(userId))
     }
 
-    // TODO: CB or ACB ?
-    useEffect(function initialSearchACB() {
-        dispatch(
-            saveFilterSearchStudents(
-                {
-                    nationality: searchNationality,
-                    university: searchUniversity,
-                    department: searchDepartment,
-                },
-                true
-            )
-        )
-    }, [])
+    useEffect(
+        function retrieveSearchParametersACB() {
+            setSearchNationality(searchFilter.nationality)
+            setSearchUniversity(searchFilter.university)
+            setSearchDepartment(searchFilter.department)
+        },
+        [searchFilter]
+    )
 
     const departments = [
         "Computer Science",

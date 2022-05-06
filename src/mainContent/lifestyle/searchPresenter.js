@@ -11,6 +11,7 @@ import TIP_TYPES from "../../utils/tipTypes"
 export default function TipsSearchPresenter() {
     const dispatch = useDispatch()
     const { loading, error, data } = useSelector((state) => state.tips.results)
+    const searchFilter = useSelector((state) => state.tips.searchFilter)
 
     // search parameters
     const [searchInput, setSearchInput] = useState("")
@@ -21,12 +22,16 @@ export default function TipsSearchPresenter() {
 
     function inputChangedACB(input) {
         setSearchInput(input)
+        dispatch(
+            saveFilterSearchTips({ text_pattern: input, type: searchType })
+        )
     }
 
     function typeChangedACB(newType) {
         setSearchType(newType)
         dispatch(
             saveFilterSearchTips({
+                text_pattern: searchInput,
                 type: newType,
             })
         )
@@ -36,16 +41,13 @@ export default function TipsSearchPresenter() {
         dispatch(getStudentDetails(userId))
     }
 
-    useEffect(function initialSearchCB() {
-        dispatch(
-            saveFilterSearchTips(
-                {
-                    type: searchType,
-                },
-                true
-            )
-        )
-    }, [])
+    useEffect(
+        function retrieveSearchParametersACB() {
+            setSearchInput(searchFilter.text_pattern)
+            setSearchType(searchFilter.type)
+        },
+        [searchFilter]
+    )
 
     function containsSearchInputCB(tip) {
         return (
