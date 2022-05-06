@@ -19,7 +19,6 @@ export default function CoursePresenter() {
         dispatch(getStudentDetails(userId))
     }
 
-    // TODO: CB or ACB ?
     useEffect(function componentWasCreatedACB() {
         if (!courseCode && params.id) {
             dispatch(getCourseDetails(params.id))

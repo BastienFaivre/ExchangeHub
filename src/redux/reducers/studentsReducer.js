@@ -103,15 +103,12 @@ export function studentsReducer(state = initialState, action) {
     }
 }
 
-export function saveFilterSearchStudents(searchFilter, isFirstSearch = false) {
+export function saveFilterSearchStudents(searchFilter) {
     return async function saveFilterSearchStudentsThunk(dispatch, getState) {
         try {
             let state = getState()
             // checking is search filter is same as before to avoid fetching twice on the same filter
-            if (
-                isFirstSearch ||
-                !isObjectEqual(searchFilter, state.students.searchFilter)
-            ) {
+            if (!isObjectEqual(searchFilter, state.students.searchFilter)) {
                 dispatch({
                     type: "STUDENTS_SET_SEARCH_FILTER",
                     payload: { searchFilter },

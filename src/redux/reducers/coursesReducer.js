@@ -20,9 +20,8 @@ const initialState = {
     },
     searchFilter: {
         text_pattern: "",
+        school_code: "",
         department_prefix: "",
-        educational_level: "",
-        term_period: "",
     },
 }
 
@@ -109,7 +108,10 @@ export function saveFilterSearchCourses(searchFilter) {
                     type: "COURSE_SET_SEARCH_FILTER",
                     payload: { searchFilter },
                 })
-                const results = await searchCourses(searchFilter)
+                const results = await searchCourses({
+                    text_pattern: searchFilter.text_pattern,
+                    department_prefix: searchFilter.department_prefix,
+                })
 
                 // Checking to see that the search filter hasn't been changed while waiting for the resulsts
                 // to avoid race condition
