@@ -22,7 +22,7 @@ const styles = {
         maxWidth: "700px",
         margin: "30px auto",
         width: {
-            sm: "60%",
+            sm: "100%",
         },
     },
     form: {
@@ -39,10 +39,10 @@ const styles = {
         justifyContent: "center",
     },
     gridContainer: {
-        display: "flex",
         alignItems: "center",
-        maxWidth: "1300px",
+        maxWidth: "70vw",
         padding: "50px",
+        maxHeight: "80vh",
     },
     title: {
         paddingBottom: "15px",
@@ -52,7 +52,8 @@ const styles = {
         paddingBottom: "30px",
     },
     largeImage: {
-        height: "100%",
+        width: 1,
+        objectFit: "cover",
     },
 }
 
