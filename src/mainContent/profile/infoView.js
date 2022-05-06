@@ -79,6 +79,17 @@ export default function ProfileInfoView(props) {
                             <Grid item xs={12}>
                                 {props.profile.nationality}
                             </Grid>
+                            <Grid item xs={12} sx={{ paddingTop: "10px" }}>
+                                <Typography
+                                    variant="h7"
+                                    sx={{ fontWeight: "bold" }}
+                                >
+                                    University
+                                </Typography>
+                            </Grid>
+                            <Grid item xs={12}>
+                                {props.profile.university}
+                            </Grid>
                         </Card>
                     </Grid>
                     <Grid container item xs={12} lg={6}>

@@ -174,7 +174,10 @@ export default function CourseView(props) {
                     </Typography>
                 </Grid>
                 <Grid item xs={6} sx={{ textAlign: "center" }}>
-                    <Button to={`/profile`} component={Link}>
+                    <Button
+                        to={`/profile?courseCode=${props.courseData.code}`}
+                        component={Link}
+                    >
                         <RateReviewIcon />
                         &nbsp;&nbsp;Write a Comment
                     </Button>
