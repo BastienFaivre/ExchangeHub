@@ -5,8 +5,8 @@ import styles from "../../../MUI/styles/styles"
 
 const Hero = () => {
     return (
-        <Grid container spacing={6} sx={styles.gridContainer}>
-            <Grid item xs={12} md={7}>
+        <Grid container sx={styles.gridContainer}>
+            <Grid item xs={12} md={7} p={4}>
                 <Typography variant="h3" fontWeight={700} sx={styles.title}>
                     Everything you need to go on exchange
                 </Typography>
@@ -24,7 +24,8 @@ const Hero = () => {
                 </Button>
             </Grid>
             <Grid item xs={12} md={5}>
-                <img
+                <Box
+                    component="img"
                     src={exchangestudent}
                     alt="My Team"
                     sx={styles.largeImage}

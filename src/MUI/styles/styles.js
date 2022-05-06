@@ -40,9 +40,8 @@ const styles = {
     },
     gridContainer: {
         alignItems: "center",
-        maxWidth: "70vw",
-        padding: "50px",
-        maxHeight: "80vh",
+        width: 1,
+        height: 1,
     },
     title: {
         paddingBottom: "15px",
@@ -53,7 +52,10 @@ const styles = {
     },
     largeImage: {
         width: 1,
+        p: 3,
         objectFit: "cover",
+        justifySelf: "flex-end",
+        borderRadius: "35px",
     },
 }
 
