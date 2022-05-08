@@ -21,14 +21,12 @@ export default function FormCommentsView(props) {
 
     function saveChangesACB(event) {
         event.preventDefault()
-        props.saveChanges()
+        props.saveChanges(props.formInputs.courseCode)
     }
 
     function handleFormInputChangeACB(event) {
         props.setFormInput(event.target.name, event.target.value)
     }
-
-    console.log(props.formInputs);
 
     return (
         <CardContent>

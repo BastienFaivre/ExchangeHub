@@ -13,7 +13,7 @@ import FormCommentsView from "./formCommentsView"
 
 export default function CommentsPresenter() {
     const dispatch = useDispatch()
-    const { courses, form } = useSelector((state) => state.profile)
+    const { courses } = useSelector((state) => state.profile)
 
     // used to retrieve the course code to review
     const { search } = useLocation()
@@ -47,12 +47,19 @@ export default function CommentsPresenter() {
                     difficulty: "",
                 })
             )
-            setFormInputs(form.course)
+            setFormInputs({
+                courseCode,
+                rating: 0,
+                title: "",
+                description: "",
+                difficulty: "",
+            })
             setEditComment(true)
         }
     }, [courses])
 
     function setEditCommentsACB(courseCode) {
+        // initialize the form in redux and in the state
         dispatch(
             editFormComment(
                 courses.find((course) => course.courseCode === courseCode) ?? {}
@@ -69,7 +76,7 @@ export default function CommentsPresenter() {
         navigate("/profile")
     }
 
-    function saveCommentEditsACB() {
+    function saveCommentEditsACB(courseCode) {
         navigate("/profile")
         if (courses.find((course) => course.courseCode === courseCode)) {
             dispatch(updateComment())

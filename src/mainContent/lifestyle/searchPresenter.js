@@ -6,7 +6,7 @@ import { getStudentDetails } from "../../redux/reducers/studentsReducer"
 import { saveFilterSearchTips } from "../../redux/reducers/tipsReducer"
 import TipsSearchFormView from "./searchFormView"
 import TipsResultsView from "./searchResultsView"
-import TIP_TYPES from "../../utils/tipTypes"
+import { types } from "../../utils/tipTypes"
 
 export default function TipsSearchPresenter() {
     const dispatch = useDispatch()
@@ -67,7 +67,7 @@ export default function TipsSearchPresenter() {
                 searchType={searchType}
                 setSearchInput={inputChangedACB}
                 setSearchType={typeChangedACB}
-                types={TIP_TYPES}
+                types={types}
             />
             {tips.length > 0 && (
                 <TipsResultsView tips={tips} tipClicked={tipClickedACB} />
