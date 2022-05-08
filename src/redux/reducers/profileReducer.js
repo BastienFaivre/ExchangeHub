@@ -248,6 +248,10 @@ export function addComment() {
                 throw new Error("User already reviewed this course")
             }
 
+            // add the author name to the comment
+            comment.forname = state.info.forname
+            comment.lastname = state.info.lastname
+
             const commentId = await saveComment(comment)
 
             const formCourse = getState().profile.form.course
