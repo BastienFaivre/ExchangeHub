@@ -13,7 +13,7 @@ import FormCommentsView from "./formCommentsView"
 
 export default function CommentsPresenter() {
     const dispatch = useDispatch()
-    const { courses } = useSelector((state) => state.profile)
+    const { courses, form } = useSelector((state) => state.profile)
 
     // used to retrieve the course code to review
     const { search } = useLocation()
@@ -23,14 +23,6 @@ export default function CommentsPresenter() {
 
     // used to set edit mode
     const [editComment, setEditComment] = useState(false)
-
-    const [formInputs, setFormInputs] = useState({
-        courseCode,
-        rating: 0,
-        title: "",
-        description: "",
-        difficulty: "",
-    })
 
     useEffect(() => {
         // check that the student has not already written a comment for this course
@@ -47,13 +39,6 @@ export default function CommentsPresenter() {
                     difficulty: "",
                 })
             )
-            setFormInputs({
-                courseCode,
-                rating: 0,
-                title: "",
-                description: "",
-                difficulty: "",
-            })
             setEditComment(true)
         }
     }, [courses])
@@ -64,9 +49,6 @@ export default function CommentsPresenter() {
             editFormComment(
                 courses.find((course) => course.courseCode === courseCode) ?? {}
             )
-        )
-        setFormInputs(
-            courses.find((course) => course.courseCode === courseCode) ?? {}
         )
         setEditComment(true)
     }
@@ -90,15 +72,14 @@ export default function CommentsPresenter() {
     }
 
     function setFormInputACB(name, value) {
-        setFormInputs({ ...formInputs, [name]: value })
-        dispatch(editFormComment({ ...formInputs, [name]: value }))
+        dispatch(editFormComment({ ...form.course, [name]: value }))
     }
 
     return (
         <Box>
             {editComment && (
                 <FormCommentsView
-                    formInputs={formInputs}
+                    formInputs={form.course}
                     setFormInput={setFormInputACB}
                     cancelChanges={cancelCommentChangesACB}
                     saveChanges={saveCommentEditsACB}
