@@ -3,7 +3,7 @@ import { Box } from "@mui/system"
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
-import { getCourseDetails } from "../../API/coursesAPI"
+import { saveCourseCode } from "../../redux/reducers/coursesReducer"
 import { getStudentDetails } from "../../redux/reducers/studentsReducer"
 import StudentView from "./studentView"
 
@@ -15,7 +15,7 @@ export default function StudentPresenter() {
     )
 
     function commentClickedACB(courseCode) {
-        dispatch(getCourseDetails(courseCode))
+        dispatch(saveCourseCode(courseCode))
     }
 
     useEffect(function componentWasCreatedACB() {

@@ -7,7 +7,7 @@ import Box from "@mui/material/Box"
 import Typography from "@mui/material/Typography"
 import { CircularProgress } from "@mui/material"
 import {
-    getCourseDetails,
+    saveCourseCode,
     saveFilterSearchCourses,
 } from "../../redux/reducers/coursesReducer"
 
@@ -69,7 +69,7 @@ export default function SearchPresenter() {
     }
 
     function courseClickedACB(courseCode) {
-        dispatch(getCourseDetails(courseCode))
+        dispatch(saveCourseCode(courseCode))
     }
 
     useEffect(

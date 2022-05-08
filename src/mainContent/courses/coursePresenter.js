@@ -4,7 +4,7 @@ import Box from "@mui/material/Box"
 import { CircularProgress } from "@mui/material"
 import { useEffect } from "react"
 import { useParams } from "react-router-dom"
-import { getCourseDetails } from "../../redux/reducers/coursesReducer"
+import { saveCourseCode } from "../../redux/reducers/coursesReducer"
 import { getStudentDetails } from "../../redux/reducers/studentsReducer"
 
 export default function CoursePresenter() {
@@ -21,7 +21,7 @@ export default function CoursePresenter() {
 
     useEffect(function componentWasCreatedACB() {
         if (!courseCode && params.id) {
-            dispatch(getCourseDetails(params.id))
+            dispatch(saveCourseCode(params.id))
         }
     }, [])
 

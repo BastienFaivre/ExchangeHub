@@ -1,7 +1,4 @@
-import {
-    searchCourses,
-    getCourseDetails as getDetails,
-} from "../../API/coursesAPI"
+import { searchCourses, getCourseDetails } from "../../API/coursesAPI"
 import { getCommentsByCourseCode } from "../../API/firebase/comments"
 import isObjectEqual from "../../utils/isObjectEqual"
 
@@ -130,8 +127,8 @@ export function saveFilterSearchCourses(searchFilter) {
     }
 }
 
-export function getCourseDetails(courseCode) {
-    return async function getCourseDetailsThunk(dispatch, getState) {
+export function saveCourseCode(courseCode) {
+    return async function saveCourseCodeThunk(dispatch, getState) {
         try {
             let state = getState()
             // checking course code is same as previous to avoid fetching again
@@ -142,7 +139,7 @@ export function getCourseDetails(courseCode) {
                 })
 
                 const [detailsResponse, commentsResponse] = await Promise.all([
-                    getDetails(courseCode),
+                    getCourseDetails(courseCode),
                     getCommentsByCourseCode(courseCode),
                 ])
 
