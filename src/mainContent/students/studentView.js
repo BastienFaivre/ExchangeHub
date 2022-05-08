@@ -39,10 +39,10 @@ export default function StudentView(props) {
                             </Grid>
                         </Grid>
                         <Grid container item sx={{ paddingBottom: "10px" }}>
-                            <Grid item xs={9} sx={{ fontWeight: "bold" }}>
+                            <Grid item xs={8} sx={{ fontWeight: "bold" }}>
                                 {comment.title}
                             </Grid>
-                            <Grid item xs={3} sx={{ textAlign: "end" }}>
+                            <Grid item xs={4} sx={{ textAlign: "end" }}>
                                 <Rating
                                     value={comment.rating}
                                     readOnly
@@ -55,7 +55,7 @@ export default function StudentView(props) {
                                 Difficulty: {comment.difficulty}
                             </Grid>
                         </Grid>
-                        <Grid container item sx={{ paddingBottom: "10px" }}>
+                        <Grid container item>
                             <Grid item xs={12} sx={{ textAlign: "justify" }}>
                                 {comment.description}
                             </Grid>
@@ -68,27 +68,29 @@ export default function StudentView(props) {
 
     function tipCB(tip) {
         return (
-            <Grid item xs={12} key={tip.title}>
-                <Card variant="outlined" sx={{ backgroundColor: "grey.100" }}>
-                    <CardContent>
-                        <Grid container>
-                            <Grid container item sx={{ paddingBottom: "10px" }}>
-                                <Grid item xs={10} sx={{ fontWeight: "bold" }}>
-                                    {tip.title}
-                                </Grid>
-                                <Grid item xs={2} sx={{ textAlign: "end" }}>
-                                    {tip.type}
-                                </Grid>
+            <Card
+                variant="outlined"
+                key={tip.title}
+                sx={{ backgroundColor: "grey.100" }}
+            >
+                <CardContent>
+                    <Grid container>
+                        <Grid container item sx={{ paddingBottom: "10px" }}>
+                            <Grid item xs={10} sx={{ fontWeight: "bold" }}>
+                                {tip.title}
                             </Grid>
-                            <Grid container item>
-                                <Grid item xs={12}>
-                                    {tip.description}
-                                </Grid>
+                            <Grid item xs={2} sx={{ textAlign: "end" }}>
+                                {tip.type}
                             </Grid>
                         </Grid>
-                    </CardContent>
-                </Card>
-            </Grid>
+                        <Grid container item>
+                            <Grid item xs={12}>
+                                {tip.description}
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </CardContent>
+            </Card>
         )
     }
 
@@ -131,73 +133,65 @@ export default function StudentView(props) {
                     </Card>
                 </Grid>
             </Grid>
-            <Grid container item xs={12} spacing={10}>
-                <Grid container item xs={12} md={12} lg={6}>
-                    <Grid item xs={12}>
-                        <Typography
-                            variant="h5"
-                            sx={{
-                                fontWeight: "bold",
-                                paddingBottom: "10px",
-                                textAlign: "center",
-                            }}
-                        >
-                            Comments ({props.comments.length})
-                        </Typography>
-                    </Grid>
-                    <Stack
-                        direction="column"
-                        spacing={2}
-                        width={"100%"}
-                        height={"100%"}
+            <Grid container item xs={12} md={12} lg={6}>
+                <Grid item xs={12}>
+                    <Typography
+                        variant="h5"
+                        sx={{
+                            fontWeight: "bold",
+                            paddingBottom: "10px",
+                            textAlign: "center",
+                        }}
                     >
-                        {props.comments.map(commentCB)}
-                        {props.comments.length === 0 && (
-                            <Grid item xs={12} sx={{ textAlign: "center" }}>
-                                <Typography
-                                    variant="h5"
-                                    sx={{ padding: "10px" }}
-                                >
-                                    The student hasn't reviewed any courses yet.
-                                </Typography>
-                                <CommentsDisabledIcon fontSize="large" />
-                            </Grid>
-                        )}
-                    </Stack>
+                        Comments ({props.comments.length})
+                    </Typography>
                 </Grid>
-                <Grid container item xs={12} md={12} lg={6}>
-                    <Grid item xs={12}>
-                        <Typography
-                            variant="h5"
-                            sx={{
-                                fontWeight: "bold",
-                                paddingBottom: "10px",
-                                textAlign: "center",
-                            }}
-                        >
-                            Tips ({props.tips.length})
-                        </Typography>
-                    </Grid>
-                    <Stack
-                        direction="column"
-                        spacing={2}
-                        width={"100%"}
-                        height={"100%"}
+                <Stack
+                    direction="column"
+                    spacing={2}
+                    width={"100%"}
+                    height={"100%"}
+                >
+                    {props.comments.map(commentCB)}
+                    {props.comments.length === 0 && (
+                        <Grid item xs={12} sx={{ textAlign: "center" }}>
+                            <Typography variant="h5" sx={{ padding: "10px" }}>
+                                The student hasn't reviewed any courses yet.
+                            </Typography>
+                            <CommentsDisabledIcon fontSize="large" />
+                        </Grid>
+                    )}
+                </Stack>
+            </Grid>
+            <Grid container item xs={12} md={12} lg={6}>
+                <Grid item xs={12}>
+                    <Typography
+                        variant="h5"
+                        sx={{
+                            fontWeight: "bold",
+                            paddingBottom: "10px",
+                            textAlign: "center",
+                        }}
                     >
-                        {props.tips.map(tipCB)}
-                        {props.tips.length === 0 && (
-                            <Grid item xs={12} sx={{ textAlign: "center" }}>
-                                <Typography
-                                    variant="h5"
-                                    sx={{ padding: "10px" }}
-                                >
-                                    The student hasn't added any tips yet.
-                                </Typography>
-                                <CommentsDisabledIcon fontSize="large" />
-                            </Grid>
-                        )}
-                    </Stack>
+                        Tips ({props.tips.length})
+                    </Typography>
                 </Grid>
+                <Stack
+                    direction="column"
+                    spacing={2}
+                    width={"100%"}
+                    height={"100%"}
+                >
+                    {props.tips.map(tipCB)}
+                    {props.tips.length === 0 && (
+                        <Grid item xs={12} sx={{ textAlign: "center" }}>
+                            <Typography variant="h5" sx={{ padding: "10px" }}>
+                                The student hasn't added any tips yet.
+                            </Typography>
+                            <CommentsDisabledIcon fontSize="large" />
+                        </Grid>
+                    )}
+                </Stack>
             </Grid>
         </Grid>
     )
