@@ -11,16 +11,16 @@ import { ProfileCommentsView as CommentsView } from "./commentsView"
 import FormCommentsView from "./formCommentsView"
 
 export default function CommentsPresenter({}) {
-  const { search } = useLocation();
-  const navigate = useNavigate();
-  const courseCode = useSelector(
-    (state) => state.courses.courseDetails.courseCode
-  );
-  const [editComment, setEditComment] = useState(false);
+    const { search } = useLocation()
+    const navigate = useNavigate()
+    const courseCode = useSelector(
+        (state) => state.courses.courseDetails.courseCode
+    )
+    const [editComment, setEditComment] = useState(false)
 
-  const { courses, form } = useSelector((state) => state.profile);
+    const { courses, form } = useSelector((state) => state.profile)
 
-  const dispatch = useDispatch();
+    const dispatch = useDispatch()
 
     useEffect(() => {
         if (
@@ -87,24 +87,24 @@ export default function CommentsPresenter({}) {
     }
 
     return (
-      <>
-        {editComment && (
-          <FormCommentsView
-            form={form.course}
-            cancelChanges={cancelCommentChangesACB}
-            saveChanges={saveCommentEditsACB}
-            handleInputChange={handleCommentInputChange}
-          />
-        )}
-        
-        {!editComment && (
-          <CommentsView
-            comments={courses}
-            editComment={setEditCommentsACB}
-            addComment={setAddCommentACB}
-            deleteComment={deleteCommentACB}
-          />
-        )}
-      </>
-    );
+        <>
+            {editComment && (
+                <FormCommentsView
+                    form={form.course}
+                    cancelChanges={cancelCommentChangesACB}
+                    saveChanges={saveCommentEditsACB}
+                    handleInputChange={handleCommentInputChange}
+                />
+            )}
+
+            {!editComment && (
+                <CommentsView
+                    comments={courses}
+                    editComment={setEditCommentsACB}
+                    addComment={setAddCommentACB}
+                    deleteComment={deleteCommentACB}
+                />
+            )}
+        </>
+    )
 }
