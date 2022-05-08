@@ -13,7 +13,7 @@ export default function StudentsResultsView(props) {
                 xs={12}
                 md={12}
                 lg={6}
-                key={student.data.info.forname + student.data.info.lastname}
+                key={student.userId}
             >
                 <Card variant="outlined" sx={{ backgroundColor: "grey.100" }}>
                     <CardContent>
