@@ -1,23 +1,58 @@
-import { Box, Grid, TextField, Typography } from "@mui/material"
+import {
+    Box,
+    FormControl,
+    Grid,
+    MenuItem,
+    Select,
+    TextField,
+    Typography,
+} from "@mui/material"
 import CardContent from "@mui/material/CardContent"
 import Card from "@mui/material/Card"
 import Button from "@mui/material/Button"
 import CardHeader from "@mui/material/CardHeader"
 import ArticleIcon from "@mui/icons-material/Article"
 import AccountCircle from "@mui/icons-material/AccountCircle"
-import Autocomplete from "@mui/material/Autocomplete"
-import { nationalities } from "../../utils/nationalities"
-import { universities } from "../../utils/universities"
 
-export default function ProfileInfoFormView({
-    form,
-    autoSelectForm,
-    handleInputChangeACB,
-    handleAutoSelectACB,
-    saveChangesCB,
-    cancelChangesCB,
-    departments,
-}) {
+export default function ProfileInfoFormView(props) {
+    function listNationalitiesCB(nationality) {
+        return (
+            <MenuItem key={nationality} value={nationality}>
+                {nationality}
+            </MenuItem>
+        )
+    }
+
+    function listUniversitiesCB(university) {
+        return (
+            <MenuItem key={university.title} value={university.title}>
+                {university.title}
+            </MenuItem>
+        )
+    }
+
+    function listDepartmentsCB(department) {
+        return (
+            <MenuItem key={department} value={department}>
+                {department}
+            </MenuItem>
+        )
+    }
+
+    function handleFormInputChangeACB(event) {
+        props.setFormInput(event.target.name, event.target.value)
+    }
+
+    function saveInfoChangesACB(event) {
+        event.preventDefault()
+        props.saveInfoChanges()
+    }
+
+    function cancelInfoChangesACB(event) {
+        event.preventDefault()
+        props.cancelInfoChanges()
+    }
+
     return (
         <>
             <CardHeader
@@ -30,28 +65,28 @@ export default function ProfileInfoFormView({
                 title={
                     <Box>
                         <TextField
-                            value={form.forname}
-                            onChange={handleInputChangeACB}
+                            value={props.formInputs.forname}
+                            onChange={handleFormInputChangeACB}
                             required
-                            name="forname"
                             label="First name"
+                            name="forname"
                             sx={{ marginRight: 2 }}
                             variant="filled"
                         />
                         <TextField
-                            value={form.lastname}
-                            onChange={handleInputChangeACB}
+                            value={props.formInputs.lastname}
+                            onChange={handleFormInputChangeACB}
                             required
-                            name="lastname"
                             label="Last name"
+                            name="lastname"
                             variant="filled"
                         />
                     </Box>
                 }
                 subheader={
                     <TextField
-                        value={form.year}
-                        onChange={handleInputChangeACB}
+                        value={props.formInputs.year}
+                        onChange={handleFormInputChangeACB}
                         required
                         type="number"
                         label="Year"
@@ -65,12 +100,15 @@ export default function ProfileInfoFormView({
                         <Button
                             sx={{ margin: 3 }}
                             variant="contained"
-                            onClick={saveChangesCB}
+                            onClick={saveInfoChangesACB}
                             startIcon={<ArticleIcon />}
                         >
                             Save changes
                         </Button>
-                        <Button onClick={cancelChangesCB} variant="contained">
+                        <Button
+                            onClick={cancelInfoChangesACB}
+                            variant="contained"
+                        >
                             Cancel
                         </Button>
                     </Grid>
@@ -101,29 +139,23 @@ export default function ProfileInfoFormView({
                                 </Typography>
                             </Grid>
                             <Grid item xs={12}>
-                                <Autocomplete
-                                    disablePortal
-                                    options={nationalities}
-                                    getOptionLabel={(option) => option}
-                                    value={form.nationality}
-                                    onChange={handleAutoSelectACB}
-                                    inputValue={autoSelectForm.nationality}
-                                    onInputChange={handleAutoSelectACB}
-                                    id="nationality"
-                                    sx={{ width: 300 }}
-                                    renderInput={(params) => {
-                                        return (
-                                            <TextField
-                                                {...params}
-                                                required
-                                                name="nationality"
-                                                label="Nationality"
-                                                variant="filled"
-                                                sx={{ marginY: 2 }}
-                                            />
-                                        )
+                                <FormControl
+                                    sx={{
+                                        width: "100%",
+                                        backgroundColor: "grey.100",
+                                        marginTop: "10px",
                                     }}
-                                />
+                                >
+                                    <Select
+                                        name="nationality"
+                                        value={props.formInputs.nationality}
+                                        onChange={handleFormInputChangeACB}
+                                    >
+                                        {props.nationalities.map(
+                                            listNationalitiesCB
+                                        )}
+                                    </Select>
+                                </FormControl>
                             </Grid>
                             <Grid item xs={12} sx={{ paddingTop: "10px" }}>
                                 <Typography
@@ -134,29 +166,23 @@ export default function ProfileInfoFormView({
                                 </Typography>
                             </Grid>
                             <Grid item xs={12}>
-                                <Autocomplete
-                                    disablePortal
-                                    options={universities.map((u) => u.title)}
-                                    getOptionLabel={(option) => option}
-                                    value={form.university}
-                                    onChange={handleAutoSelectACB}
-                                    inputValue={autoSelectForm.university}
-                                    onInputChange={handleAutoSelectACB}
-                                    id="university"
-                                    sx={{ width: 300 }}
-                                    renderInput={(params) => {
-                                        return (
-                                            <TextField
-                                                {...params}
-                                                required
-                                                name="university"
-                                                label="University"
-                                                variant="filled"
-                                                sx={{ marginY: 2 }}
-                                            />
-                                        )
+                                <FormControl
+                                    sx={{
+                                        width: "100%",
+                                        backgroundColor: "grey.100",
+                                        marginTop: "10px",
                                     }}
-                                />
+                                >
+                                    <Select
+                                        name="university"
+                                        value={props.formInputs.university}
+                                        onChange={handleFormInputChangeACB}
+                                    >
+                                        {props.universities.map(
+                                            listUniversitiesCB
+                                        )}
+                                    </Select>
+                                </FormControl>
                             </Grid>
                         </Card>
                     </Grid>
@@ -183,29 +209,23 @@ export default function ProfileInfoFormView({
                                 </Typography>
                             </Grid>
                             <Grid item xs={12}>
-                                <Autocomplete
-                                    disablePortal
-                                    options={departments}
-                                    getOptionLabel={(option) => option}
-                                    value={form.department}
-                                    onChange={handleAutoSelectACB}
-                                    inputValue={autoSelectForm.department}
-                                    onInputChange={handleAutoSelectACB}
-                                    id="department"
-                                    sx={{ width: 300 }}
-                                    renderInput={(params) => {
-                                        return (
-                                            <TextField
-                                                {...params}
-                                                required
-                                                name="department"
-                                                label="Department"
-                                                variant="filled"
-                                                sx={{ marginY: 2 }}
-                                            />
-                                        )
+                                <FormControl
+                                    sx={{
+                                        width: "100%",
+                                        backgroundColor: "grey.100",
+                                        marginTop: "10px",
                                     }}
-                                />
+                                >
+                                    <Select
+                                        name="department"
+                                        value={props.formInputs.department}
+                                        onChange={handleFormInputChangeACB}
+                                    >
+                                        {props.departments.map(
+                                            listDepartmentsCB
+                                        )}
+                                    </Select>
+                                </FormControl>
                             </Grid>
                         </Card>
                     </Grid>

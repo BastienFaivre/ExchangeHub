@@ -1,4 +1,5 @@
-import { useEffect, useState, useRef } from "react"
+import { Box } from "@mui/material"
+import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useLocation, useNavigate } from "react-router-dom"
 import {
@@ -7,22 +8,32 @@ import {
     editComment as updateComment,
     deleteComment,
 } from "../../redux/reducers/profileReducer"
-import { ProfileCommentsView as CommentsView } from "./commentsView"
+import ProfileCommentsView from "./commentsView"
 import FormCommentsView from "./formCommentsView"
 
-export default function CommentsPresenter({}) {
-    const { search } = useLocation()
-    const navigate = useNavigate()
-    const courseCode = useSelector(
-        (state) => state.courses.courseDetails.courseCode
-    )
-    const [editComment, setEditComment] = useState(false)
-
+export default function CommentsPresenter() {
+    const dispatch = useDispatch()
     const { courses, form } = useSelector((state) => state.profile)
 
-    const dispatch = useDispatch()
+    // used to retrieve the course code to review
+    const { search } = useLocation()
+    const courseCode = new URLSearchParams(search).get("courseCode")
+
+    const navigate = useNavigate()
+
+    // used to set edit mode
+    const [editComment, setEditComment] = useState(false)
+
+    const [formInputs, setFormInputs] = useState({
+        courseCode,
+        rating: 0,
+        title: "",
+        description: "",
+        difficulty: "",
+    })
 
     useEffect(() => {
+        // check that the student has not already written a comment for this course
         if (
             courseCode &&
             !courses.find((course) => course.courseCode === courseCode)
@@ -36,6 +47,7 @@ export default function CommentsPresenter({}) {
                     difficulty: "",
                 })
             )
+            setFormInputs(form.course)
             setEditComment(true)
         }
     }, [courses])
@@ -46,24 +58,15 @@ export default function CommentsPresenter({}) {
                 courses.find((course) => course.courseCode === courseCode) ?? {}
             )
         )
-        setEditComment(true)
-    }
-
-    function setAddCommentACB() {
-        dispatch(
-            editFormComment({
-                courseCode: "",
-                rating: 0,
-                title: "",
-                description: "",
-                difficulty: "",
-            })
+        setFormInputs(
+            courses.find((course) => course.courseCode === courseCode) ?? {}
         )
         setEditComment(true)
     }
 
     function cancelCommentChangesACB() {
         setEditComment(false)
+        navigate("/profile")
     }
 
     function saveCommentEditsACB() {
@@ -79,32 +82,28 @@ export default function CommentsPresenter({}) {
         dispatch(deleteComment(commentId))
     }
 
-    function handleCommentInputChange(key, newValue) {
-        const newFormComment = {
-            [key]: key === "rating" ? Number(newValue) : newValue,
-        }
-        dispatch(editFormComment(newFormComment))
+    function setFormInputACB(name, value) {
+        setFormInputs({ ...formInputs, [name]: value })
+        dispatch(editFormComment({ ...formInputs, [name]: value }))
     }
 
     return (
-        <>
+        <Box>
             {editComment && (
                 <FormCommentsView
-                    form={form.course}
+                    formInputs={formInputs}
+                    setFormInput={setFormInputACB}
                     cancelChanges={cancelCommentChangesACB}
                     saveChanges={saveCommentEditsACB}
-                    handleInputChange={handleCommentInputChange}
                 />
             )}
-
             {!editComment && (
-                <CommentsView
+                <ProfileCommentsView
                     comments={courses}
                     editComment={setEditCommentsACB}
-                    addComment={setAddCommentACB}
                     deleteComment={deleteCommentACB}
                 />
             )}
-        </>
+        </Box>
     )
 }

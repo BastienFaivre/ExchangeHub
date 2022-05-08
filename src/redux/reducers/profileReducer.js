@@ -15,7 +15,7 @@ import isObjectEqual from "./../../utils/isObjectEqual"
 
 const initialState = {
     loading: false,
-    error: [false, ""],
+    error: false,
     courses: [],
     tips: [],
     info: {
@@ -56,20 +56,19 @@ export function profileReducer(state = initialState, action) {
             return {
                 ...state,
                 loading: true,
-                error: [false, ""],
+                error: false,
             }
         case "PROFILE_SET_ERROR":
-            const { errorMessage } = action.payload
             return {
                 ...state,
                 loading: false,
-                error: [true, errorMessage],
+                error: true,
             }
         case "PROFILE_SET_DATA":
             const { form, info, tips, comments } = action.payload
             return {
                 loading: false,
-                error: [false, ""],
+                error: false,
                 courses: comments,
                 info,
                 tips,
@@ -80,7 +79,7 @@ export function profileReducer(state = initialState, action) {
             return {
                 ...state,
                 loading: false,
-                error: [false, ""],
+                error: false,
                 courses: [...state.courses, formCourse],
                 form: {
                     ...state.form,
@@ -92,7 +91,7 @@ export function profileReducer(state = initialState, action) {
             return {
                 ...state,
                 loading: false,
-                error: [false, ""],
+                error: false,
                 tips: [...state.tips, formTip],
                 form: {
                     ...state.form,
@@ -104,7 +103,7 @@ export function profileReducer(state = initialState, action) {
             return {
                 ...state,
                 loading: false,
-                error: [false, ""],
+                error: false,
                 info: formInfo,
                 form: {
                     ...state.form,
@@ -116,7 +115,7 @@ export function profileReducer(state = initialState, action) {
             return {
                 ...state,
                 loading: false,
-                error: [false, ""],
+                error: false,
                 courses: [
                     ...state.courses.filter(
                         (course) =>
@@ -134,7 +133,7 @@ export function profileReducer(state = initialState, action) {
             return {
                 ...state,
                 loading: false,
-                error: [false, ""],
+                error: false,
                 courses: [
                     ...state.courses.filter(
                         (course) => course.id !== commentId
@@ -146,7 +145,7 @@ export function profileReducer(state = initialState, action) {
             return {
                 ...state,
                 loading: false,
-                error: [false, ""],
+                error: false,
                 form: formToSave,
             }
         case "PROFILE_EDIT_FORM_INFO":
@@ -223,7 +222,6 @@ export function fetchStudentProfile() {
         } catch (e) {
             dispatch({
                 type: "PROFILE_SET_ERROR",
-                payload: { errorMessage: e.message },
             })
         }
     }
@@ -263,7 +261,6 @@ export function addComment() {
         } catch (e) {
             dispatch({
                 type: "PROFILE_SET_ERROR",
-                payload: { errorMessage: e.message },
             })
         }
     }
@@ -297,7 +294,6 @@ export function editComment() {
         } catch (e) {
             dispatch({
                 type: "PROFILE_SET_ERROR",
-                payload: { errorMessage: e.message },
             })
         }
     }
@@ -327,7 +323,6 @@ export function deleteComment(commentId) {
         } catch (e) {
             dispatch({
                 type: "PROFILE_SET_ERROR",
-                payload: { errorMessage: e.message },
             })
         }
     }
@@ -357,7 +352,6 @@ export function addTip() {
         } catch (e) {
             dispatch({
                 type: "PROFILE_SET_ERROR",
-                payload: { errorMessage: e.message },
             })
         }
     }
@@ -384,7 +378,6 @@ export function saveForm() {
         } catch (e) {
             dispatch({
                 type: "PROFILE_SET_ERROR",
-                payload: { errorMessage: e.message },
             })
         }
     }
@@ -411,7 +404,6 @@ export function saveInfo() {
         } catch (e) {
             dispatch({
                 type: "PROFILE_SET_ERROR",
-                payload: { errorMessage: e.message },
             })
         }
     }
