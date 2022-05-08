@@ -8,13 +8,7 @@ export default function StudentsResultsView(props) {
         }
 
         return (
-            <Grid
-                item
-                xs={12}
-                md={12}
-                lg={6}
-                key={student.userId}
-            >
+            <Grid item xs={12} md={12} lg={6} key={student.userId}>
                 <Card variant="outlined" sx={{ backgroundColor: "grey.100" }}>
                     <CardContent>
                         <Grid container>
