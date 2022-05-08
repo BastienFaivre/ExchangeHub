@@ -11,20 +11,10 @@ import { Box } from "@mui/system"
 
 export default function InfoPresenter() {
     const dispatch = useDispatch()
-    const { info } = useSelector((state) => state.profile)
+    const { info, form } = useSelector((state) => state.profile)
 
     // used to set edit mode
     const [editInfo, setEditInfo] = useState(false)
-
-    // form states
-    const [formInputs, setFormInputs] = useState({
-        forname: info.forname,
-        lastname: info.lastname,
-        year: info.year,
-        nationality: info.nationality,
-        university: info.university,
-        department: info.department,
-    })
 
     function logoutACB() {
         const auth = getAuth()
@@ -50,8 +40,7 @@ export default function InfoPresenter() {
     }
 
     function setFormInputACB(name, value) {
-        setFormInputs({ ...formInputs, [name]: value })
-        dispatch(editFormInfo({ ...formInputs, [name]: value }))
+        dispatch(editFormInfo({ ...form.info, [name]: value }))
     }
 
     const departments = schools.map((school) => school.name)
@@ -60,7 +49,7 @@ export default function InfoPresenter() {
         <Box>
             {editInfo && (
                 <ProfileInfoFormView
-                    formInputs={formInputs}
+                    formInputs={form.info}
                     setFormInput={setFormInputACB}
                     saveInfoChanges={saveInfoChangesACB}
                     cancelInfoChanges={cancelChangesACB}
