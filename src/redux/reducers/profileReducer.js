@@ -99,9 +99,22 @@ export function profileReducer(state = initialState, action) {
                 },
             }
         case "PROFILE_REMOVE_TIP":
-            const { formTip } = action.payload
+            const { tipId } = action.payload
             return {
                 ...state,
+                loading: false,
+                error: false,
+                tips: [...state.tips.filter((tip) => tip.id === tipId)],
+            }
+
+        case "PROFILE_EDIT_FORM_TIP":
+            const editedTip = action.payload
+            return {
+                ...state,
+                form: {
+                    ...state.form,
+                    tip: { ...state.form.tip, ...editedTip },
+                },
             }
         case "PROFILE_UPDATE_INFO":
             const { formInfo } = action.payload
@@ -173,6 +186,13 @@ export function profileReducer(state = initialState, action) {
             }
         default:
             return state
+    }
+}
+
+export function editFormTip(formTip) {
+    return {
+        type: "PROFILE_EDIT_FORM_TIP",
+        payload: { formTip },
     }
 }
 
@@ -346,7 +366,7 @@ export function deleteTip(tipId) {
 
             const state = getState().profile
 
-            const comment = state.courses.find((c) => c.id === commentId)
+            const comment = state.courses.find((c) => c.id === tipId)
 
             if (!tipId || !comment) {
                 throw new Error("Comment id not found")
