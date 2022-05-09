@@ -54,33 +54,6 @@ export default function SearchFormView(props) {
     return (
         <Card variant="outlined" sx={{ p: 2, bgcolor: "grey.50" }}>
             <Grid spacing={2} container alignItems="center">
-                <Grid item xs={12} lg={4}>
-                    <Paper
-                        component="form"
-                        sx={{
-                            p: "2px 4px",
-                            display: "flex",
-                            alignItems: "center",
-                        }}
-                    >
-                        <InputBase
-                            sx={{ ml: 1, flex: 1 }}
-                            placeholder="Search For Course"
-                            inputProps={{ "aria-label": "search course" }}
-                            value={props.searchInput}
-                            onChange={handleInputChangeACB}
-                        />
-
-                        <IconButton
-                            type="submit"
-                            sx={{ p: "10px" }}
-                            aria-label="search"
-                            onClick={doSearchACB}
-                        >
-                            <SearchIcon />
-                        </IconButton>
-                    </Paper>
-                </Grid>
                 <Grid item xs={12} md={6} lg={4}>
                     <FormControl sx={{ width: "100%", bgcolor: "white" }}>
                         <InputLabel>School</InputLabel>
@@ -108,6 +81,33 @@ export default function SearchFormView(props) {
                                 .map(listDepartmentsCB)}
                         </Select>
                     </FormControl>
+                </Grid>
+                <Grid item xs={12} lg={4}>
+                    <Paper
+                        component="form"
+                        sx={{
+                            p: "2px 4px",
+                            display: "flex",
+                            alignItems: "center",
+                        }}
+                    >
+                        <InputBase
+                            sx={{ ml: 1, flex: 1 }}
+                            placeholder="Search For Course"
+                            inputProps={{ "aria-label": "search course" }}
+                            value={props.searchInput}
+                            onChange={handleInputChangeACB}
+                        />
+
+                        <IconButton
+                            type="submit"
+                            sx={{ p: "10px" }}
+                            aria-label="search"
+                            onClick={doSearchACB}
+                        >
+                            <SearchIcon />
+                        </IconButton>
+                    </Paper>
                 </Grid>
             </Grid>
         </Card>

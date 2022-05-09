@@ -74,7 +74,7 @@ export default function ProfileCommentsView(props) {
                                     to={`/courses/${comment.courseCode}`}
                                     component={Link}
                                 >
-                                    View all comments
+                                    View all comments for this course
                                 </Button>
                             </Grid>
                         </Grid>

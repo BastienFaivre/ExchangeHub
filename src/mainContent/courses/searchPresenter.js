@@ -13,6 +13,11 @@ import {
 
 import { useEffect, useState } from "react"
 
+const RESULTS_MESSAGE = {
+    emptySearchFilter: `Enter a text pattern ("web", "machine learning", etc...) or choose a department and school to get started!`,
+    emptyResults: "No courses matching the specified search terms were found",
+}
+
 export default function SearchPresenter() {
     const dispatch = useDispatch()
     const { loading, error, data } = useSelector(
@@ -24,6 +29,10 @@ export default function SearchPresenter() {
     const [searchInput, setSearchInput] = useState("")
     const [searchSchool, setSearchSchool] = useState("")
     const [searchDepartment, setSearchDepartment] = useState("")
+
+    const [noResultsMessage, setNoResultsMessage] = useState(
+        RESULTS_MESSAGE.emptySearchFilter
+    )
 
     // Note: the school parameter is not used in the API query,
     // it is only used to choose a department more easily.
@@ -66,6 +75,16 @@ export default function SearchPresenter() {
                 "You should at least specify a text pattern or choose a department!"
             )
         }
+
+        if (
+            searchInput === "" &&
+            searchDepartment === "" &&
+            searchSchool === ""
+        ) {
+            setNoResultsMessage(RESULTS_MESSAGE.emptySearchFilter)
+        } else {
+            setNoResultsMessage(RESULTS_MESSAGE.emptyResults)
+        }
     }
 
     function courseClickedACB(courseCode) {
@@ -103,7 +122,7 @@ export default function SearchPresenter() {
                     variant="h5"
                     sx={{ padding: "20px", textAlign: "center" }}
                 >
-                    No courses matching the specified search terms
+                    {noResultsMessage}
                 </Typography>
             )}
             {loading && (
