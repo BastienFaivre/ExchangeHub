@@ -98,6 +98,11 @@ export function profileReducer(state = initialState, action) {
                     tip: initialState.form.tip,
                 },
             }
+        case "PROFILE_REMOVE_TIP":
+            const { formTip } = action.payload
+            return {
+                ...state,
+            }
         case "PROFILE_UPDATE_INFO":
             const { formInfo } = action.payload
             return {
@@ -324,6 +329,35 @@ export function deleteComment(commentId) {
             })
 
             await removeComment(commentId)
+        } catch (e) {
+            dispatch({
+                type: "PROFILE_SET_ERROR",
+            })
+        }
+    }
+}
+
+export function deleteTip(tipId) {
+    return async function deleteCommentThunk(dispatch, getState) {
+        try {
+            dispatch({
+                type: "PROFILE_FETCH_DATA",
+            })
+
+            const state = getState().profile
+
+            const comment = state.courses.find((c) => c.id === commentId)
+
+            if (!tipId || !comment) {
+                throw new Error("Comment id not found")
+            }
+
+            dispatch({
+                type: "PROFILE_REMOVE_COMMENT",
+                payload: { tipId },
+            })
+
+            await removeComment(tipId)
         } catch (e) {
             dispatch({
                 type: "PROFILE_SET_ERROR",
