@@ -10,7 +10,7 @@ import {
     updateUserForm,
     updateUserInfo,
 } from "../../API/firebase/students"
-import { saveTip } from "../../API/firebase/tips"
+import { getTipsForProfile, saveTip } from "../../API/firebase/tips"
 import isObjectEqual from "./../../utils/isObjectEqual"
 
 const initialState = {
@@ -196,7 +196,7 @@ export function fetchStudentProfile() {
 
             const comments = await getCommentsForProfile()
 
-            const tips = []
+            const tips = await getTipsForProfile()
 
             if (!studentProfile) {
                 await createUserProfile({
