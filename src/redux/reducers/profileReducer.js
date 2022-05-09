@@ -7,7 +7,6 @@ import {
 import {
     createUserProfile,
     getStudentProfile,
-    updateUserForm,
     updateUserInfo,
 } from "../../API/firebase/students"
 import {
@@ -463,32 +462,6 @@ export function addTip() {
                     type: "PROFILE_ADD_TIP",
                     payload: { formTip: { ...formTip, id: tipId } },
                 })
-            }
-        } catch (e) {
-            dispatch({
-                type: "PROFILE_SET_ERROR",
-            })
-        }
-    }
-}
-
-export function saveForm() {
-    return async function saveFormThunk(dispatch, getState) {
-        try {
-            dispatch({
-                type: "PROFILE_FETCH_DATA",
-            })
-
-            const state = getState().profile
-
-            const form = state.form
-
-            await updateUserForm(form)
-
-            const formToSave = getState().profile.form
-
-            if (isObjectEqual(formToSave, form)) {
-                dispatch({ type: "PROFILE_SAVE_FORM", payload: { formToSave } })
             }
         } catch (e) {
             dispatch({

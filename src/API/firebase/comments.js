@@ -44,7 +44,6 @@ export async function getCommentsByStudentId(userId) {
             where("userId", "==", userId)
         )
         const snapshot = await getDocs(q)
-
         const comments = snapshot.docs.map((doc) => ({
             ...doc.data(),
             id: doc.id,
@@ -81,7 +80,6 @@ export async function saveComment(comment) {
         if (!userId) {
             throw new Error("User needs to be logged in")
         }
-
         const { id } = await addDoc(collection(db, "comments"), {
             ...comment,
             userId,
@@ -116,11 +114,14 @@ export async function getCommentsByCourseCode(courseCode) {
             collection(db, "comments"),
             where("courseCode", "==", courseCode)
         )
-
         const snapshot = await getDocs(q)
-        const comments = snapshot.docs.map((doc) => doc.data())
+        const comments = snapshot.docs.map((doc) => ({
+            ...doc.data(),
+            id: doc.id,
+        }))
         return comments
     } catch (e) {
         console.error(e.message)
+        throw e
     }
 }

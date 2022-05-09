@@ -33,6 +33,22 @@ export async function getTipsForProfile() {
     }
 }
 
+export async function getTipsByStudentId(userId) {
+    try {
+        const db = getFirestore()
+        const q = query(collection(db, "tips"), where("userId", "==", userId))
+        const snapshot = await getDocs(q)
+        const tips = snapshot.docs.map((doc) => ({
+            ...doc.data(),
+            id: doc.id,
+        }))
+        return tips
+    } catch (e) {
+        console.error(e.message)
+        throw e
+    }
+}
+
 export async function updateTip(newTip) {
     try {
         const db = getFirestore()
@@ -58,7 +74,6 @@ export async function saveTip(tip) {
         if (!userId) {
             throw new Error("User needs to be logged in")
         }
-
         const { id } = await addDoc(collection(db, "tips"), { ...tip, userId })
         return id
     } catch (e) {
@@ -83,24 +98,15 @@ export async function removeTip(tipId) {
     }
 }
 
-export async function getAllTips() {
+export async function getTipsByType(type) {
     try {
         const db = getFirestore()
-        const q = query(collection(db, "tips"))
+        const q = query(collection(db, "tips"), where("type", "==", type))
         const snapshot = await getDocs(q)
-        const tips = snapshot.docs.map((doc) => doc.data())
-        return tips
-    } catch (e) {
-        console.error(e.message)
-    }
-}
-
-export async function getTipsByStudentId(userId) {
-    try {
-        const db = getFirestore()
-        const q = query(collection(db, "tips"), where("userId", "==", userId))
-        const snapshot = await getDocs(q)
-        const tips = snapshot.docs.map((doc) => doc.data())
+        const tips = snapshot.docs.map((doc) => ({
+            ...doc.data(),
+            id: doc.id,
+        }))
         return tips
     } catch (e) {
         console.error(e.message)
@@ -108,13 +114,15 @@ export async function getTipsByStudentId(userId) {
     }
 }
 
-export async function getTipsByType(type) {
+export async function getAllTips() {
     try {
         const db = getFirestore()
-        const q = query(collection(db, "tips"), where("type", "==", type))
-
+        const q = query(collection(db, "tips"))
         const snapshot = await getDocs(q)
-        const tips = snapshot.docs.map((doc) => doc.data())
+        const tips = snapshot.docs.map((doc) => ({
+            ...doc.data(),
+            id: doc.id,
+        }))
         return tips
     } catch (e) {
         console.error(e.message)
