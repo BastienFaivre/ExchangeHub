@@ -13,25 +13,19 @@ import Rating from "@mui/material/Rating"
 import CheckIcon from "@mui/icons-material/Check"
 import CloseIcon from "@mui/icons-material/Close"
 
-export default function FormCommentsView({
-    form,
-    cancelChanges,
-    saveChanges,
-    handleInputChange,
-}) {
+export default function FormCommentsView(props) {
     function cancelChangesACB(event) {
         event.preventDefault()
-        cancelChanges()
+        props.cancelChanges()
     }
 
     function saveChangesACB(event) {
         event.preventDefault()
-        saveChanges()
+        props.saveChanges(props.formInputs.courseCode)
     }
 
-    function onInputChangeACB(event) {
-        const { name, value } = event.target
-        handleInputChange(name, value)
+    function handleFormInputChangeACB(event) {
+        props.setFormInput(event.target.name, event.target.value)
     }
 
     return (
@@ -49,7 +43,9 @@ export default function FormCommentsView({
                         </Button>
                     }
                     title={
-                        form.courseCode === "" ? "Add comment" : "Edit comment"
+                        props.formInputs.courseCode === ""
+                            ? "Add comment"
+                            : "Edit comment"
                     }
                 />
                 <Card variant="outlined" sx={{ backgroundColor: "grey.100" }}>
@@ -66,13 +62,13 @@ export default function FormCommentsView({
                                 variant="h5"
                                 color="text.secondary"
                             >
-                                {form.courseCode}
+                                {props.formInputs.courseCode}
                             </Typography>
                         }
                         subheader={
                             <TextField
-                                value={form.title}
-                                onChange={onInputChangeACB}
+                                value={props.formInputs.title}
+                                onChange={handleFormInputChangeACB}
                                 required
                                 name="title"
                                 label="Title"
@@ -84,47 +80,9 @@ export default function FormCommentsView({
                     <CardContent>
                         <Grid container spacing={2}>
                             <Grid item xs={12} md={12} lg={6}>
-                                {/* <Typography
-                                    gutterBottom
-                                    variant="h5"
-                                    color="text.secondary"
-                                >
-                                    Course code:
-                                </Typography>
-                                <Autocomplete
-                                    isOptionEqualToValue={(option, value) =>
-                                        option.courseCode === value.courseCode
-                                    }
-                                    getOptionLabel={(option) => `${option.courseCode} ${option.title}`}
-                                    options={options}
-                                    loading={loading}
-                                    renderInput={(params) => (
-                                        <TextField
-                                            {...params}
-                                            label="Asynchronous"
-                                            InputProps={{
-                                                ...params.InputProps,
-                                                endAdornment: (
-                                                    <React.Fragment>
-                                                        {loading ? (
-                                                            <CircularProgress
-                                                                color="inherit"
-                                                                size={20}
-                                                            />
-                                                        ) : null}
-                                                        {
-                                                            params.InputProps
-                                                                .endAdornment
-                                                        }
-                                                    </React.Fragment>
-                                                ),
-                                            }}
-                                        />
-                                    )}
-                                /> */}
                                 <Rating
-                                    value={Number(form.rating)}
-                                    onChange={onInputChangeACB}
+                                    value={Number(props.formInputs.rating)}
+                                    onChange={handleFormInputChangeACB}
                                     precision={0.5}
                                     size="large"
                                     sx={{ mt: 2 }}
@@ -138,8 +96,8 @@ export default function FormCommentsView({
                                     Difficulty:
                                 </Typography>
                                 <Select
-                                    value={form.difficulty}
-                                    onChange={onInputChangeACB}
+                                    value={props.formInputs.difficulty}
+                                    onChange={handleFormInputChangeACB}
                                     name="difficulty"
                                     sx={{ width: "100%", fontSize: "1rem" }}
                                     variant="filled"
@@ -162,8 +120,8 @@ export default function FormCommentsView({
                                     Description
                                 </Typography>
                                 <TextField
-                                    value={form.description}
-                                    onChange={onInputChangeACB}
+                                    value={props.formInputs.description}
+                                    onChange={handleFormInputChangeACB}
                                     required
                                     multiline
                                     name="description"

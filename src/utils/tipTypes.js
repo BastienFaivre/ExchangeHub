@@ -1,4 +1,4 @@
-export default [
+const types = [
     "Arrival",
     "Administration",
     "Food",
@@ -9,3 +9,5 @@ export default [
     "Nightlife",
     "Other",
 ]
+
+export { types }

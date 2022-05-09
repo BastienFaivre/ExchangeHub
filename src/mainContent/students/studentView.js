@@ -44,7 +44,7 @@ export default function StudentView(props) {
                             </Grid>
                             <Grid item xs={4} sx={{ textAlign: "end" }}>
                                 <Rating
-                                    value={comment.rating}
+                                    value={Number(comment.rating) ?? 0}
                                     readOnly
                                     precision={0.5}
                                 />

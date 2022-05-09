@@ -1,4 +1,5 @@
-import { useEffect, useState, useRef } from "react"
+import { Box } from "@mui/material"
+import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useLocation, useNavigate } from "react-router-dom"
 import {
@@ -7,22 +8,24 @@ import {
     editComment as updateComment,
     deleteComment,
 } from "../../redux/reducers/profileReducer"
-import { ProfileCommentsView as CommentsView } from "./commentsView"
+import ProfileCommentsView from "./commentsView"
 import FormCommentsView from "./formCommentsView"
 
-export default function CommentsPresenter({}) {
-    const { search } = useLocation()
-    const navigate = useNavigate()
-    const courseCode = useSelector(
-        (state) => state.courses.courseDetails.courseCode
-    )
-    const [editComment, setEditComment] = useState(false)
-
+export default function CommentsPresenter() {
+    const dispatch = useDispatch()
     const { courses, form } = useSelector((state) => state.profile)
 
-    const dispatch = useDispatch()
+    // used to retrieve the course code to review
+    const { search } = useLocation()
+    const courseCode = new URLSearchParams(search).get("courseCode")
+
+    const navigate = useNavigate()
+
+    // used to set edit mode
+    const [editComment, setEditComment] = useState(false)
 
     useEffect(() => {
+        // check that the student has not already written a comment for this course
         if (
             courseCode &&
             !courses.find((course) => course.courseCode === courseCode)
@@ -38,9 +41,10 @@ export default function CommentsPresenter({}) {
             )
             setEditComment(true)
         }
-    }, [courses])
+    }, [])
 
     function setEditCommentsACB(courseCode) {
+        // initialize the form in redux and in the state
         dispatch(
             editFormComment(
                 courses.find((course) => course.courseCode === courseCode) ?? {}
@@ -49,24 +53,12 @@ export default function CommentsPresenter({}) {
         setEditComment(true)
     }
 
-    function setAddCommentACB() {
-        dispatch(
-            editFormComment({
-                courseCode: "",
-                rating: 0,
-                title: "",
-                description: "",
-                difficulty: "",
-            })
-        )
-        setEditComment(true)
-    }
-
     function cancelCommentChangesACB() {
         setEditComment(false)
+        navigate("/profile")
     }
 
-    function saveCommentEditsACB() {
+    function saveCommentEditsACB(courseCode) {
         navigate("/profile")
         if (courses.find((course) => course.courseCode === courseCode)) {
             dispatch(updateComment())
@@ -79,32 +71,27 @@ export default function CommentsPresenter({}) {
         dispatch(deleteComment(commentId))
     }
 
-    function handleCommentInputChange(key, newValue) {
-        const newFormComment = {
-            [key]: key === "rating" ? Number(newValue) : newValue,
-        }
-        dispatch(editFormComment(newFormComment))
+    function setFormInputACB(name, value) {
+        dispatch(editFormComment({ ...form.course, [name]: value }))
     }
 
     return (
-        <>
+        <Box>
             {editComment && (
                 <FormCommentsView
-                    form={form.course}
+                    formInputs={form.course}
+                    setFormInput={setFormInputACB}
                     cancelChanges={cancelCommentChangesACB}
                     saveChanges={saveCommentEditsACB}
-                    handleInputChange={handleCommentInputChange}
                 />
             )}
-
             {!editComment && (
-                <CommentsView
+                <ProfileCommentsView
                     comments={courses}
                     editComment={setEditCommentsACB}
-                    addComment={setAddCommentACB}
                     deleteComment={deleteCommentACB}
                 />
             )}
-        </>
+        </Box>
     )
 }

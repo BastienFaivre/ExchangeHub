@@ -1,113 +1,70 @@
 import { getAuth, signOut } from "firebase/auth"
 import ProfileInfoView from "./infoView"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import {
-    fetchStudentProfile,
-    editFormInfo,
-    editFormComment,
-    saveInfo,
-    addComment,
-} from "../../redux/reducers/profileReducer"
-import Card from "@mui/material/Card"
-import { CircularProgress } from "@mui/material"
+import { editFormInfo, saveInfo } from "../../redux/reducers/profileReducer"
 import { schools } from "../../utils/departments"
-import InfoFormView from "./formInfoView"
-import { ProfileCommentsView as CommentsView } from "./commentsView"
-import FormCommentsView from "./formCommentsView"
+import { nationalities } from "../../utils/nationalities"
+import { universities } from "../../utils/universities"
+import ProfileInfoFormView from "./formInfoView"
+import { Box } from "@mui/system"
 
-export default function InfoPresenter({}) {
-    const [editInfo, setEditInfo] = useState(false)
-
+export default function InfoPresenter() {
+    const dispatch = useDispatch()
     const { info, form } = useSelector((state) => state.profile)
 
-    const [autoSelectFormInput, setAutoSelectFormInput] = useState({
-        university: info.university ?? "",
-        nationality: info.nationality ?? "",
-        department: info.department ?? "",
-    })
-
-    const dispatch = useDispatch()
-
-    // useEffect(() => {
-    //     console.log("INFO PRESENTER", info, form)
-    // }, [info, form])
+    // used to set edit mode
+    const [editInfo, setEditInfo] = useState(false)
 
     function logoutACB() {
         const auth = getAuth()
-        signOut(auth).catch(console.log)
+        signOut(auth).catch(function errorACB(e) {
+            console.log(e)
+        })
     }
 
     function setEditInfoACB() {
         setEditInfo(true)
     }
 
-    function cancelChangesACB(event) {
-        event.preventDefault()
+    function cancelChangesACB() {
         setEditInfo(false)
+        // reset the form with the current info values
         dispatch(editFormInfo(info))
     }
 
     function saveInfoChangesACB() {
-        dispatch(saveInfo()).then(() => {
+        dispatch(saveInfo()).then(function resetEditModeACB() {
             setEditInfo(false)
         })
     }
 
-    function handleInfoInputChange(event, newValue) {
-        const { name, value } = event.target
-        const newFormInfo = { [name]: newValue ?? value }
-        dispatch(editFormInfo(newFormInfo))
-    }
-
-    function handleAutoSelect(event, newValue) {
-        if (event && event.target && event.type === "change") {
-            const { name, value } = event.target ?? {}
-            if (name) {
-                setAutoSelectFormInput({
-                    ...autoSelectFormInput,
-                    [name]: value,
-                })
-            }
-        } else if (event && event.target) {
-            const id = event.target.id
-            const key = id.includes("nationality")
-                ? "nationality"
-                : id.includes("department")
-                ? "department"
-                : id.includes("university")
-                ? "university"
-                : null
-            if (key) {
-                dispatch(editFormInfo({ [key]: newValue }))
-                setAutoSelectFormInput((state) => ({
-                    ...state,
-                    [key]: newValue,
-                }))
-            }
-        }
+    function setFormInputACB(name, value) {
+        dispatch(editFormInfo({ ...form.info, [name]: value }))
     }
 
     const departments = schools.map((school) => school.name)
 
-    if (editInfo)
-        return (
-            <InfoFormView
-                form={form.info}
-                autoSelectForm={autoSelectFormInput}
-                handleInputChangeACB={handleInfoInputChange}
-                handleAutoSelectACB={handleAutoSelect}
-                saveChangesCB={saveInfoChangesACB}
-                cancelChangesCB={cancelChangesACB}
-                departments={departments}
-            />
-        )
-
     return (
-        <ProfileInfoView
-            profile={info}
-            logout={logoutACB}
-            setEdit={setEditInfoACB}
-        />
+        <Box>
+            {editInfo && (
+                <ProfileInfoFormView
+                    formInputs={form.info}
+                    setFormInput={setFormInputACB}
+                    saveInfoChanges={saveInfoChangesACB}
+                    cancelInfoChanges={cancelChangesACB}
+                    nationalities={nationalities}
+                    universities={universities}
+                    departments={departments}
+                />
+            )}
+            {!editInfo && (
+                <ProfileInfoView
+                    profile={info}
+                    logout={logoutACB}
+                    setEdit={setEditInfoACB}
+                />
+            )}
+        </Box>
     )
 }
