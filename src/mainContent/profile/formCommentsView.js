@@ -6,6 +6,7 @@ import {
     TextField,
     Select,
     MenuItem,
+    Box,
 } from "@mui/material"
 import CardContent from "@mui/material/CardContent"
 import Card from "@mui/material/Card"
@@ -33,53 +34,31 @@ export default function FormCommentsView(props) {
             <Card
                 variant="outlined"
                 style={{ padding: "30px" }}
-                sx={{ width: "100%" }}
+                sx={{ widht: "100%" }}
             >
                 <CardHeader
-                    action={
-                        <Button onClick={cancelChangesACB}>
-                            <CloseIcon />
-                            Cancel changes
-                        </Button>
-                    }
                     title={
                         props.formInputs.courseCode === ""
                             ? "Add comment"
                             : "Edit comment"
                     }
                 />
+
                 <Card variant="outlined" sx={{ backgroundColor: "grey.100" }}>
-                    <CardHeader
-                        action={
-                            <Button onClick={saveChangesACB}>
-                                <CheckIcon />
-                                Save changes
-                            </Button>
-                        }
-                        title={
-                            <Typography
-                                gutterBottom
-                                variant="h5"
-                                color="text.secondary"
-                            >
-                                {props.formInputs.courseCode}
-                            </Typography>
-                        }
-                        subheader={
-                            <TextField
-                                value={props.formInputs.title}
-                                onChange={handleFormInputChangeACB}
-                                required
-                                name="title"
-                                label="Title"
-                                sx={{ width: 0.6 }}
-                                variant="filled"
-                            />
-                        }
-                    />
-                    <CardContent>
-                        <Grid container spacing={2}>
-                            <Grid item xs={12} md={12} lg={6}>
+                    <Grid container direction="column" spacing={2}>
+                        <Grid item>
+                            <Box m={2}>
+                                <TextField
+                                    value={props.formInputs.title}
+                                    onChange={handleFormInputChangeACB}
+                                    required
+                                    name="title"
+                                    label="Title"
+                                    sx={{ width: 1 }}
+                                    variant="filled"
+                                />
+                            </Box>
+                            <Box m={2}>
                                 <Rating
                                     value={Number(props.formInputs.rating)}
                                     onChange={handleFormInputChangeACB}
@@ -88,19 +67,15 @@ export default function FormCommentsView(props) {
                                     sx={{ mt: 2 }}
                                     name="rating"
                                 />
-                                <Typography
-                                    gutterBottom
-                                    variant="h5"
-                                    color="text.secondary"
-                                >
-                                    Difficulty:
-                                </Typography>
-                                <Select
+                                <TextField
                                     value={props.formInputs.difficulty}
                                     onChange={handleFormInputChangeACB}
                                     name="difficulty"
                                     sx={{ width: "100%", fontSize: "1rem" }}
                                     variant="filled"
+                                    label="Difficulty"
+                                    select
+                                    required
                                 >
                                     <MenuItem value={""}></MenuItem>
                                     <MenuItem value={"Easy"}>Easy</MenuItem>
@@ -113,12 +88,9 @@ export default function FormCommentsView(props) {
                                     <MenuItem value={"Very difficult"}>
                                         Very difficult
                                     </MenuItem>
-                                </Select>
-                            </Grid>
-                            <Grid item xs={12} md={12} lg={6}>
-                                <Typography variant="h5" color="text.secondary">
-                                    Description
-                                </Typography>
+                                </TextField>
+                            </Box>
+                            <Box m={2}>
                                 <TextField
                                     value={props.formInputs.description}
                                     onChange={handleFormInputChangeACB}
@@ -127,11 +99,42 @@ export default function FormCommentsView(props) {
                                     name="description"
                                     label="Description"
                                     sx={{ width: 1 }}
+                                    InputProps={{ rows: 5 }}
                                     variant="filled"
                                 />
-                            </Grid>
+                            </Box>
+                            <Box m={2}>
+                                <Grid
+                                    justify="flex-end"
+                                    alignItems="center"
+                                    container
+                                >
+                                    <Grid item>
+                                        <Button
+                                            style={{ marginRight: "5px" }}
+                                            color="primary"
+                                            variant="outlined"
+                                            onClick={saveChangesACB}
+                                        >
+                                            <CloseIcon />
+                                            Cancel changes
+                                        </Button>
+                                    </Grid>
+                                    <Grid item>
+                                        <Button
+                                            style={{ marginRight: "5px" }}
+                                            color="primary"
+                                            variant="contained"
+                                            onClick={saveChangesACB}
+                                        >
+                                            <CheckIcon />
+                                            Save changes
+                                        </Button>
+                                    </Grid>
+                                </Grid>
+                            </Box>
                         </Grid>
-                    </CardContent>
+                    </Grid>
                 </Card>
             </Card>
         </CardContent>
