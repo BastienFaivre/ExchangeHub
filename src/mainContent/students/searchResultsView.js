@@ -14,19 +14,19 @@ export default function StudentsResultsView(props) {
                         <Grid container>
                             <Grid item xs={8}>
                                 <span style={{ fontWeight: "bold" }}>
-                                    {student.data.info.forname}{" "}
-                                    {student.data.info.lastname}
+                                    {student.data.forname}{" "}
+                                    {student.data.lastname}
                                 </span>{" "}
-                                ({student.data.info.nationality})
+                                ({student.data.nationality})
                             </Grid>
                             <Grid item xs={4} sx={{ textAlign: "end" }}>
-                                {student.data.info.year}
+                                {student.data.year}
                             </Grid>
                             <Grid item xs={6}>
-                                {student.data.info.university}
+                                {student.data.university}
                             </Grid>
                             <Grid item xs={6} sx={{ textAlign: "end" }}>
-                                {student.data.info.department}
+                                {student.data.department}
                             </Grid>
                         </Grid>
                     </CardContent>

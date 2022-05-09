@@ -26,8 +26,8 @@ export default function StudentsSearchFormView(props) {
 
     function listDepartmentsCB(department) {
         return (
-            <MenuItem key={department} value={department}>
-                {department}
+            <MenuItem key={department.name} value={department.name}>
+                {department.name}
             </MenuItem>
         )
     }
