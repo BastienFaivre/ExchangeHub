@@ -10,6 +10,8 @@ import {
 } from "@mui/material"
 import { useState } from "react"
 import { types as tipTypes } from "../../utils/tipTypes"
+import CheckIcon from "@mui/icons-material/Check"
+import CloseIcon from "@mui/icons-material/Close"
 
 export default function FormTipsView(props) {
     const [description, setDescription] = useState("")
@@ -106,7 +108,8 @@ export default function FormTipsView(props) {
                                             variant="outlined"
                                             onClick={cancelTipFormChangesACB}
                                         >
-                                            close
+                                            <CloseIcon />
+                                            Cancel changes
                                         </Button>
                                     </Grid>
                                     <Grid item>
@@ -116,7 +119,8 @@ export default function FormTipsView(props) {
                                             variant="contained"
                                             onClick={saveTipFormChangedACB}
                                         >
-                                            save
+                                            <CheckIcon />
+                                            Save changes
                                         </Button>
                                     </Grid>
                                 </Grid>
