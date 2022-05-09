@@ -2,6 +2,7 @@ import { Box } from "@mui/material"
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useLocation, useNavigate } from "react-router-dom"
+import { saveCourseCode } from "../../redux/reducers/coursesReducer"
 import {
     editFormComment,
     addComment,
@@ -75,6 +76,10 @@ export default function CommentsPresenter() {
         dispatch(editFormComment({ ...form.course, [name]: value }))
     }
 
+    function commentClickedACB(courseCode) {
+        dispatch(saveCourseCode(courseCode))
+    }
+
     return (
         <Box>
             {editComment && (
@@ -90,6 +95,7 @@ export default function CommentsPresenter() {
                     comments={courses}
                     editComment={setEditCommentsACB}
                     deleteComment={deleteCommentACB}
+                    commentClicked={commentClickedACB}
                 />
             )}
         </Box>
