@@ -243,10 +243,7 @@ export function fetchStudentProfile() {
             const tips = await getTipsForProfile()
 
             if (!studentProfile) {
-                await createUserProfile({
-                    info: initialState.info,
-                    form: initialState.form,
-                })
+                await createUserProfile(initialState.info)
                 dispatch({
                     type: "PROFILE_SET_DATA",
                     payload: {
@@ -257,10 +254,14 @@ export function fetchStudentProfile() {
                     },
                 })
             } else {
-                const { form, info } = studentProfile
                 dispatch({
                     type: "PROFILE_SET_DATA",
-                    payload: { form, info, tips, comments },
+                    payload: {
+                        form: initialState.form,
+                        info: studentProfile,
+                        tips,
+                        comments,
+                    },
                 })
             }
         } catch (e) {

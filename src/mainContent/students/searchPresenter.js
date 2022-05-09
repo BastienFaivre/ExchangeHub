@@ -5,6 +5,7 @@ import {
     getStudentDetails,
     saveFilterSearchStudents,
 } from "../../redux/reducers/studentsReducer"
+import { schools } from "../../utils/departments"
 import { nationalities } from "../../utils/nationalities"
 import { universities } from "../../utils/universities"
 import StudentsSearchFormView from "./searchFormView"
@@ -68,13 +69,6 @@ export default function StudentsSearchPresenter() {
         [searchFilter]
     )
 
-    const departments = [
-        "Computer Science",
-        "Mathematics",
-        "Physics",
-        "Communication Systems",
-    ]
-
     return (
         <Box>
             <StudentsSearchFormView
@@ -86,7 +80,7 @@ export default function StudentsSearchPresenter() {
                 setSearchDepartment={departementChangedACB}
                 nationalities={nationalities}
                 universities={universities}
-                departments={departments}
+                departments={schools}
             />
             {data.length > 0 && (
                 <StudentsResultsView

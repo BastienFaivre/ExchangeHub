@@ -113,20 +113,19 @@ export default function StudentView(props) {
                             <Grid container>
                                 <Grid item xs={12}>
                                     <span style={{ fontWeight: "bold" }}>
-                                        {props.studentData.info.forname}{" "}
-                                        {props.studentData.info.lastname}
+                                        {props.studentData.forname}{" "}
+                                        {props.studentData.lastname}
                                     </span>{" "}
-                                    ({props.studentData.info.nationality})
+                                    ({props.studentData.nationality})
                                 </Grid>
                                 <Grid item xs={12} lg={6}>
-                                    University:{" "}
-                                    {props.studentData.info.university}
+                                    University: {props.studentData.university}
                                 </Grid>
                                 <Grid item xs={12} lg={6}>
-                                    Field: {props.studentData.info.department}
+                                    Field: {props.studentData.department}
                                 </Grid>
                                 <Grid item xs={12}>
-                                    Year: {props.studentData.info.year}
+                                    Year: {props.studentData.year}
                                 </Grid>
                             </Grid>
                         </CardContent>

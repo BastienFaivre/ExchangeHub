@@ -26,8 +26,7 @@ export async function getStudentProfile() {
         if (!studentInfo) {
             return undefined
         }
-        const { form, info } = studentInfo
-        return { form, info }
+        return studentInfo
     } catch (e) {
         console.error(e.message)
         throw e
@@ -58,7 +57,7 @@ export async function updateUserInfo(newInfo) {
             throw new Error("User needs to be logged in")
         }
         const studentDocRef = doc(db, "students", userId)
-        await updateDoc(studentDocRef, { info: newInfo })
+        await updateDoc(studentDocRef, newInfo)
     } catch (e) {
         console.error(e.message)
         throw e
@@ -90,42 +89,42 @@ export async function getUsersByNationalityAndUniversityAndDepartment(
         } else if (nationality && !university && !department) {
             q = query(
                 collection(db, "students"),
-                where("info.nationality", "==", nationality)
+                where("nationality", "==", nationality)
             )
         } else if (!nationality && university && !department) {
             q = query(
                 collection(db, "students"),
-                where("info.university", "==", university)
+                where("university", "==", university)
             )
         } else if (!nationality && !university && department) {
             q = query(
                 collection(db, "students"),
-                where("info.department", "==", department)
+                where("department", "==", department)
             )
         } else if (nationality && university && !department) {
             q = query(
                 collection(db, "students"),
-                where("info.nationality", "==", nationality),
-                where("info.university", "==", university)
+                where("nationality", "==", nationality),
+                where("university", "==", university)
             )
         } else if (nationality && !university && department) {
             q = query(
                 collection(db, "students"),
-                where("info.nationality", "==", nationality),
-                where("info.department", "==", department)
+                where("nationality", "==", nationality),
+                where("department", "==", department)
             )
         } else if (!nationality && university && department) {
             q = query(
                 collection(db, "students"),
-                where("info.university", "==", university),
-                where("info.department", "==", department)
+                where("university", "==", university),
+                where("department", "==", department)
             )
         } else if (nationality && university && department) {
             q = query(
                 collection(db, "students"),
-                where("info.nationality", "==", nationality),
-                where("info.university", "==", university),
-                where("info.department", "==", department)
+                where("nationality", "==", nationality),
+                where("university", "==", university),
+                where("department", "==", department)
             )
         }
 
