@@ -10,7 +10,12 @@ import {
     updateUserForm,
     updateUserInfo,
 } from "../../API/firebase/students"
-import { saveTip } from "../../API/firebase/tips"
+import {
+    getTipsForProfile,
+    removeTip,
+    saveTip,
+    updateTip,
+} from "../../API/firebase/tips"
 import isObjectEqual from "./../../utils/isObjectEqual"
 
 const initialState = {
@@ -98,6 +103,24 @@ export function profileReducer(state = initialState, action) {
                     tip: initialState.form.tip,
                 },
             }
+        case "PROFILE_REMOVE_TIP":
+            const { tipId } = action.payload
+            return {
+                ...state,
+                loading: false,
+                error: false,
+                tips: [...state.tips.filter((tip) => tip.id !== tipId)],
+            }
+
+        case "PROFILE_EDIT_FORM_TIP":
+            const editedTip = action.payload.formTip
+            return {
+                ...state,
+                form: {
+                    ...state.form,
+                    tip: { ...state.form.tip, ...editedTip },
+                },
+            }
         case "PROFILE_UPDATE_INFO":
             const { formInfo } = action.payload
             return {
@@ -126,6 +149,21 @@ export function profileReducer(state = initialState, action) {
                 form: {
                     ...state.form,
                     course: initialState.form.course,
+                },
+            }
+        case "PROFILE_UPDATE_TIP":
+            const { formTipEdited } = action.payload
+            return {
+                ...state,
+                loading: false,
+                error: false,
+                tips: [
+                    ...state.tips.filter((tip) => tip.id !== formTipEdited.id),
+                    formTipEdited,
+                ],
+                form: {
+                    ...state.form,
+                    tip: initialState.form.tip,
                 },
             }
         case "PROFILE_REMOVE_COMMENT":
@@ -171,6 +209,13 @@ export function profileReducer(state = initialState, action) {
     }
 }
 
+export function editFormTip(formTip) {
+    return {
+        type: "PROFILE_EDIT_FORM_TIP",
+        payload: { formTip },
+    }
+}
+
 export function editFormComment(formComment) {
     return {
         type: "PROFILE_EDIT_FORM_COMMENT",
@@ -196,7 +241,7 @@ export function fetchStudentProfile() {
 
             const comments = await getCommentsForProfile()
 
-            const tips = []
+            const tips = await getTipsForProfile()
 
             if (!studentProfile) {
                 await createUserProfile({
@@ -332,6 +377,68 @@ export function deleteComment(commentId) {
     }
 }
 
+export function deleteTip(tipId) {
+    return async function deleteCommentThunk(dispatch, getState) {
+        try {
+            dispatch({
+                type: "PROFILE_FETCH_DATA",
+            })
+
+            const state = getState().profile
+
+            const tip = state.tips.find((c) => c.id === tipId)
+
+            if (!tipId || !tip) {
+                throw new Error("Tip id not found")
+            }
+
+            dispatch({
+                type: "PROFILE_REMOVE_TIP",
+                payload: { tipId },
+            })
+
+            await removeTip(tipId)
+        } catch (e) {
+            dispatch({
+                type: "PROFILE_SET_ERROR",
+            })
+        }
+    }
+}
+
+export function editTip() {
+    return async function editTipThunk(dispatch, getState) {
+        try {
+            dispatch({
+                type: "PROFILE_FETCH_DATA",
+            })
+
+            const state = getState().profile
+
+            const tip = state.form.tip
+
+            if (!tip.id) {
+                throw new Error("No tip id")
+            }
+
+            await updateTip(tip)
+
+            const formTip = getState().profile.form.tip
+
+            if (isObjectEqual(formTip, tip)) {
+                dispatch({
+                    type: "PROFILE_UPDATE_TIP",
+                    payload: { formTipEdited: formTip },
+                })
+            }
+        } catch (e) {
+            dispatch({
+                type: "PROFILE_SET_ERROR",
+            })
+        }
+    }
+}
+
 export function addTip() {
     return async function addTipThunk(dispatch, getState) {
         try {
@@ -343,14 +450,18 @@ export function addTip() {
 
             const tip = state.form.tip
 
-            await saveTip(tip)
+            // add the author name to the comment
+            tip.forname = state.info.forname
+            tip.lastname = state.info.lastname
+
+            const tipId = await saveTip(tip)
 
             const formTip = getState().profile.form.tip
 
             if (isObjectEqual(formTip, tip)) {
                 dispatch({
                     type: "PROFILE_ADD_TIP",
-                    payload: { formTip },
+                    payload: { formTip: { ...formTip, id: tipId } },
                 })
             }
         } catch (e) {

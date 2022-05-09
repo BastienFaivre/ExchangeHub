@@ -7,6 +7,7 @@ import { CircularProgress } from "@mui/material"
 import InfoPresenter from "./infoPresenter"
 import CommentsPresenter from "./commentsPresenter"
 import { Box } from "@mui/system"
+import TipPresenter from "./tipPresenter"
 
 export default function ProfilePresenter() {
     const { loading, error } = useSelector((state) => state.profile)
@@ -29,6 +30,7 @@ export default function ProfilePresenter() {
                 <Card>
                     <InfoPresenter />
                     <CommentsPresenter />
+                    <TipPresenter />
                 </Card>
             )}
         </Box>
