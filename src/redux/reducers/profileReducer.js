@@ -421,7 +421,7 @@ export function deleteTip(tipId) {
             const tip = state.tips.find((c) => c.id === tipId)
 
             if (!tipId || !tip) {
-                throw new Error("Comment id not found")
+                throw new Error("Tip id not found")
             }
 
             dispatch({

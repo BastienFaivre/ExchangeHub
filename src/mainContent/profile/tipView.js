@@ -1,5 +1,6 @@
 import DeleteIcon from "@mui/icons-material/Delete"
 import MoreVertIcon from "@mui/icons-material/MoreVert"
+import AddIcon from "@mui/icons-material/Add"
 import {
     CardContent,
     Card,
@@ -23,7 +24,7 @@ export default function ProfileTipsView(props) {
         }
 
         return (
-            <Grid item xs={12} md={12} lg={6} key={tip.id}>
+            <Grid item xs={12} md={12} lg={6} key={tip.title}>
                 <Card
                     variant="outlined"
                     sx={{ backgroundColor: "grey.100", height: 1 }}
@@ -47,10 +48,26 @@ export default function ProfileTipsView(props) {
             </Grid>
         )
     }
+
+    function addNewTipACB() {
+        props.editTip()
+    }
     return (
         <CardContent>
             <Card variant="outlined" sx={{ width: "100%", p: "30px" }}>
-                <CardHeader title="My tips" />
+                <CardHeader
+                    title="My tips"
+                    action={
+                        <Button
+                            onClick={addNewTipACB}
+                            sx={{ margin: 3 }}
+                            variant="contained"
+                            startIcon={<AddIcon />}
+                        >
+                            Add Tip
+                        </Button>
+                    }
+                />
                 <Grid container spacing={2}>
                     {props.tips.map(tipCB)}
                 </Grid>

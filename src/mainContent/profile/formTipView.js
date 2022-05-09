@@ -16,7 +16,7 @@ export default function FormTipsView(props) {
 
     function cancelTipFormChangesACB(event) {
         event.preventDefault()
-        props.concelChanges()
+        props.cancelTipChanges()
     }
 
     function saveTipFormChangedACB(event) {
