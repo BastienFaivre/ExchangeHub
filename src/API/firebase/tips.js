@@ -74,7 +74,7 @@ export async function removeTip(tipId) {
         if (!userId) {
             throw new Error("User needs to be logged in")
         }
-        const tipRef = doc(db, `comments/${tipId}`)
+        const tipRef = doc(db, `tips/${tipId}`)
         await deleteDoc(tipRef)
     } catch (e) {
         console.error(e.message)

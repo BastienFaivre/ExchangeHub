@@ -1,5 +1,4 @@
 import DeleteIcon from "@mui/icons-material/Delete"
-import { PropaneSharp } from "@mui/icons-material"
 import MoreVertIcon from "@mui/icons-material/MoreVert"
 import {
     CardContent,
@@ -10,7 +9,6 @@ import {
     Button,
     IconButton,
 } from "@mui/material"
-import styles from "../../MUI/styles/styles"
 
 export default function ProfileTipsView(props) {
     function tipCB(tip) {
@@ -41,13 +39,9 @@ export default function ProfileTipsView(props) {
                     />
                     <CardContent>{tip.description}</CardContent>
                     <CardActions>
-                        <Grid container spacing={2}>
-                            <Grid item xs={2}>
-                                <IconButton onClick={deleteTipACB}>
-                                    <DeleteIcon />
-                                </IconButton>
-                            </Grid>
-                        </Grid>
+                        <IconButton onClick={deleteTipACB}>
+                            <DeleteIcon />
+                        </IconButton>
                     </CardActions>
                 </Card>
             </Grid>
@@ -55,11 +49,7 @@ export default function ProfileTipsView(props) {
     }
     return (
         <CardContent>
-            <Card
-                variant="oulined"
-                style={{ padding: "30px" }}
-                sx={{ width: "100%", p: 2 }}
-            >
+            <Card variant="outlined" sx={{ width: "100%", p: "30px" }}>
                 <CardHeader title="My tips" />
                 <Grid container spacing={2}>
                     {props.tips.map(tipCB)}

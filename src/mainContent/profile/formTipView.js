@@ -2,20 +2,13 @@ import {
     Grid,
     Box,
     Button,
-    TextareaAutosize,
-    Typography,
     Card,
     CardContent,
     TextField,
     CardHeader,
-    Stack,
-    Select,
     MenuItem,
 } from "@mui/material"
 import { useState } from "react"
-import styles from "../../MUI/styles/styles"
-import CheckIcon from "@mui/icons-material/Check"
-import CloseIcon from "@mui/icons-material/Close"
 import { types as tipTypes } from "../../utils/tipTypes"
 
 export default function FormTipsView(props) {
@@ -28,7 +21,7 @@ export default function FormTipsView(props) {
 
     function saveTipFormChangedACB(event) {
         event.preventDefault()
-        props.saveTipChanges()
+        props.saveTipChanges(props.tipFormInputs.id)
     }
 
     function handleTipFormInputChangeACB(event) {
@@ -111,6 +104,7 @@ export default function FormTipsView(props) {
                                             style={{ marginRight: "5px" }}
                                             color="primary"
                                             variant="outlined"
+                                            onClick={cancelTipFormChangesACB}
                                         >
                                             close
                                         </Button>
@@ -120,6 +114,7 @@ export default function FormTipsView(props) {
                                             style={{ marginLeft: "5px" }}
                                             color="primary"
                                             variant="contained"
+                                            onClick={saveTipFormChangedACB}
                                         >
                                             save
                                         </Button>
