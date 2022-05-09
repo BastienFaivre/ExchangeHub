@@ -59,7 +59,8 @@ export async function saveTip(tip) {
             throw new Error("User needs to be logged in")
         }
 
-        await addDoc(collection(db, "tips"), { ...tip, userId })
+        const { id } = await addDoc(collection(db, "tips"), { ...tip, userId })
+        return id
     } catch (e) {
         console.error(e.message)
         throw e

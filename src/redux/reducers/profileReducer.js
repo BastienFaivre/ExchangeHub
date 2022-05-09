@@ -347,38 +347,6 @@ export function editComment() {
         }
     }
 }
-export function editTip() {
-    return async function editTipThunk(dispatch, getState) {
-        try {
-            dispatch({
-                type: "PROFILE_FETCH_DATA",
-            })
-
-            const state = getState().profile
-
-            const tip = state.form.tip
-
-            if (!tip.id) {
-                throw new Error("No tip id")
-            }
-
-            await updateTip(tip)
-
-            const formTip = getState().profile.form.tip
-
-            if (isObjectEqual(formTip, tip)) {
-                dispatch({
-                    type: "PROFILE_UPDATE_TIP",
-                    payload: { formTipEdited: formTip },
-                })
-            }
-        } catch (e) {
-            dispatch({
-                type: "PROFILE_SET_ERROR",
-            })
-        }
-    }
-}
 
 export function deleteComment(commentId) {
     return async function deleteCommentThunk(dispatch, getState) {
@@ -438,6 +406,39 @@ export function deleteTip(tipId) {
     }
 }
 
+export function editTip() {
+    return async function editTipThunk(dispatch, getState) {
+        try {
+            dispatch({
+                type: "PROFILE_FETCH_DATA",
+            })
+
+            const state = getState().profile
+
+            const tip = state.form.tip
+
+            if (!tip.id) {
+                throw new Error("No tip id")
+            }
+
+            await updateTip(tip)
+
+            const formTip = getState().profile.form.tip
+
+            if (isObjectEqual(formTip, tip)) {
+                dispatch({
+                    type: "PROFILE_UPDATE_TIP",
+                    payload: { formTipEdited: formTip },
+                })
+            }
+        } catch (e) {
+            dispatch({
+                type: "PROFILE_SET_ERROR",
+            })
+        }
+    }
+}
+
 export function addTip() {
     return async function addTipThunk(dispatch, getState) {
         try {
@@ -449,14 +450,18 @@ export function addTip() {
 
             const tip = state.form.tip
 
-            await saveTip(tip)
+            // add the author name to the comment
+            tip.forname = state.info.forname
+            tip.lastname = state.info.lastname
+
+            const tipId = await saveTip(tip)
 
             const formTip = getState().profile.form.tip
 
             if (isObjectEqual(formTip, tip)) {
                 dispatch({
                     type: "PROFILE_ADD_TIP",
-                    payload: { formTip },
+                    payload: { formTip: { ...formTip, id: tipId } },
                 })
             }
         } catch (e) {

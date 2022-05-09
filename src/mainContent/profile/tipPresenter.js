@@ -18,7 +18,6 @@ export default function TipPresenter() {
     const [editTip, setEditTip] = useState(false)
 
     function setEditTipACB(tipId) {
-        console.log(tipId)
         dispatch(editFormTip(tips.find((tip) => tip.id === tipId ?? {})))
         setEditTip(true)
     }
