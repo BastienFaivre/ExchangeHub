@@ -92,7 +92,7 @@ Finally, the previous exchange students have the possibility to write reviews an
 
 In our project we used MUI, which is a React UI library that gives us access to already stylised components according to a theme we choose. This theme is present in MUI/theme.js where we simply overwrite the main and secondary colors.
 
-We also used [React Router](https://reactrouter.com/docs/en/v6) for a better user experience, allowing them to navigate through the web page while still maintaining all the advantages of a SPA. 
+We also used [React Router](https://reactrouter.com/docs/en/v6) for a better user experience, allowing them to navigate through the web page while still maintaining all the advantages of a SPA.
 
 With redux and redux-thunk, we created reducers that allow us to interact with the state (which is our model). We also define functions that allow us to make asynchronous API calls and update our model when these are completed.
 
@@ -108,7 +108,7 @@ cd ExchangeHub
 npm install
 ```
 
-To be able to connect to the firebase Database, you need to add the following text in *src/config/firebaseConfig.js*:
+To be able to connect to the firebase Database, you need to add the following text in _src/config/firebaseConfig.js_:
 
 ```js
 export default {
