@@ -6,7 +6,6 @@ import {
     query,
     where,
     getDocs,
-    limit,
     updateDoc,
     getDoc,
 } from "firebase/firestore"
