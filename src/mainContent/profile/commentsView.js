@@ -11,6 +11,7 @@ import Card from "@mui/material/Card"
 import Rating from "@mui/material/Rating"
 import MoreVertIcon from "@mui/icons-material/MoreVert"
 import DeleteIcon from "@mui/icons-material/Delete"
+import { Link } from "react-router-dom"
 
 export default function ProfileCommentsView(props) {
     function commentCB(comment) {
@@ -22,6 +23,10 @@ export default function ProfileCommentsView(props) {
         function deleteCommentACB(event) {
             event.preventDefault()
             props.deleteComment(comment.id)
+        }
+
+        function commentClickedACB() {
+            props.commentClicked(comment.courseCode)
         }
 
         return (
@@ -37,29 +42,42 @@ export default function ProfileCommentsView(props) {
                                 Edit
                             </Button>
                         }
-                        title={comment.courseCode}
-                        subheader={comment.title}
+                        title={"(" + comment.courseCode + ") " + comment.title}
                     />
                     <CardContent>
-                        <Rating
-                            value={Number(comment.rating) ?? 0}
-                            readOnly
-                            precision={0.5}
-                            size="small"
-                            sx={{ mt: 2 }}
-                        />
-                        <Typography gutterBottom variant="h5" component="div">
-                            {comment.difficulty &&
-                                `Difficulty: ${comment.difficulty}`}
-                        </Typography>
-                        <Typography variant="body2" color="text.secondary">
-                            {comment.description}
-                        </Typography>
+                        <Grid container spacing={2}>
+                            <Grid item xs={6}>
+                                Difficulty: {comment.difficulty}
+                            </Grid>
+                            <Grid item xs={6} sx={{ textAlign: "end" }}>
+                                <Rating
+                                    value={Number(comment.rating) ?? 0}
+                                    readOnly
+                                    precision={0.5}
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                {comment.description}
+                            </Grid>
+                        </Grid>
                     </CardContent>
                     <CardActions>
-                        <IconButton onClick={deleteCommentACB}>
-                            <DeleteIcon />
-                        </IconButton>
+                        <Grid container spacing={2}>
+                            <Grid item xs={2}>
+                                <IconButton onClick={deleteCommentACB}>
+                                    <DeleteIcon />
+                                </IconButton>
+                            </Grid>
+                            <Grid item xs={10} sx={{ textAlign: "end" }}>
+                                <Button
+                                    onClick={commentClickedACB}
+                                    to={`/courses/${comment.courseCode}`}
+                                    component={Link}
+                                >
+                                    View all comments for this course
+                                </Button>
+                            </Grid>
+                        </Grid>
                     </CardActions>
                 </Card>
             </Grid>

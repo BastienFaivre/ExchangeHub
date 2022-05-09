@@ -33,7 +33,7 @@ export default function FormCommentsView(props) {
             <Card
                 variant="outlined"
                 style={{ padding: "30px" }}
-                sx={{ width: "100%", m: 2 }}
+                sx={{ width: "100%" }}
             >
                 <CardHeader
                     action={
