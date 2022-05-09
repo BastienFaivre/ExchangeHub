@@ -41,7 +41,7 @@ export default function CommentsPresenter() {
             )
             setEditComment(true)
         }
-    }, [courses])
+    }, [])
 
     function setEditCommentsACB(courseCode) {
         // initialize the form in redux and in the state
