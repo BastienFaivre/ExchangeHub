@@ -1,4 +1,4 @@
-import { Button, Card, CardContent, Grid } from "@mui/material"
+import { Button, Card, CardActions, CardContent, Grid } from "@mui/material"
 import { Link } from "react-router-dom"
 
 export default function TipsResultsView(props) {
@@ -11,7 +11,12 @@ export default function TipsResultsView(props) {
             <Grid item xs={12} md={12} lg={6} key={tip.id}>
                 <Card
                     variant="outlined"
-                    sx={{ backgroundColor: "grey.100", height: "100%" }}
+                    sx={{
+                        backgroundColor: "grey.100",
+                        height: "100%",
+                        display: "flex",
+                        flexDirection: "column",
+                    }}
                 >
                     <CardContent>
                         <Grid container>
@@ -28,19 +33,21 @@ export default function TipsResultsView(props) {
                                     {tip.description}
                                 </Grid>
                             </Grid>
-                            <Grid container item>
-                                <Grid item xs={12} sx={{ textAlign: "end" }}>
-                                    <Button
-                                        onClick={tipClickedACB}
-                                        to={`/students/${tip.userId}`}
-                                        component={Link}
-                                    >
-                                        View author profile
-                                    </Button>
-                                </Grid>
-                            </Grid>
                         </Grid>
                     </CardContent>
+                    <CardActions sx={{ marginTop: "auto" }}>
+                        <Grid container>
+                            <Grid item xs={12} sx={{ textAlign: "end" }}>
+                                <Button
+                                    onClick={tipClickedACB}
+                                    to={`/students/${tip.userId}`}
+                                    component={Link}
+                                >
+                                    View author profile
+                                </Button>
+                            </Grid>
+                        </Grid>
+                    </CardActions>
                 </Card>
             </Grid>
         )

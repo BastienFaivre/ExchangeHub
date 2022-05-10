@@ -11,7 +11,12 @@ export default function StudentsResultsView(props) {
             <Grid item xs={12} md={12} lg={6} key={student.userId}>
                 <Card
                     variant="outlined"
-                    sx={{ backgroundColor: "grey.100", height: "100%" }}
+                    sx={{
+                        backgroundColor: "grey.100",
+                        height: "100%",
+                        display: "flex",
+                        flexDirection: "column",
+                    }}
                 >
                     <CardContent>
                         <Grid container>
@@ -33,14 +38,18 @@ export default function StudentsResultsView(props) {
                             </Grid>
                         </Grid>
                     </CardContent>
-                    <CardActions>
-                        <Button
-                            onClick={studentClickedACB}
-                            to={`${student.userId}`}
-                            component={Link}
-                        >
-                            Visit Profile
-                        </Button>
+                    <CardActions sx={{ marginTop: "auto" }}>
+                        <Grid container>
+                            <Grid item xs={12} sx={{ textAlign: "end" }}>
+                                <Button
+                                    onClick={studentClickedACB}
+                                    to={`${student.userId}`}
+                                    component={Link}
+                                >
+                                    Visit Profile
+                                </Button>
+                            </Grid>
+                        </Grid>
                     </CardActions>
                 </Card>
             </Grid>

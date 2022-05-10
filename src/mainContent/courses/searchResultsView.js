@@ -16,7 +16,12 @@ export default function SearchResultsView(props) {
             <Grid item xs={12} md={12} lg={6} key={res.courseCode}>
                 <Card
                     variant="outlined"
-                    sx={{ backgroundColor: "grey.100", height: "100%" }}
+                    sx={{
+                        backgroundColor: "grey.100",
+                        height: "100%",
+                        display: "flex",
+                        flexDirection: "column",
+                    }}
                 >
                     <CardContent>
                         <Grid container>
@@ -28,14 +33,19 @@ export default function SearchResultsView(props) {
                             </Grid>
                         </Grid>
                     </CardContent>
-                    <CardActions>
-                        <Button
-                            onClick={courseClickedACB}
-                            to={`${res.courseCode}`}
-                            component={Link}
-                        >
-                            More Information
-                        </Button>
+                    <CardActions sx={{ marginTop: "auto" }}>
+                        <Grid container>
+                            <Grid item xs={12} sx={{ textAlign: "end" }}>
+                                {" "}
+                                <Button
+                                    onClick={courseClickedACB}
+                                    to={`${res.courseCode}`}
+                                    component={Link}
+                                >
+                                    More Information
+                                </Button>
+                            </Grid>
+                        </Grid>
                     </CardActions>
                 </Card>
             </Grid>
