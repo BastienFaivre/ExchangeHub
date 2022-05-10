@@ -14,7 +14,10 @@ export default function SearchResultsView(props) {
 
         return (
             <Grid item xs={12} md={12} lg={6} key={res.courseCode}>
-                <Card variant="outlined" sx={{ backgroundColor: "grey.100", height: "100%" }}>
+                <Card
+                    variant="outlined"
+                    sx={{ backgroundColor: "grey.100", height: "100%" }}
+                >
                     <CardContent>
                         <Grid container>
                             <Grid item xs={10}>
