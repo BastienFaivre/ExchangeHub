@@ -2,8 +2,6 @@ import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { fetchStudentProfile } from "../../redux/reducers/profileReducer"
 import Card from "@mui/material/Card"
-import { CircularProgress } from "@mui/material"
-
 import InfoPresenter from "./infoPresenter"
 import CommentsPresenter from "./commentsPresenter"
 import { Box } from "@mui/system"

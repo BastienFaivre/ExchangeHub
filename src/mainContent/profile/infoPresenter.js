@@ -1,6 +1,6 @@
 import { getAuth, signOut } from "firebase/auth"
 import ProfileInfoView from "./infoView"
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { editFormInfo, saveInfo } from "../../redux/reducers/profileReducer"
 import { schools } from "../../utils/departments"

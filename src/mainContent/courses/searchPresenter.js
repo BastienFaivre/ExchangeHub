@@ -2,8 +2,6 @@ import SearchFormView from "./searchFormView"
 import SearchResultsView from "./searchResultsView"
 import { useDispatch, useSelector } from "react-redux"
 import Box from "@mui/material/Box"
-import Typography from "@mui/material/Typography"
-import { CircularProgress } from "@mui/material"
 import {
     saveCourseCode,
     saveFilterSearchCourses,
