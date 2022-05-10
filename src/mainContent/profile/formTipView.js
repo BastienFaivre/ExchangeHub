@@ -14,7 +14,6 @@ import CheckIcon from "@mui/icons-material/Check"
 import CloseIcon from "@mui/icons-material/Close"
 
 export default function FormTipsView(props) {
-
     function cancelTipFormChangesACB(event) {
         event.preventDefault()
         props.cancelTipChanges()
