@@ -2,9 +2,7 @@ import {
     Button,
     CardHeader,
     Grid,
-    Typography,
     TextField,
-    Select,
     MenuItem,
     Box,
 } from "@mui/material"
@@ -114,7 +112,7 @@ export default function FormCommentsView(props) {
                                             style={{ marginRight: "5px" }}
                                             color="primary"
                                             variant="outlined"
-                                            onClick={saveChangesACB}
+                                            onClick={cancelChangesACB}
                                         >
                                             <CloseIcon />
                                             Cancel changes
