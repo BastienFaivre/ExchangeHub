@@ -1,6 +1,6 @@
 import { getAuth, signOut } from "firebase/auth"
 import ProfileInfoView from "./infoView"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { editFormInfo, saveInfo } from "../../redux/reducers/profileReducer"
 import { schools } from "../../utils/departments"
@@ -34,9 +34,8 @@ export default function InfoPresenter() {
     }
 
     function saveInfoChangesACB() {
-        dispatch(saveInfo()).then(function resetEditModeACB() {
-            setEditInfo(false)
-        })
+        dispatch(saveInfo())
+        setEditInfo(false)
     }
 
     function setFormInputACB(name, value) {
@@ -47,7 +46,7 @@ export default function InfoPresenter() {
 
     return (
         <Box>
-            {editInfo && (
+            {editInfo ? (
                 <ProfileInfoFormView
                     formInputs={form.info}
                     setFormInput={setFormInputACB}
@@ -57,8 +56,7 @@ export default function InfoPresenter() {
                     universities={universities}
                     departments={departments}
                 />
-            )}
-            {!editInfo && (
+            ) : (
                 <ProfileInfoView
                     profile={info}
                     logout={logoutACB}
