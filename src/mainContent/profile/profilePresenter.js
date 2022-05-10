@@ -20,19 +20,19 @@ export default function ProfilePresenter() {
 
     return (
         <Box>
-            {loading && (
-                <Box sx={{ width: "fit-content", mx: "auto", padding: "20px" }}>
-                    <CircularProgress color="primary" m="auto" />
-                </Box>
-            )}
-            {error && <p>Error</p>}
-            {!loading && !error && (
+            {!loading && !error ? (
                 <Card>
                     <InfoPresenter />
                     <CommentsPresenter />
                     <TipPresenter />
                 </Card>
-            )}
+            ) : loading && !error ? (
+                <Box sx={{ width: "fit-content", mx: "auto", padding: "20px" }}>
+                    <CircularProgress color="primary" m="auto" />
+                </Box>
+            ) : !loading && error ? (
+                <p>Error</p>
+            ) : null}
         </Box>
     )
 }
