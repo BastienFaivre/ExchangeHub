@@ -26,10 +26,7 @@ export default function TipsResultsView(props) {
                                 </Grid>
                             </Grid>
                             <Grid container item sx={{ paddingBottom: "10px" }}>
-                                <Grid item xs={6}>
-                                    Author: {tip.forname} {tip.lastname}
-                                </Grid>
-                                <Grid item xs={6} sx={{ textAlign: "end" }}>
+                                <Grid item xs={12} sx={{ textAlign: "end" }}>
                                     <Button
                                         onClick={tipClickedACB}
                                         to={`/students/${tip.userId}`}
