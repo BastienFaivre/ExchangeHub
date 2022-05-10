@@ -89,6 +89,17 @@ export function coursesReducer(state = initialState, action) {
                     comments: comments,
                 },
             }
+        case "COURSE_RESET_COURSE_DETAILS":
+            return {
+                ...state,
+                courseDetails: {
+                    loading: false,
+                    error: false,
+                    courseCode: null,
+                    data: {},
+                    comments: [],
+                },
+            }
 
         default:
             return state
@@ -159,5 +170,13 @@ export function saveCourseCode(courseCode) {
         } catch (e) {
             dispatch({ type: "COURSE_SET_ERROR_DETAILS" })
         }
+    }
+}
+
+export function resetCourseDetails() {
+    return async function resetCourseDetailsThunk(dispatch) {
+        dispatch({
+            type: "COURSE_RESET_COURSE_DETAILS",
+        })
     }
 }

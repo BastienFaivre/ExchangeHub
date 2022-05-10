@@ -2,7 +2,10 @@ import { Box } from "@mui/material"
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useLocation, useNavigate } from "react-router-dom"
-import { saveCourseCode } from "../../redux/reducers/coursesReducer"
+import {
+    resetCourseDetails,
+    saveCourseCode,
+} from "../../redux/reducers/coursesReducer"
 import {
     editFormComment,
     addComment,
@@ -61,6 +64,7 @@ export default function CommentsPresenter() {
 
     function saveCommentEditsACB(courseCode) {
         navigate("/profile")
+        dispatch(resetCourseDetails())
         if (courses.find((course) => course.courseCode === courseCode)) {
             dispatch(updateComment())
         } else {
@@ -69,6 +73,7 @@ export default function CommentsPresenter() {
     }
 
     function deleteCommentACB(commentId) {
+        dispatch(resetCourseDetails())
         dispatch(deleteComment(commentId))
     }
 
