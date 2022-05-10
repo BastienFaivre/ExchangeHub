@@ -1,8 +1,6 @@
 import SearchFormView from "./searchFormView"
-
 import SearchResultsView from "./searchResultsView"
 import { useDispatch, useSelector } from "react-redux"
-
 import Box from "@mui/material/Box"
 import Typography from "@mui/material/Typography"
 import { CircularProgress } from "@mui/material"
@@ -10,9 +8,9 @@ import {
     saveCourseCode,
     saveFilterSearchCourses,
 } from "../../redux/reducers/coursesReducer"
-
 import { useEffect, useState } from "react"
 
+// messages used for a better user experience
 const RESULTS_MESSAGE = {
     emptySearchFilter: `Enter a text pattern ("web", "machine learning", etc...) or choose a department and school to get started!`,
     emptyResults: "No courses matching the specified search terms were found",
