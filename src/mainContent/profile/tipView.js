@@ -27,7 +27,12 @@ export default function ProfileTipsView(props) {
             <Grid item xs={12} md={12} lg={6} key={tip.title}>
                 <Card
                     variant="outlined"
-                    sx={{ backgroundColor: "grey.100", height: 1 }}
+                    sx={{
+                        backgroundColor: "grey.100",
+                        height: 1,
+                        display: "flex",
+                        flexDirection: "column",
+                    }}
                 >
                     <CardHeader
                         action={
@@ -39,7 +44,7 @@ export default function ProfileTipsView(props) {
                         title={tip.title + " (" + tip.type + ")"}
                     />
                     <CardContent>{tip.description}</CardContent>
-                    <CardActions>
+                    <CardActions sx={{ marginTop: "auto" }}>
                         <IconButton onClick={deleteTipACB}>
                             <DeleteIcon />
                         </IconButton>

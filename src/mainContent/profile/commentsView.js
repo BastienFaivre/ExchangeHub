@@ -32,7 +32,12 @@ export default function ProfileCommentsView(props) {
             <Grid item xs={12} md={12} lg={6} key={comment.id}>
                 <Card
                     variant="outlined"
-                    sx={{ backgroundColor: "grey.100", height: 1 }}
+                    sx={{
+                        backgroundColor: "grey.100",
+                        height: 1,
+                        display: "flex",
+                        flexDirection: "column",
+                    }}
                 >
                     <CardHeader
                         action={
@@ -60,7 +65,7 @@ export default function ProfileCommentsView(props) {
                             </Grid>
                         </Grid>
                     </CardContent>
-                    <CardActions>
+                    <CardActions sx={{ marginTop: "auto" }}>
                         <Grid container spacing={2}>
                             <Grid item xs={2}>
                                 <IconButton onClick={deleteCommentACB}>
