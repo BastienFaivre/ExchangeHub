@@ -60,7 +60,6 @@ export default function ProfileTipsView(props) {
                     action={
                         <Button
                             onClick={addNewTipACB}
-                            sx={{ margin: 3 }}
                             variant="contained"
                             startIcon={<AddIcon />}
                         >
