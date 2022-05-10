@@ -9,14 +9,14 @@ export default function TipsResultsView(props) {
 
         return (
             <Grid item xs={12} md={12} lg={6} key={tip.title}>
-                <Card variant="outlined" sx={{ backgroundColor: "grey.100" }}>
+                <Card variant="outlined" sx={{ backgroundColor: "grey.100", height: "100%" }}>
                     <CardContent>
                         <Grid container>
                             <Grid container item sx={{ paddingBottom: "10px" }}>
-                                <Grid item xs={10} sx={{ fontWeight: "bold" }}>
+                                <Grid item xs={9} sx={{ fontWeight: "bold" }}>
                                     {tip.title}
                                 </Grid>
-                                <Grid item xs={2} sx={{ textAlign: "end" }}>
+                                <Grid item xs={3} sx={{ textAlign: "end" }}>
                                     {tip.type}
                                 </Grid>
                             </Grid>
@@ -25,7 +25,7 @@ export default function TipsResultsView(props) {
                                     {tip.description}
                                 </Grid>
                             </Grid>
-                            <Grid container item sx={{ paddingBottom: "10px" }}>
+                            <Grid container item>
                                 <Grid item xs={12} sx={{ textAlign: "end" }}>
                                     <Button
                                         onClick={tipClickedACB}
