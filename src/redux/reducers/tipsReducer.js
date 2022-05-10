@@ -52,14 +52,17 @@ export function tipsReducer(state = initialState, action) {
 }
 
 export function getTips() {
-    return async function getTipsThunk(dispatch) {
+    return async function getTipsThunk(dispatch, getState) {
         try {
-            dispatch({
-                type: "TIPS_SET_SEARCH_FILTER",
-                payload: { searchFilter: initialState.searchFilter },
-            })
+            let state = getState()
+            const searchFilter = state.tips.searchFilter
 
-            const results = await getAllTips()
+            let results
+            if (searchFilter.type === "") {
+                results = await getAllTips()
+            } else {
+                results = await getTipsByType(searchFilter.type)
+            }
 
             dispatch({
                 type: "TIPS_SET_RESULTS",

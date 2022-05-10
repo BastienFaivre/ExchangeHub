@@ -51,6 +51,9 @@ export default function TipsSearchPresenter() {
     )
 
     useEffect(function retrieveTipsACB() {
+        // this call is necessary since if the user just add a new tip,
+        // then the search results need to update to show the new tip
+        // Note: it updated resulted tips based on the saved search filters
         dispatch(getTips())
     }, [])
 
