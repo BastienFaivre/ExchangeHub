@@ -236,11 +236,11 @@ export function fetchStudentProfile() {
                 type: "PROFILE_FETCH_DATA",
             })
 
-            const studentProfile = await getStudentProfile()
-
-            const comments = await getCommentsForProfile()
-
-            const tips = await getTipsForProfile()
+            const [studentProfile, comments, tips] = await Promise.all([
+                getStudentProfile(),
+                getCommentsForProfile(),
+                getTipsForProfile(),
+            ])
 
             if (!studentProfile) {
                 await createUserProfile(initialState.info)
