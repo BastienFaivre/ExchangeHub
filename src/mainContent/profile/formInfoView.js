@@ -12,6 +12,8 @@ import Card from "@mui/material/Card"
 import Button from "@mui/material/Button"
 import CardHeader from "@mui/material/CardHeader"
 import ArticleIcon from "@mui/icons-material/Article"
+import CheckIcon from "@mui/icons-material/Check"
+import CloseIcon from "@mui/icons-material/Close"
 import AccountCircle from "@mui/icons-material/AccountCircle"
 
 export default function ProfileInfoFormView(props) {
@@ -96,20 +98,21 @@ export default function ProfileInfoFormView(props) {
                     />
                 }
                 action={
-                    <Grid sx={{ paddingTop: "35px" }}>
-                        <Button
-                            sx={{ margin: 3 }}
-                            variant="contained"
-                            onClick={saveInfoChangesACB}
-                            startIcon={<ArticleIcon />}
-                        >
-                            Save changes
-                        </Button>
+                    <Grid>
                         <Button
                             onClick={cancelInfoChangesACB}
-                            variant="contained"
+                            variant="outlined"
                         >
-                            Cancel
+                            <CloseIcon />
+                            Cancel changes
+                        </Button>
+                        <Button
+                            sx={{ margin: 2 }}
+                            variant="contained"
+                            onClick={saveInfoChangesACB}
+                        >
+                            <CheckIcon />
+                            Save changes
                         </Button>
                     </Grid>
                 }
