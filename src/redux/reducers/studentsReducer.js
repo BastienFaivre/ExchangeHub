@@ -103,6 +103,35 @@ export function studentsReducer(state = initialState, action) {
     }
 }
 
+export function getStudents() {
+    return async function getStudentsThunk(dispatch, getState) {
+        try {
+            let state = getState()
+            const searchFilter = state.students.searchFilter
+
+            // this call is just used to set the loading state
+            dispatch({
+                type: "STUDENTS_SET_SEARCH_FILTER",
+                payload: { searchFilter },
+            })
+
+            const results =
+                await getUsersByNationalityAndUniversityAndDepartment(
+                    searchFilter.nationality,
+                    searchFilter.university,
+                    searchFilter.department
+                )
+
+            dispatch({
+                type: "STUDENTS_SET_RESULTS",
+                payload: { results },
+            })
+        } catch (error) {
+            dispatch({ type: "STUDENTS_SET_ERROR" })
+        }
+    }
+}
+
 export function saveFilterSearchStudents(searchFilter) {
     return async function saveFilterSearchStudentsThunk(dispatch, getState) {
         try {
@@ -114,7 +143,7 @@ export function saveFilterSearchStudents(searchFilter) {
                     payload: { searchFilter },
                 })
 
-                let results =
+                const results =
                     await getUsersByNationalityAndUniversityAndDepartment(
                         searchFilter.nationality,
                         searchFilter.university,

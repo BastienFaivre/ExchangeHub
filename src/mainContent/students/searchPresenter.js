@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import {
     getStudentDetails,
+    getStudents,
     saveFilterSearchStudents,
 } from "../../redux/reducers/studentsReducer"
 import { schools } from "../../utils/departments"
@@ -66,6 +67,7 @@ export default function StudentsSearchPresenter() {
             setSearchNationality(searchFilter.nationality)
             setSearchUniversity(searchFilter.university)
             setSearchDepartment(searchFilter.department)
+            dispatch(getStudents())
         },
         [searchFilter]
     )
