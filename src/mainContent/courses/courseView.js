@@ -44,10 +44,7 @@ export default function CourseView(props) {
                             </Grid>
                         </Grid>
                         <Grid container item>
-                            <Grid item xs={6}>
-                                Author: {comment.forname} {comment.lastname}
-                            </Grid>
-                            <Grid item xs={6} sx={{ textAlign: "end" }}>
+                            <Grid item xs={12} sx={{ textAlign: "end" }}>
                                 <Button
                                     onClick={commentClickedACB}
                                     to={`/students/${comment.userId}`}
