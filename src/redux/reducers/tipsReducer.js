@@ -51,6 +51,26 @@ export function tipsReducer(state = initialState, action) {
     }
 }
 
+export function getTips() {
+    return async function getTipsThunk(dispatch) {
+        try {
+            dispatch({
+                type: "TIPS_SET_SEARCH_FILTER",
+                payload: { searchFilter: initialState.searchFilter },
+            })
+
+            const results = await getAllTips()
+
+            dispatch({
+                type: "TIPS_SET_RESULTS",
+                payload: { results },
+            })
+        } catch (e) {
+            dispatch({ type: "TIPS_SET_ERROR" })
+        }
+    }
+}
+
 export function saveFilterSearchTips(searchFilter) {
     return async function saveFilterSearchTipsThunk(dispatch, getState) {
         try {
@@ -72,7 +92,7 @@ export function saveFilterSearchTips(searchFilter) {
                 // to avoid race condition
                 state = getState()
 
-                if (Object.is(searchFilter, state.tips.searchFilter)) {
+                if (isObjectEqual(searchFilter, state.tips.searchFilter)) {
                     dispatch({
                         type: "TIPS_SET_RESULTS",
                         payload: { results },

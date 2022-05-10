@@ -10,6 +10,7 @@ import { nationalities } from "../../utils/nationalities"
 import { universities } from "../../utils/universities"
 import StudentsSearchFormView from "./searchFormView"
 import StudentsResultsView from "./searchResultsView"
+import LoadingErrorHandler from "../LoadingErrorHandler"
 
 export default function StudentsSearchPresenter() {
     const dispatch = useDispatch()
@@ -82,26 +83,16 @@ export default function StudentsSearchPresenter() {
                 universities={universities}
                 departments={schools}
             />
-            {data.length > 0 && (
+            <LoadingErrorHandler
+                error={error || data.length === 0}
+                loading={loading}
+                errorMessage="No students matching the specified search type"
+            >
                 <StudentsResultsView
                     students={data}
                     studentClicked={studentClickedACB}
                 />
-            )}
-            {data.length === 0 && !loading && (
-                <Typography
-                    variant="h5"
-                    sx={{ padding: "20px", textAlign: "center" }}
-                >
-                    No students matching the specified search type
-                </Typography>
-            )}
-            {loading && (
-                <Box sx={{ width: "fit-content", mx: "auto", padding: "20px" }}>
-                    <CircularProgress color="primary" m="auto" />
-                </Box>
-            )}
-            {error && <p>Error</p>}
+            </LoadingErrorHandler>
         </Box>
     )
 }

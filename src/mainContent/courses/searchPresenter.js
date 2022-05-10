@@ -12,6 +12,7 @@ import {
 } from "../../redux/reducers/coursesReducer"
 
 import { useEffect, useState } from "react"
+import LoadingErrorHandler from "../LoadingErrorHandler"
 
 const RESULTS_MESSAGE = {
     emptySearchFilter: `Enter a text pattern ("web", "machine learning", etc...) or choose a department and school to get started!`,
@@ -111,26 +112,16 @@ export default function SearchPresenter() {
                 searchDepartment={searchDepartment}
                 setSearchDepartment={departmentChangedACB}
             />
-            {data.length > 0 && (
+            <LoadingErrorHandler
+                error={error || data.length === 0}
+                loading={loading}
+                errorMessage={noResultsMessage}
+            >
                 <SearchResultsView
                     searchResults={data}
                     courseClicked={courseClickedACB}
                 />
-            )}
-            {data.length === 0 && !loading && (
-                <Typography
-                    variant="h5"
-                    sx={{ padding: "20px", textAlign: "center" }}
-                >
-                    {noResultsMessage}
-                </Typography>
-            )}
-            {loading && (
-                <Box sx={{ width: "fit-content", mx: "auto", padding: "20px" }}>
-                    <CircularProgress color="primary" m="auto" />
-                </Box>
-            )}
-            {error && <p>Error</p>}
+            </LoadingErrorHandler>
         </Box>
     )
 }

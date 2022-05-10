@@ -16,7 +16,7 @@ export default function CourseView(props) {
         return (
             <Card
                 variant="outlined"
-                key={comment.userId}
+                key={`${comment.userId}-${comment.id}`}
                 sx={{ backgroundColor: "grey.100" }}
             >
                 <CardContent>

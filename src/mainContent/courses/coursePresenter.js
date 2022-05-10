@@ -6,6 +6,7 @@ import { useEffect } from "react"
 import { useParams } from "react-router-dom"
 import { saveCourseCode } from "../../redux/reducers/coursesReducer"
 import { getStudentDetails } from "../../redux/reducers/studentsReducer"
+import LoadingErrorHandler from "../LoadingErrorHandler"
 
 export default function CoursePresenter() {
     const params = useParams()
@@ -27,19 +28,15 @@ export default function CoursePresenter() {
 
     return (
         <Box>
-            {Object.keys(data).length > 0 && (
-                <CourseView
-                    courseData={data}
-                    comments={comments}
-                    commentClicked={commentClickedACB}
-                />
-            )}
-            {loading && (
-                <Box sx={{ width: "fit-content", mx: "auto", padding: "20px" }}>
-                    <CircularProgress color="primary" m="auto" />
-                </Box>
-            )}
-            {error && <p>Error</p>}
+            <LoadingErrorHandler loading={loading} error={error}>
+                {Object.keys(data).length > 0 && (
+                    <CourseView
+                        courseData={data}
+                        comments={comments}
+                        commentClicked={commentClickedACB}
+                    />
+                )}
+            </LoadingErrorHandler>
         </Box>
     )
 }

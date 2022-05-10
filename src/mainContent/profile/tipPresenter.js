@@ -44,15 +44,14 @@ export default function TipPresenter() {
 
     return (
         <Box>
-            {editTip && (
+            {editTip ? (
                 <FormTipsView
                     tipFormInputs={form.tip}
                     setTipFormInput={setTipFormInputACB}
                     cancelTipChanges={cancelTipChangesACB}
                     saveTipChanges={saveTipEditACB}
                 />
-            )}
-            {!editTip && (
+            ) : (
                 <ProfileTipsView
                     tips={tips}
                     editTip={setEditTipACB}

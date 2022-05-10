@@ -123,7 +123,7 @@ export function saveFilterSearchStudents(searchFilter) {
 
                 state = getState()
 
-                if (Object.is(searchFilter, state.students.searchFilter)) {
+                if (isObjectEqual(searchFilter, state.students.searchFilter)) {
                     dispatch({
                         type: "STUDENTS_SET_RESULTS",
                         payload: { results },
