@@ -8,7 +8,6 @@ import {
     CardHeader,
     MenuItem,
 } from "@mui/material"
-import { useState } from "react"
 import { types as tipTypes } from "../../utils/tipTypes"
 import CheckIcon from "@mui/icons-material/Check"
 import CloseIcon from "@mui/icons-material/Close"
