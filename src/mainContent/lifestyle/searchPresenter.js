@@ -3,10 +3,11 @@ import { Box } from "@mui/system"
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { getStudentDetails } from "../../redux/reducers/studentsReducer"
-import { saveFilterSearchTips } from "../../redux/reducers/tipsReducer"
+import { getTips, saveFilterSearchTips } from "../../redux/reducers/tipsReducer"
 import TipsSearchFormView from "./searchFormView"
 import TipsResultsView from "./searchResultsView"
 import { types } from "../../utils/tipTypes"
+import LoadingErrorHandler from "../LoadingErrorHandler"
 
 export default function TipsSearchPresenter() {
     const dispatch = useDispatch()
@@ -49,6 +50,10 @@ export default function TipsSearchPresenter() {
         [searchFilter]
     )
 
+    useEffect(function retrieveTipsACB() {
+        dispatch(getTips())
+    }, [])
+
     function containsSearchInputCB(tip) {
         return (
             searchInput === "" ||
@@ -69,23 +74,13 @@ export default function TipsSearchPresenter() {
                 setSearchType={typeChangedACB}
                 types={types}
             />
-            {tips.length > 0 && (
+            <LoadingErrorHandler
+                loading={loading}
+                error={error || tips.length === 0}
+                errorMessage="No tips matching the specified search type"
+            >
                 <TipsResultsView tips={tips} tipClicked={tipClickedACB} />
-            )}
-            {tips.length === 0 && !loading && (
-                <Typography
-                    variant="h5"
-                    sx={{ padding: "20px", textAlign: "center" }}
-                >
-                    No tips matching the specified search type
-                </Typography>
-            )}
-            {loading && (
-                <Box sx={{ width: "fit-content", mx: "auto", padding: "20px" }}>
-                    <CircularProgress color="primary" m="auto" />
-                </Box>
-            )}
-            {error && <p>Error</p>}
+            </LoadingErrorHandler>
         </Box>
     )
 }

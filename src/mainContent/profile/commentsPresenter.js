@@ -82,15 +82,14 @@ export default function CommentsPresenter() {
 
     return (
         <Box>
-            {editComment && (
+            {editComment ? (
                 <FormCommentsView
                     formInputs={form.course}
                     setFormInput={setFormInputACB}
                     cancelChanges={cancelCommentChangesACB}
                     saveChanges={saveCommentEditsACB}
                 />
-            )}
-            {!editComment && (
+            ) : (
                 <ProfileCommentsView
                     comments={courses}
                     editComment={setEditCommentsACB}

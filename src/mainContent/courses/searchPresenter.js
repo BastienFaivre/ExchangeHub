@@ -9,6 +9,7 @@ import {
     saveFilterSearchCourses,
 } from "../../redux/reducers/coursesReducer"
 import { useEffect, useState } from "react"
+import LoadingErrorHandler from "../LoadingErrorHandler"
 
 // messages used for a better user experience
 const RESULTS_MESSAGE = {
@@ -109,26 +110,16 @@ export default function SearchPresenter() {
                 searchDepartment={searchDepartment}
                 setSearchDepartment={departmentChangedACB}
             />
-            {data.length > 0 && (
+            <LoadingErrorHandler
+                error={error || data.length === 0}
+                loading={loading}
+                errorMessage={noResultsMessage}
+            >
                 <SearchResultsView
                     searchResults={data}
                     courseClicked={courseClickedACB}
                 />
-            )}
-            {data.length === 0 && !loading && (
-                <Typography
-                    variant="h5"
-                    sx={{ padding: "20px", textAlign: "center" }}
-                >
-                    {noResultsMessage}
-                </Typography>
-            )}
-            {loading && (
-                <Box sx={{ width: "fit-content", mx: "auto", padding: "20px" }}>
-                    <CircularProgress color="primary" m="auto" />
-                </Box>
-            )}
-            {error && <p>Error</p>}
+            </LoadingErrorHandler>
         </Box>
     )
 }

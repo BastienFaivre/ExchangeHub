@@ -8,6 +8,7 @@ import InfoPresenter from "./infoPresenter"
 import CommentsPresenter from "./commentsPresenter"
 import { Box } from "@mui/system"
 import TipPresenter from "./tipPresenter"
+import LoadingErrorHandler from "../LoadingErrorHandler"
 
 export default function ProfilePresenter() {
     const { loading, error } = useSelector((state) => state.profile)
@@ -20,19 +21,13 @@ export default function ProfilePresenter() {
 
     return (
         <Box>
-            {!loading && !error ? (
+            <LoadingErrorHandler loading={loading} error={error}>
                 <Card>
                     <InfoPresenter />
                     <CommentsPresenter />
                     <TipPresenter />
                 </Card>
-            ) : loading && !error ? (
-                <Box sx={{ width: "fit-content", mx: "auto", padding: "20px" }}>
-                    <CircularProgress color="primary" m="auto" />
-                </Box>
-            ) : !loading && error ? (
-                <p>Error</p>
-            ) : null}
+            </LoadingErrorHandler>
         </Box>
     )
 }
