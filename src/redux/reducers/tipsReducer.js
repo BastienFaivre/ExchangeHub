@@ -57,6 +57,12 @@ export function getTips() {
             let state = getState()
             const searchFilter = state.tips.searchFilter
 
+            // this call is just used to set the loading state
+            dispatch({
+                type: "TIPS_SET_SEARCH_FILTER",
+                payload: { searchFilter },
+            })
+
             let results
             if (searchFilter.type === "") {
                 results = await getAllTips()

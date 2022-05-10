@@ -8,7 +8,7 @@ export default function TipsResultsView(props) {
         }
 
         return (
-            <Grid item xs={12} md={12} lg={6} key={tip.title}>
+            <Grid item xs={12} md={12} lg={6} key={tip.id}>
                 <Card
                     variant="outlined"
                     sx={{ backgroundColor: "grey.100", height: "100%" }}

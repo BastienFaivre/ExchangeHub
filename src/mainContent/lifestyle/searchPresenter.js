@@ -42,19 +42,16 @@ export default function TipsSearchPresenter() {
     }
 
     useEffect(
-        function retrieveSearchParametersACB() {
+        function retrieveSearchParametersAndTipsACB() {
             setSearchInput(searchFilter.text_pattern)
             setSearchType(searchFilter.type)
+            // this call is necessary to update the search results since
+            // potential new results could have been added since the last search
+            // Note: it updated resulted tips based on the saved search filters
+            dispatch(getTips())
         },
         [searchFilter]
     )
-
-    useEffect(function retrieveTipsACB() {
-        // this call is necessary since if the user just add a new tip,
-        // then the search results need to update to show the new tip
-        // Note: it updated resulted tips based on the saved search filters
-        dispatch(getTips())
-    }, [])
 
     function containsSearchInputCB(tip) {
         return (
