@@ -94,6 +94,25 @@ export default function StudentView(props) {
         )
     }
 
+    function showNameOrAnonymous() {
+        if (props.studentData.forname && props.studentData.lastname) {
+            return (
+                <Grid item xs={12}>
+                    <span style={{ fontWeight: "bold" }}>
+                        {props.studentData.forname} {props.studentData.lastname}
+                    </span>{" "}
+                    ({props.studentData.nationality})
+                </Grid>
+            )
+        } else {
+            return (
+                <Grid item xs={12}>
+                    Anonymous user
+                </Grid>
+            )
+        }
+    }
+
     return (
         <Grid container spacing={2}>
             <Grid container item sx={{ textAlign: "center" }}>
@@ -111,18 +130,18 @@ export default function StudentView(props) {
                     >
                         <CardContent>
                             <Grid container>
-                                <Grid item xs={12}>
-                                    <span style={{ fontWeight: "bold" }}>
-                                        {props.studentData.forname}{" "}
-                                        {props.studentData.lastname}
-                                    </span>{" "}
-                                    ({props.studentData.nationality})
+                                {showNameOrAnonymous()}
+                                <Grid item xs={12} lg={6}>
+                                    University:{" "}
+                                    {props.studentData.university
+                                        ? props.studentData.university
+                                        : "not specified"}
                                 </Grid>
                                 <Grid item xs={12} lg={6}>
-                                    University: {props.studentData.university}
-                                </Grid>
-                                <Grid item xs={12} lg={6}>
-                                    Field: {props.studentData.department}
+                                    Field:{" "}
+                                    {props.studentData.department
+                                        ? props.studentData.department
+                                        : "not specified"}
                                 </Grid>
                                 <Grid item xs={12}>
                                     Year: {props.studentData.year}

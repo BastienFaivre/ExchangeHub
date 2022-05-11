@@ -4,6 +4,7 @@ import {
     CardHeader,
     Grid,
     IconButton,
+    Typography,
 } from "@mui/material"
 import CardContent from "@mui/material/CardContent"
 import Card from "@mui/material/Card"
@@ -11,6 +12,7 @@ import Rating from "@mui/material/Rating"
 import MoreVertIcon from "@mui/icons-material/MoreVert"
 import DeleteIcon from "@mui/icons-material/Delete"
 import { Link } from "react-router-dom"
+import CommentsDisabledIcon from "@mui/icons-material/CommentsDisabled"
 
 export default function ProfileCommentsView(props) {
     function commentCB(comment) {
@@ -98,6 +100,14 @@ export default function ProfileCommentsView(props) {
                 <CardHeader title="My comments" />
                 <Grid container spacing={2}>
                     {props.comments.map(commentCB)}
+                    {props.comments.length === 0 && (
+                        <Grid item xs={12} sx={{ textAlign: "center" }}>
+                            <Typography variant="h5" sx={{ padding: "10px" }}>
+                                You haven't added any comments yet.
+                            </Typography>
+                            <CommentsDisabledIcon fontSize="large" />
+                        </Grid>
+                    )}
                 </Grid>
             </Card>
         </CardContent>

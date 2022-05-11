@@ -7,6 +7,25 @@ export default function StudentsResultsView(props) {
             props.studentClicked(student.userId)
         }
 
+        function showNameOrAnonymous() {
+            if (student.data.forname && student.data.lastname) {
+                return (
+                    <Grid item xs={8}>
+                        <span style={{ fontWeight: "bold" }}>
+                            {student.data.forname} {student.data.lastname}
+                        </span>{" "}
+                        ({student.data.nationality})
+                    </Grid>
+                )
+            } else {
+                return (
+                    <Grid item xs={8}>
+                        Anonymous user
+                    </Grid>
+                )
+            }
+        }
+
         return (
             <Grid item xs={12} md={12} lg={6} key={student.userId}>
                 <Card
@@ -20,13 +39,7 @@ export default function StudentsResultsView(props) {
                 >
                     <CardContent>
                         <Grid container>
-                            <Grid item xs={8}>
-                                <span style={{ fontWeight: "bold" }}>
-                                    {student.data.forname}{" "}
-                                    {student.data.lastname}
-                                </span>{" "}
-                                ({student.data.nationality})
-                            </Grid>
+                            {showNameOrAnonymous()}
                             <Grid item xs={4} sx={{ textAlign: "end" }}>
                                 {student.data.year}
                             </Grid>

@@ -9,7 +9,9 @@ import {
     Grid,
     Button,
     IconButton,
+    Typography,
 } from "@mui/material"
+import CommentsDisabledIcon from "@mui/icons-material/CommentsDisabled"
 
 export default function ProfileTipsView(props) {
     function tipCB(tip) {
@@ -57,6 +59,7 @@ export default function ProfileTipsView(props) {
     function addNewTipACB() {
         props.editTip()
     }
+
     return (
         <CardContent>
             <Card variant="outlined" sx={{ width: "100%", p: "30px" }}>
@@ -74,6 +77,14 @@ export default function ProfileTipsView(props) {
                 />
                 <Grid container spacing={2}>
                     {props.tips.map(tipCB)}
+                    {props.tips.length === 0 && (
+                        <Grid item xs={12} sx={{ textAlign: "center" }}>
+                            <Typography variant="h5" sx={{ padding: "10px" }}>
+                                You haven't added any tips yet.
+                            </Typography>
+                            <CommentsDisabledIcon fontSize="large" />
+                        </Grid>
+                    )}
                 </Grid>
             </Card>
         </CardContent>
