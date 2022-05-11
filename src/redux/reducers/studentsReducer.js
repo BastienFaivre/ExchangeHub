@@ -169,33 +169,30 @@ export function getStudentDetails(studentId) {
     return async function getStudentDetailsThunk(dispatch, getState) {
         try {
             let state = getState()
-            // checking is search filter is same as before to avoid fetching twice on the same filter
-            if (studentId !== state.students.studentDetails.studentId) {
-                dispatch({
-                    type: "STUDENTS_BEGIN_FETCH_DETAILS",
-                    payload: { studentId },
-                })
-                const [detailsResponse, commentsResponse, tipsResponse] =
-                    await Promise.all([
-                        getUser(studentId),
-                        getCommentsByStudentId(studentId),
-                        getTipsByStudentId(studentId),
-                    ])
-                state = getState()
+            dispatch({
+                type: "STUDENTS_BEGIN_FETCH_DETAILS",
+                payload: { studentId },
+            })
+            const [detailsResponse, commentsResponse, tipsResponse] =
+                await Promise.all([
+                    getUser(studentId),
+                    getCommentsByStudentId(studentId),
+                    getTipsByStudentId(studentId),
+                ])
+            state = getState()
 
-                if (studentId === state.students.studentDetails.studentId) {
-                    const studentDetails = detailsResponse
-                    const comments = commentsResponse
-                    const tips = tipsResponse
-                    dispatch({
-                        type: "STUDENTS_SET_STUDENT_DETAILS",
-                        payload: {
-                            studentDetails,
-                            comments,
-                            tips,
-                        },
-                    })
-                }
+            if (studentId === state.students.studentDetails.studentId) {
+                const studentDetails = detailsResponse
+                const comments = commentsResponse
+                const tips = tipsResponse
+                dispatch({
+                    type: "STUDENTS_SET_STUDENT_DETAILS",
+                    payload: {
+                        studentDetails,
+                        comments,
+                        tips,
+                    },
+                })
             }
         } catch (e) {
             dispatch({ type: "STUDENTS_SET_ERROR_DETAILS" })

@@ -142,30 +142,27 @@ export function saveCourseCode(courseCode) {
     return async function saveCourseCodeThunk(dispatch, getState) {
         try {
             let state = getState()
-            // checking course code is same as previous to avoid fetching again
-            if (courseCode !== state.courses.courseDetails.courseCode) {
+            dispatch({
+                type: "COURSE_BEGIN_FETCH_DETAILS",
+                payload: { courseCode },
+            })
+
+            const [detailsResponse, commentsResponse] = await Promise.all([
+                getCourseDetails(courseCode),
+                getCommentsByCourseCode(courseCode),
+            ])
+
+            // Checking to see that the course code hasn't been changed while waiting for the resulsts
+            // to avoid race condition
+            state = getState()
+
+            if (courseCode === state.courses.courseDetails.courseCode) {
+                const courseDetails = detailsResponse
+                const comments = commentsResponse
                 dispatch({
-                    type: "COURSE_BEGIN_FETCH_DETAILS",
-                    payload: { courseCode },
+                    type: "COURSE_SET_COURSE_DETAILS",
+                    payload: { courseDetails, comments },
                 })
-
-                const [detailsResponse, commentsResponse] = await Promise.all([
-                    getCourseDetails(courseCode),
-                    getCommentsByCourseCode(courseCode),
-                ])
-
-                // Checking to see that the course code hasn't been changed while waiting for the resulsts
-                // to avoid race condition
-                state = getState()
-
-                if (courseCode === state.courses.courseDetails.courseCode) {
-                    const courseDetails = detailsResponse
-                    const comments = commentsResponse
-                    dispatch({
-                        type: "COURSE_SET_COURSE_DETAILS",
-                        payload: { courseDetails, comments },
-                    })
-                }
             }
         } catch (e) {
             dispatch({ type: "COURSE_SET_ERROR_DETAILS" })

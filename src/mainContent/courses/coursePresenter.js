@@ -10,7 +10,7 @@ import LoadingErrorHandler from "../LoadingErrorHandler"
 export default function CoursePresenter() {
     const params = useParams()
     const dispatch = useDispatch()
-    const { loading, error, courseCode, data, comments } = useSelector(
+    const { loading, error, data, comments } = useSelector(
         (state) => state.courses.courseDetails
     )
 
@@ -20,7 +20,7 @@ export default function CoursePresenter() {
     }
 
     useEffect(function componentWasCreatedACB() {
-        if (!courseCode && params.id) {
+        if (params.id) {
             dispatch(saveCourseCode(params.id))
         }
     }, [])

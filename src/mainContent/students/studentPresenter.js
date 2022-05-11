@@ -10,7 +10,7 @@ import LoadingErrorHandler from "../LoadingErrorHandler"
 export default function StudentPresenter() {
     const params = useParams()
     const dispatch = useDispatch()
-    const { loading, error, studentId, data, comments, tips } = useSelector(
+    const { loading, error, data, comments, tips } = useSelector(
         (state) => state.students.studentDetails
     )
 
@@ -19,7 +19,7 @@ export default function StudentPresenter() {
     }
 
     useEffect(function componentWasCreatedACB() {
-        if (!studentId && params.id) {
+        if (params.id) {
             dispatch(getStudentDetails(params.id))
         }
     }, [])
