@@ -6,7 +6,7 @@ This is a project for the course [DH2642](https://www.kth.se/student/kurser/kurs
 
 ## Description
 
-ExchangeHub is a website for EPFL students planning to do an exchange at KTH. This platform helps future KTH exchange students to prepare their exchange in terms of course and lifestyle based on previous exchange students that left comments and reviewed.
+ExchangeHub is a website for students planning to do an exchange at KTH. This platform helps future KTH exchange students to prepare their exchange in terms of course and lifestyle based on previous exchange students that left comments and reviews.
 
 Under **courses** tab, the users can search for KTH courses based on their search criterias. They can learn more about a specific course by clicking on it. In the detailed tab of a course, the users have access to more information about the course and also to students reviews and ratings about it.
 
@@ -37,6 +37,7 @@ Finally, the previous exchange students have the possibility to write reviews an
     ├── index.js
     ├── logo.svg
     ├── mainContent
+    │   ├── LoadingErrorHandler.js
     │   ├── MainContentView.js
     │   ├── courses
     │   │   ├── coursePresenter.js
@@ -56,6 +57,7 @@ Finally, the previous exchange students have the possibility to write reviews an
     │   │   ├── commentsView.js
     │   │   ├── formCommentsView.js
     │   │   ├── formInfoView.js
+    │   │   ├── formTipView.js
     │   │   ├── infoPresenter.js
     │   │   ├── infoView.js
     │   │   ├── profileLoginPresenter.js
@@ -90,7 +92,7 @@ Finally, the previous exchange students have the possibility to write reviews an
         ├── tipTypes.js
         └── universities.js
 
-In our project we used MUI, which is a React UI library that gives us access to already stylised components according to a theme we choose. This theme is present in MUI/theme.js where we simply overwrite the main and secondary colors.
+In our project we used [MUI](https://mui.com/), which is a React UI library that gives us access to already stylised components according to a theme we choose. This theme is present in MUI/theme.js where we simply overwrite the main and secondary colors.
 
 We also used [React Router](https://reactrouter.com/docs/en/v6) for a better user experience, allowing them to navigate through the web page while still maintaining all the advantages of a SPA.
 
