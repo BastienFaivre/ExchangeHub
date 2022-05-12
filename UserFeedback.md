@@ -20,11 +20,11 @@ We started by changing the order of the search parameters, and made sure there w
 
 # User feedback for mid-project review done on April 9th, 2022
 
-At this point, only the courses search page is implemented. But the app is clearly appreciated by the users. They like the design and the way it is implemented. However, here are the remarks that were given:
+At this point, only the courses search page was implemented. But the app is clearly appreciated by the users. They like the design and the way it is implemented. However, here are the remarks that were given:
 
--   The purpose of the website is not obvious. It should be well explain on the home page
--   The current page marker is not enough clear. It should be more visible to know on which page the users are
--   The course search is missing a user-friendly message when the search gives no results
+-   The purpose of the website is not obvious. It should be well explained on the home page.
+-   The current page marker is not clear enough. It should be more visible to know on which page the users are.
+-   The course search is missing a user-friendly message when the search gives no results.
 -   The course search should include more parameters such as school and department.
 
 However, there is also one remark that cannot be fixed:
@@ -42,3 +42,11 @@ To handle the four remarks, we added a [new issue](https://github.com/BastienFai
     ![message](https://user-images.githubusercontent.com/57015770/168039504-35265ed2-e606-4bc7-ac9e-48b8ba50d801.png)
 
 The remarks were also taken into account to implement the rest of the website, for instance, the tips search and students search also include multiple parameters and friendly message when there is no results.
+
+# User feedback for debugging done on May 10th, 2022
+
+At this point, the first final version of the app is done. We asked our friends to test the app in order to detect potential bugs and/or get improvement suggestions. Concerning the design, small fixes were done, such as, fixing the alignment of a specific text. Then, for the user experience, they found it annoying, that, just after adding a comment and/or a tip, in order for their change to appear in the results and/or specific page such as the course or student page, they had to refresh the page. This is due to the fact that the last search results, course page and student page visited are stored in the application state (Redux), and the app would not re-fetch them if the user access these page again. Therefore, to improve the user experience, we decided that each time the user goes back to one of these page, the data will automatically be fetch again to get the last modification since the last _visit_.
+
+Note: the courses search results are now the only results that are _cached_ in the application state since they have really low risk to be changed.
+
+After these last changes, we reached the final version of our website.
