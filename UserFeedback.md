@@ -22,10 +22,10 @@ We started by changing the order of the search parameters, and made sure there w
 
 At this point, only the courses search page is implemented. But the app is clearly appreciated by the users. They like the design and the way it is implemented. However, here are the remarks that were given:
 
-- The purpose of the website is not obvious. It should be well explain on the home page 
-- The current page marker is not enough clear. It should be more visible to know on which page the users are
-- The course search is missing a user-friendly message when the search gives no results
-- The course search should include more parameters such as school and department. 
+-   The purpose of the website is not obvious. It should be well explain on the home page
+-   The current page marker is not enough clear. It should be more visible to know on which page the users are
+-   The course search is missing a user-friendly message when the search gives no results
+-   The course search should include more parameters such as school and department.
 
 However, there is also one remark that cannot be fixed:
 
@@ -34,6 +34,3 @@ However, there is also one remark that cannot be fixed:
 This is due to the fact that the KTH APi does not provide more information about the course details. That is why the course page includes a link to the KTH page of the course.
 
 To handle the four remarks, we added a [new issue](https://github.com/BastienFaivre/ExchangeHub/issues/16) in GitHub. From there, we implemented all the changes that were suggested. Here are pictures of the changes:
-
-
-
