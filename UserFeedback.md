@@ -1,4 +1,4 @@
-# User feedback for prototype stage done on April 20th, 2022
+# User feedback for prototype stage done on March 20th, 2022
 
 ## User first impressions
 
@@ -17,3 +17,23 @@ Otherwise, very nice design, I like the colors and once I figured out that I was
 # What we did based on this feedback
 
 We started by changing the order of the search parameters, and made sure there was text explaining the reason why there were 0 search results (whether because of empty parameters or because no courses could be found based on search parameters).
+
+# User feedback for mid-project review done on April 9th, 2022
+
+At this point, only the courses search page is implemented. But the app is clearly appreciated by the users. They like the design and the way it is implemented. However, here are the remarks that were given:
+
+- The purpose of the website is not obvious. It should be well explain on the home page 
+- The current page marker is not enough clear. It should be more visible to know on which page the users are
+- The course search is missing a user-friendly message when the search gives no results
+- The course search should include more parameters such as school and department. 
+
+However, there is also one remark that cannot be fixed:
+
+"_The ability to jump from the About the Course page to the official KTH website is useful, but I would suggest that you include a few more details about the course, such as course content, on your page._"
+
+This is due to the fact that the KTH APi does not provide more information about the course details. That is why the course page includes a link to the KTH page of the course.
+
+To handle the four remarks, we added a [new issue](https://github.com/BastienFaivre/ExchangeHub/issues/16) in GitHub. From there, we implemented all the changes that were suggested. Here are pictures of the changes:
+
+
+
