@@ -42,3 +42,7 @@ To handle the four remarks, we added a [new issue](https://github.com/BastienFai
     ![message](https://user-images.githubusercontent.com/57015770/168039504-35265ed2-e606-4bc7-ac9e-48b8ba50d801.png)
 
 The remarks were also taken into account to implement the rest of the website, for instance, the tips search and students search also include multiple parameters and friendly message when there is no results.
+
+# User feedback for debugging done on May 10th, 2022
+
+At this point, the first final version of the app is done. We asked our friends to test the app in order to detect potential bugs and/or get improvement suggestions. Concerning the design, small fixes were done such as, for instance, fixing the alignment of a specific text. Then, for the user experience, they found annoying that, just after adding a comment and/or a tip, in order to their change to appears in the results and/or specific page such as course page or student page, they add to refresh the page. This is due to the fact that the last search results, course page and student page visited are stored in the application state (Redux), and the app would not re-fetch them if the user access these page again. Therefore, to improve the user experience, we decided that each time the user goes back to one of these page, the data will automatically be fetch again in order to get the last modification since the last _visit_.
