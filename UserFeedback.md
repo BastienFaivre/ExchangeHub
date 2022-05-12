@@ -35,10 +35,10 @@ This is due to the fact that the KTH APi does not provide more information about
 
 To handle the four remarks, we added a [new issue](https://github.com/BastienFaivre/ExchangeHub/issues/16) in GitHub. From there, we implemented all the changes that were suggested. Here are pictures of the changes:
 
-- The home page explains the purpose of the app
-![homepage](https://user-images.githubusercontent.com/57015770/168039475-34b34317-01aa-4105-8bc2-0dd7fd348b48.png)
+-   The home page explains the purpose of the app
+    ![homepage](https://user-images.githubusercontent.com/57015770/168039475-34b34317-01aa-4105-8bc2-0dd7fd348b48.png)
 
-- The course search includes more parameters and a message when there is no results
-![message](https://user-images.githubusercontent.com/57015770/168039504-35265ed2-e606-4bc7-ac9e-48b8ba50d801.png)
+-   The course search includes more parameters and a message when there is no results
+    ![message](https://user-images.githubusercontent.com/57015770/168039504-35265ed2-e606-4bc7-ac9e-48b8ba50d801.png)
 
 The remarks were also taken into account to implement the rest of the website, for instance, the tips search and students search also include multiple parameters and friendly message when there is no results.
