@@ -23,7 +23,6 @@ export default function SidebarView({ currentTab }) {
             aria-label="links to other pages"
         >
             {TabData.map(({ label, value, to }) => {
-                console.log(currentTab, value, currentTab === value)
                 return (
                     <Tab
                         key={label}

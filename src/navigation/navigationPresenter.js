@@ -7,6 +7,5 @@ export default function NavigationPresenter() {
 
     const isProfile = pathname === "/profile"
 
-    console.log(isProfile)
     return <NavigationView isProfile={isProfile} />
 }
