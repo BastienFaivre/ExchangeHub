@@ -94,7 +94,7 @@ export default function StudentView(props) {
         )
     }
 
-    function showNameOrAnonymous() {
+    function showNameOrAnonymousCB() {
         if (props.studentData.forname && props.studentData.lastname) {
             return (
                 <Grid item xs={12}>
@@ -130,7 +130,7 @@ export default function StudentView(props) {
                     >
                         <CardContent>
                             <Grid container>
-                                {showNameOrAnonymous()}
+                                {showNameOrAnonymousCB()}
                                 <Grid item xs={12} lg={6}>
                                     University:{" "}
                                     {props.studentData.university

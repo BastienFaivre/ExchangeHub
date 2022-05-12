@@ -7,7 +7,7 @@ export default function StudentsResultsView(props) {
             props.studentClicked(student.userId)
         }
 
-        function showNameOrAnonymous() {
+        function showNameOrAnonymousCB() {
             if (student.data.forname && student.data.lastname) {
                 return (
                     <Grid item xs={8}>
@@ -39,7 +39,7 @@ export default function StudentsResultsView(props) {
                 >
                     <CardContent>
                         <Grid container>
-                            {showNameOrAnonymous()}
+                            {showNameOrAnonymousCB()}
                             <Grid item xs={4} sx={{ textAlign: "end" }}>
                                 {student.data.year}
                             </Grid>
