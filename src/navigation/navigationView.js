@@ -4,10 +4,9 @@ import Typography from "@mui/material/Typography"
 import IconButton from "@mui/material/IconButton"
 import AccountCircle from "@mui/icons-material/AccountCircle"
 
-import { Link, useLocation } from "react-router-dom"
+import { Link } from "react-router-dom"
 
-export default function NavigationView() {
-    const { pathname } = useLocation()
+export default function NavigationView({ isProfile }) {
     return (
         <>
             <AppBar
@@ -35,16 +34,15 @@ export default function NavigationView() {
                     <IconButton
                         size="large"
                         edge="start"
-                        color={
-                            pathname === "/profile" ? "secondary" : "inherit"
-                        }
                         aria-label="profile"
                         sx={{ mr: 2, ml: "auto" }}
                         value="/profile"
                         to="/profile"
                         component={Link}
                     >
-                        <AccountCircle sx={{ color: "#D5D3D2" }} />
+                        <AccountCircle
+                            sx={{ color: isProfile ? "#D5D3D2" : "white" }}
+                        />
                     </IconButton>
                 </Toolbar>
             </AppBar>
