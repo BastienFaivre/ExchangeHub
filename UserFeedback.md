@@ -20,11 +20,11 @@ We started by changing the order of the search parameters, and made sure there w
 
 # User feedback for mid-project review done on April 9th, 2022
 
-At this point, only the courses search page is implemented. But the app is clearly appreciated by the users. They like the design and the way it is implemented. However, here are the remarks that were given:
+At this point, only the courses search page was implemented. But the app is clearly appreciated by the users. They like the design and the way it is implemented. However, here are the remarks that were given:
 
--   The purpose of the website is not obvious. It should be well explain on the home page
--   The current page marker is not enough clear. It should be more visible to know on which page the users are
--   The course search is missing a user-friendly message when the search gives no results
+-   The purpose of the website is not obvious. It should be well explained on the home page.
+-   The current page marker is not clear enough. It should be more visible to know on which page the users are.
+-   The course search is missing a user-friendly message when the search gives no results.
 -   The course search should include more parameters such as school and department.
 
 However, there is also one remark that cannot be fixed:
