@@ -28,7 +28,7 @@ export default function CommentsPresenter() {
     // used to set edit mode
     const [editComment, setEditComment] = useState(false)
 
-    useEffect(() => {
+    useEffect(function setEditFormACB() {
         // check that the student has not already written a comment for this course
         if (
             courseCode &&

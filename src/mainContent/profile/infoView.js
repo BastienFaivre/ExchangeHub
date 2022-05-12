@@ -12,7 +12,7 @@ export default function ProfileInfoView(props) {
         props.logout()
     }
 
-    function setEditMode(event) {
+    function setEditModeACB(event) {
         event.preventDefault()
         props.setEdit()
     }
@@ -39,7 +39,7 @@ export default function ProfileInfoView(props) {
                 action={
                     <Grid sx={{ paddingTop: "35px" }}>
                         <Button
-                            onClick={setEditMode}
+                            onClick={setEditModeACB}
                             sx={{ margin: 3 }}
                             variant="contained"
                             startIcon={<ArticleIcon />}
