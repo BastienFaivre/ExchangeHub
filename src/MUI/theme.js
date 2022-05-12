@@ -18,6 +18,13 @@ const theme = createTheme({
                         color: "#B51F1F",
                     },
                 },
+                {
+                    props: { variant: "selectedSidebar" },
+                    style: {
+                        color: "#B51F1F",
+                        backgroundColor: "#F5F5F5",
+                    },
+                },
             ],
         },
     },

@@ -3,6 +3,16 @@ import Tab from "@mui/material/Tab"
 
 import { Link } from "react-router-dom"
 
+const TabData = [
+    { label: "Courses", value: "/courses" || "/courses/:id", to: "/courses" },
+    { label: "Lifestyle", value: "/lifestyle", to: "/lifestyle" },
+    {
+        label: "Students",
+        value: "/students" || "/students/:id",
+        to: "/students",
+    },
+]
+
 export default function SidebarView({ currentTab }) {
     return (
         <Tabs
@@ -12,27 +22,21 @@ export default function SidebarView({ currentTab }) {
             indicatorColor="primary"
             aria-label="links to other pages"
         >
-            <Tab
-                label="Courses"
-                value={"/courses" || "/courses/:id"}
-                to="/courses"
-                variant="sidebar"
-                component={Link}
-            />
-            <Tab
-                label="Lifestyle"
-                value="/lifestyle"
-                to="/lifestyle"
-                variant="sidebar"
-                component={Link}
-            />
-            <Tab
-                label="Students"
-                value={"/students" || "/students/:id"}
-                to="/students"
-                variant="sidebar"
-                component={Link}
-            />
+            {TabData.map(({ label, value, to }) => {
+                console.log(currentTab, value, currentTab === value)
+                return (
+                    <Tab
+                        key={label}
+                        label={label}
+                        value={value}
+                        to={to}
+                        variant={
+                            currentTab === value ? "selectedSidebar" : "sidebar"
+                        }
+                        component={Link}
+                    />
+                )
+            })}
         </Tabs>
     )
 }
