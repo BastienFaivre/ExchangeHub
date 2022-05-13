@@ -1,6 +1,6 @@
 // this proxy is used to solve the CORS problem
 // see https://gits-15.sys.kth.se/iprog/issues/issues/369
-const PROXY = "http://159.69.42.15:1234/"
+const PROXY = "http://116.203.219.58:1234/"
 const BASE_URL = "https://www.kth.se/api/kopps/v2/"
 const ENGLISH = "&l=en"
 
