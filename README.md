@@ -2,7 +2,7 @@
 
 This is a project for the course [DH2642](https://www.kth.se/student/kurser/kurs/DH2642?l=en) at [KTH](https://www.kth.se/en).
 
-[Deployed website](http://159.69.42.15:3000)
+[Deployed website](http://116.203.219.58:3000)
 
 ## Description
 
