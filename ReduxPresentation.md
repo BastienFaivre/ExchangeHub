@@ -30,10 +30,10 @@ import { studentsReducer } from "./studentsReducer"
 import { tipsReducer } from "./tipsReducer"
 
 export default combineReducers({
-	profile: profileReducer,
-	courses: coursesReducer,
-	tips: tipsReducer,
-	students: studentsReducer,
+    profile: profileReducer,
+    courses: coursesReducer,
+    tips: tipsReducer,
+    students: studentsReducer,
 })
 ```
 
@@ -177,8 +177,8 @@ import { composeWithDevTools } from "@redux-devtools/extension"
 import rootReducer from "./reducers/rootReducer"
 
 export default createStore(
-	rootReducer,
-	composeWithDevTools(applyMiddleware(thunkMiddleware))
+    rootReducer,
+    composeWithDevTools(applyMiddleware(thunkMiddleware))
 )
 ```
 
@@ -186,8 +186,8 @@ Before the _dispatch_ function only accepted an _Action_ object as parameter:
 
 ```ts
 type Action = {
-	type: string
-	payload: Object
+    type: string
+    payload: Object
 }
 ```
 
